@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af0024c8210d1e41b2726bbb1ac120d, type: 3}
+  m_Name: SPLSettings
+  m_EditorClassIdentifier: 
+  NeedOpenSceneOnStart: 1
+  StartScene:
+    Name: BootstrapScene
+    Index: 0
+    Path: Assets/Scenes/BootstrapScene.unity
+    GuidHex: ba7021727e6188d42a5f47e324c47fde
+  NeedOpenSceneOnStop: 1
+  StopScene:
+    Name: GameScene
+    Index: 2
+    Path: Assets/Scenes/GameScene.unity
+    GuidHex: 9fc0d4010bbf28b4594072e72b8655ab
+  AllScenes:
+  - Name: BootstrapScene
+    Index: 0
+    Path: Assets/Scenes/BootstrapScene.unity
+    GuidHex: ba7021727e6188d42a5f47e324c47fde
+  - Name: MenuScene
+    Index: 1
+    Path: Assets/Scenes/MenuScene.unity
+    GuidHex: 2db244523b01005428eb47e1a99cf635
+  - Name: GameScene
+    Index: 2
+    Path: Assets/Scenes/GameScene.unity
+    GuidHex: 9fc0d4010bbf28b4594072e72b8655ab

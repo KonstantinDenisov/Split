@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.miskonm.spl": {
+      "version": "https://github.com/miskonm/SceneProjectLauncher.git?path=/Assets/Plugins/SPL",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f68b8ebaec9fe350b129beae9e0b8d547718a1f2"
+    },
     "com.unity.collab-proxy": {
       "version": "1.17.2",
       "depth": 0,
