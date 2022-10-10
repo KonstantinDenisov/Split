@@ -3,7 +3,6 @@ using Split.Infrastructure.Services.Mission.Complex;
 using Split.Infrastructure.Services.Mission.KillAllEnemies;
 using Split.Infrastructure.Services.Mission.KillOneEnemy;
 using Split.Infrastructure.Services.Npc;
-using TDS.Game.Mission;
 
 namespace Split.Infrastructure.Services.Mission
 {

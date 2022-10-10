@@ -1,8 +1,7 @@
 using System;
-using Split.Infrastructure.Services.Mission;
 using UnityEngine;
 
-namespace TDS.Game.Mission
+namespace Split.Infrastructure.Services.Mission
 {
     public class MissionService : MonoBehaviour, IMissionService
     {

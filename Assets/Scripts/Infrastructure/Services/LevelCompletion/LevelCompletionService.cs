@@ -1,7 +1,6 @@
 using Split.Infrastructure.Services.Level;
 using Split.Infrastructure.Services.Mission;
 using Split.Infrastructure.StateMachine;
-using TDS.Game.Mission;
 
 namespace Split.Infrastructure.Services.LevelCompletion
 {

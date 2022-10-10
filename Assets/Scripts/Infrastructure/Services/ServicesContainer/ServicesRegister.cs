@@ -10,7 +10,6 @@ using Split.Infrastructure.Services.Persistant;
 using Split.Infrastructure.Services.StartLevel;
 using Split.Infrastructure.StateMachine;
 using Split.Infrastructure.Utility.Coroutine;
-using TDS.Game.Mission;
 
 namespace Split.Infrastructure.Services.ServicesContainer
 {
