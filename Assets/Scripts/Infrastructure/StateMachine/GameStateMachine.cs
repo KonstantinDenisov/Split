@@ -11,7 +11,7 @@ namespace Split.Infrastructure.StateMachine
             ExitCurrent();
            
             ServicesRegister.RegisterFor<TState>();
-            TState newState = StateFactory.Create<TState>(); // new TState();
+            TState newState = StateFactory.Create<TState>(); 
             newState.Enter();
             _currentState = newState;
         }

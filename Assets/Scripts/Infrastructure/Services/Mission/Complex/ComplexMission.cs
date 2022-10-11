@@ -24,8 +24,7 @@ namespace Split.Infrastructure.Services.Mission.Complex
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-
-            // TODO: Dont update mission if completed
+            
             _missions.ForEach(x => x.Update(deltaTime));
         }
 

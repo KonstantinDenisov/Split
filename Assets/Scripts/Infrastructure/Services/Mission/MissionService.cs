@@ -23,7 +23,6 @@ namespace Split.Infrastructure.Services.Mission
 
             if (container == null)
             {
-                Debug.LogError($"[{Tag}], {nameof(Init)}: There is no container in scene.");
                 return;
             }
 

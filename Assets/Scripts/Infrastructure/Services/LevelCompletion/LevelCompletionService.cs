@@ -30,13 +30,10 @@ namespace Split.Infrastructure.Services.LevelCompletion
 
         private void MissionCompleted()
         {
-            // TODO: Show completed ui
-            // TODO: Stop game
             LevelSettings currentLevelSetting = _levelSettingsService.GetCurrentLevelSetting();
 
             if (currentLevelSetting.NextLevel == null)
             {
-                // TODO: Show game over
                 return;
             }
 

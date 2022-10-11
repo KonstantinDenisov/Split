@@ -16,7 +16,7 @@ namespace Split.Infrastructure.Services.Level
 
         public void SetCurrentLevelSettings(string id)
         {
-            _currentLevelId = id; // TODO:
+            _currentLevelId = id;
         }
 
         public LevelSettings GetCurrentLevelSetting() =>

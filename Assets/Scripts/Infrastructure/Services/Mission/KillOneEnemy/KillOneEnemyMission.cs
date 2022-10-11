@@ -11,7 +11,6 @@ namespace Split.Infrastructure.Services.Mission.KillOneEnemy
 
             if (_enemyDeath == null)
             {
-                // TODO: log error
                 return;
             }
 

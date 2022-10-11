@@ -1,4 +1,5 @@
 using Split.Infrastructure.StateMachine;
+using Split.Infrastructure.Services.ServicesContainer;
 using UnityEngine;
 
 namespace Split.Infrastructure.GameBootstrapper
@@ -7,8 +8,6 @@ namespace Split.Infrastructure.GameBootstrapper
     {
         private void Start()
         {
-            Debug.Log($"Start In GameBootstrapper");
-
             GameStateMachine gameStateMachine = new GameStateMachine();
             Services.ServicesContainer.Services.Container.Register<IGameStateMachine>(gameStateMachine);
             

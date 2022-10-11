@@ -23,7 +23,7 @@ namespace Split.Infrastructure.Services.Level
             {
                 if (_settingsById.ContainsKey(setting.SceneName))
                 {
-                    Debug.LogError($"There are 2 settings with id '{setting.SceneName}'");
+                    return;
                 }
                 else
                 {

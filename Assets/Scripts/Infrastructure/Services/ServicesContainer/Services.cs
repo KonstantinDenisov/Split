@@ -21,7 +21,6 @@ namespace Split.Infrastructure.Services.ServicesContainer
 
             if (_services.ContainsKey(key))
             {
-                Debug.LogError($"{Tag}:{nameof(Register)}: Try add service with key '{key}', that already exist.");
                 return null;
             }
 
@@ -45,8 +44,7 @@ namespace Split.Infrastructure.Services.ServicesContainer
             {
                 return _services[key] as TService;
             }
-
-            Debug.LogError($"{Tag}:{nameof(Get)}: There is no service with key '{key}'.");
+            
             return default;
         }
 
@@ -58,8 +56,6 @@ namespace Split.Infrastructure.Services.ServicesContainer
             Type key = typeof(TService);
             if (!_services.ContainsKey(key))
             {
-                Debug.LogError(
-                    $"{Tag}:{nameof(UnRegister)}: Try remove service with key '{key}', that already removed.");
                 return;
             }
 

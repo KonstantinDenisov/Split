@@ -23,7 +23,7 @@ namespace Split.Infrastructure.Services.Mission
         {
             return condition switch
             {
-                ComplexMissionCondition complexMissionCondition => throw new NotImplementedException(), // TODO
+                ComplexMissionCondition complexMissionCondition => throw new NotImplementedException(), 
                 KillAllEnemiesMissionCondition killAllCondition => CreateKillAllEnemiesMission(killAllCondition),
                 KillOneEnemyMissionCondition killOneCondition => CreateKillOneEnemyMission(killOneCondition),
                 _ => null
