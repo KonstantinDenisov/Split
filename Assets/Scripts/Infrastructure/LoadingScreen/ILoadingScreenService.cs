@@ -1,4 +1,4 @@
-using Split.Infrastructure.Services.ServicesContainer;
+using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
 namespace Split.Infrastructure.LoadingScreen
 {

@@ -1,11 +1,11 @@
 using Split.Infrastructure.LoadingScreen;
 using Split.Infrastructure.SceneLoader;
-using Split.Infrastructure.Services.InputService;
-using Split.Infrastructure.Services.Level;
-using Split.Infrastructure.Services.LevelCompletion;
-using Split.Infrastructure.Services.Mission;
-using Split.Infrastructure.Services.Npc;
-using Split.Infrastructure.Services.Persistant;
+using Split.Infrastructure.ServicesFolder.InputService;
+using Split.Infrastructure.ServicesFolder.Level;
+using Split.Infrastructure.ServicesFolder.LevelCompletion;
+using Split.Infrastructure.ServicesFolder.Mission;
+using Split.Infrastructure.ServicesFolder.Npc;
+using Split.Infrastructure.ServicesFolder.Persistant;
 using UnityEngine;
 
 namespace Split.Infrastructure.StateMachine

@@ -14,8 +14,8 @@ namespace Split.Infrastructure.StateMachine
 
         public override void Enter()
         {
-            Services.ServicesContainer.Services.Container.Get(out _loadingScreenService);
-            Services.ServicesContainer.Services.Container.Get(out _sceneLoadService);
+            ServicesFolder.ServicesContainer.Services.Container.Get(out _loadingScreenService);
+            ServicesFolder.ServicesContainer.Services.Container.Get(out _sceneLoadService);
 
             _loadingScreenService.ShowScreen();
             _sceneLoadService.Load("MenuScene", OnSceneLoaded);

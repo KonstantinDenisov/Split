@@ -1,5 +1,5 @@
-using Split.Infrastructure.Services.Level;
-using Split.Infrastructure.Services.Persistant;
+using Split.Infrastructure.ServicesFolder.Level;
+using Split.Infrastructure.ServicesFolder.Persistant;
 
 namespace Split.Infrastructure.StateMachine
 {
