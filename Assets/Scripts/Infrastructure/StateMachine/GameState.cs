@@ -73,10 +73,6 @@ namespace Split.Infrastructure.StateMachine
         private void Initialize()
         {
             InitHealth();
-            _npcService.Init();
-
-            _missionService.Init();
-            _levelCompletionService.Init();
         }
 
         private void InitHealth()

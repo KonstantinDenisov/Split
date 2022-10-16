@@ -8,8 +8,8 @@ namespace Split.Game.Units.SelectedFolder
     {
         public static SelectedService Instance { get; private set; }
         
-        public static List<GameObject> AllUnits;
-        public static List<GameObject> SelectedUnits;
+        public List<GameObject> AllUnits;
+        public List<GameObject> SelectedUnits;
 
         private void Awake()
         {
@@ -40,6 +40,12 @@ namespace Split.Game.Units.SelectedFolder
 
         public void DeselectAllUnits()
         {
+            foreach (var unit in SelectedUnits)
+            {
+                var unitSwitcher = unit.transform.GetComponent<UnitSwitcher>();
+                unitSwitcher.IsSelected = false;
+            }
+            
             SelectedUnits.Clear();
             Debug.Log("all units deselect");
         }

@@ -76,13 +76,12 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
             ServicesFolder.ServicesContainer.Services.Container.Register<IInputService>(new StandaloneInputService());
             
 
-            IMissionService missionService = ServicesFolder.ServicesContainer.Services.Container.RegisterMono<IMissionService>(typeof(MissionService));
+            
 
             ILevelSettingsService levelSettingsService = ServicesFolder.ServicesContainer.Services.Container.Get<ILevelSettingsService>();
             IGameStateMachine gameStateMachine = ServicesFolder.ServicesContainer.Services.Container.Get<IGameStateMachine>();
 
-            ServicesFolder.ServicesContainer.Services.Container.Register<ILevelCompletionService>(
-                new LevelCompletionService(missionService, levelSettingsService, gameStateMachine));
+           
         }
 
         private static void UnregisterGame()

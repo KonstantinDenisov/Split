@@ -11,7 +11,6 @@ namespace Split.Infrastructure.ServicesFolder.Mission.Complex
         public override void Init()
         {
             MissionCondition[] conditions = Condition.Conditions;
-            _missions = MissionFactory.Create(conditions);
 
             foreach (var mission in _missions)
             {
