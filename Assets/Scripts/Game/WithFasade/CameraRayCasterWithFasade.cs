@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Split.Game.Units;
 using UnityEngine;
 
-namespace Split.Game.Units.SelectedFolder
+namespace Split.Game.WithFasade
 {
-    public class CameraRayCaster : MonoBehaviour
+    public class CameraRayCasterWithFasade : MonoBehaviour
     {
         private Camera _mainCamera;
-        private UnitSwitcher _lastUnit;
+        private UnitFacade _lastUnit;
 
         private void Start()
         {
@@ -20,12 +20,12 @@ namespace Split.Game.Units.SelectedFolder
             
             if (Physics.Raycast(ray, out hit, 100))
             {
-                var unit = hit.collider.GetComponent<UnitSwitcher>();
+                var unit = hit.collider.GetComponent<UnitFacade>();
                 if (unit != null)
                 {
                     if (unit != _lastUnit)
                     {
-                        unit.OnHoverEnter();
+                        unit.UnitSwitcher.OnHoverEnter();
                         Debug.Log("unit under cursor");
                         _lastUnit = unit;
                     }
@@ -44,7 +44,7 @@ namespace Split.Game.Units.SelectedFolder
             
             {
                 Debug.Log("the unit went out from under the cursor");
-                _lastUnit.OnHoverExit();
+                _lastUnit.UnitSwitcher.OnHoverExit();
                 _lastUnit = null;
             }
             
@@ -52,11 +52,11 @@ namespace Split.Game.Units.SelectedFolder
             {
                 if (Physics.Raycast(ray, out hit, 100))
                 {
-                    var unit = hit.collider.GetComponent<UnitSwitcher>();
+                    var unit = hit.collider.GetComponent<UnitFacade>();
                     if (unit != null)
                     {
-                        unit.OnSelected();
-                        SelectedService.Instance.SelectUnit(unit.gameObject);
+                        unit.UnitSwitcher.OnSelected();
+                        SelectedServiceWithFasade.Instance.SelectUnit(unit.gameObject);
                     }
                 }
             }
@@ -68,7 +68,7 @@ namespace Split.Game.Units.SelectedFolder
                     var ground = hit.collider.GetComponent<Ground>();
                     if (ground != null)
                     {
-                        SelectedService.Instance.DeselectAllUnits();
+                        SelectedServiceWithFasade.Instance.DeselectAllUnits();
                     }
                 }
             }
@@ -78,9 +78,9 @@ namespace Split.Game.Units.SelectedFolder
                 if (Physics.Raycast(ray, out hit, 100))
                 {
                     var ground = hit.collider.GetComponent<Ground>();
-                    if (ground != null && SelectedService.Instance.SelectedUnits != null)
+                    if (ground != null && SelectedServiceWithFasade.Instance.SelectedUnits != null)
                     {
-                        foreach (var unit in SelectedService.Instance.SelectedUnits)
+                        foreach (var unit in SelectedServiceWithFasade.Instance.SelectedUnits)
                         {
                             // направить в точку клика 
                         }

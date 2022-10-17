@@ -4,6 +4,6 @@ namespace Split.Game.Units
 {
     public class UnitFacade : MonoBehaviour
     {
-        public UnitSwitcher UnitSwitcher;
+        public UnitSwitcher UnitSwitcher = new UnitSwitcher();
     }
 }
