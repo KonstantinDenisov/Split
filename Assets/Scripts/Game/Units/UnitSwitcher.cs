@@ -8,6 +8,8 @@ namespace Split.Game.Units
     {
         public bool IsUnderTheCursor;
         public bool IsSelected;
+        [SerializeField] private float _widthOutlineOnHover = 1;
+        [SerializeField] private float _widthOutlineOnSelected = 3;
         private Outline _outline;
         private void OnEnable()
         {
@@ -20,7 +22,7 @@ namespace Split.Game.Units
         }
         public void OnHoverEnter()
         {
-            _outline.OutlineWidth = 2;
+            _outline.OutlineWidth = _widthOutlineOnHover;
             IsUnderTheCursor = true;
         }
 
@@ -28,6 +30,18 @@ namespace Split.Game.Units
         {
             _outline.OutlineWidth = 0;
             IsUnderTheCursor = false;
+        }
+
+        public void OnSelected ()
+        {
+            _outline.OutlineWidth = _widthOutlineOnSelected;
+            IsSelected = true;
+        }
+
+        public void OnSelectedExit()
+        {
+            _outline.OutlineWidth = 0;
+            IsSelected = false;
         }
     }
 }
