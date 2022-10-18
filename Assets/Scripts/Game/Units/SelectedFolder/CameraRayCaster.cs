@@ -48,7 +48,7 @@ namespace Split.Game.Units.SelectedFolder
                 _lastUnit = null;
             }
             
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) 
             {
                 if (Physics.Raycast(ray, out hit, 100))
                 {
@@ -61,7 +61,7 @@ namespace Split.Game.Units.SelectedFolder
                 }
             }
             
-            else if (Input.GetMouseButtonDown(0))
+            else if (Input.GetMouseButtonDown(0)) // тут тоже почему-то не работает. чтобы работало - в скрипте Ground есть "костыль"
             {
                 if (Physics.Raycast(ray, out hit, 100))
                 {
