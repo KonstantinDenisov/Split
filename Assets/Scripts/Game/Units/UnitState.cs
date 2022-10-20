@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Split.Game.Units
 {
     [RequireComponent(typeof(Outline))]
-    public class UnitSwitcher : MonoBehaviour
+    public class UnitState : MonoBehaviour
     {
         public bool IsUnderTheCursor;
         public bool IsSelected;
@@ -31,6 +31,9 @@ namespace Split.Game.Units
 
         public void OnHoverExit()
         {
+            if (IsSelected == true)
+                return;
+            
             _outline.OutlineWidth = 0;
             IsUnderTheCursor = false;
         }

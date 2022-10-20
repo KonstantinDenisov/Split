@@ -35,8 +35,8 @@ namespace Split.Game.Units.SelectedFolder
         public void SelectUnit(GameObject unit)
         {
             SelectedUnits.Add(unit);
-            UnitSwitcher unitSwitcher = unit.transform.GetComponent<UnitSwitcher>();
-            unitSwitcher.OnSelected();
+            UnitState unitState = unit.transform.GetComponent<UnitState>();
+            unitState.OnSelected();
             Debug.Log("unit selected");
         }
 
@@ -44,8 +44,8 @@ namespace Split.Game.Units.SelectedFolder
         {
             foreach (var unit in SelectedUnits)
             {
-                UnitSwitcher unitSwitcher = unit.transform.GetComponent<UnitSwitcher>();
-                unitSwitcher.OnSelectedExit();
+                UnitState unitState = unit.transform.GetComponent<UnitState>();
+                unitState.OnSelectedExit();
             }
             
             SelectedUnits.Clear();

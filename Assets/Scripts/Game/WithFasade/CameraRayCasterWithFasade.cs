@@ -25,7 +25,7 @@ namespace Split.Game.WithFasade
                 {
                     if (unit != _lastUnit)
                     {
-                        unit.UnitSwitcher.OnHoverEnter();
+                        unit.unitState.OnHoverEnter();
                         Debug.Log("unit under cursor");
                         _lastUnit = unit;
                     }
@@ -44,7 +44,7 @@ namespace Split.Game.WithFasade
             
             {
                 Debug.Log("the unit went out from under the cursor");
-                _lastUnit.UnitSwitcher.OnHoverExit();
+                _lastUnit.unitState.OnHoverExit();
                 _lastUnit = null;
             }
             
@@ -55,7 +55,7 @@ namespace Split.Game.WithFasade
                     var unit = hit.collider.GetComponent<UnitFacade>();
                     if (unit != null)
                     {
-                        unit.UnitSwitcher.OnSelected();
+                        unit.unitState.OnSelected();
                         SelectedServiceWithFasade.Instance.SelectUnit(unit.gameObject);
                     }
                 }

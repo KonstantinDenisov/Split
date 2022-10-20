@@ -5,8 +5,10 @@ namespace Split.Game.Units.SelectedFolder
 {
     public class CameraRayCaster : MonoBehaviour
     {
+        [SerializeField] private LayerMask _unitLayerMask;
+        [SerializeField] private LayerMask _groundLayerMask;
         private Camera _mainCamera;
-        private UnitSwitcher _lastUnit;
+        private UnitState _lastUnit;
 
         private void Start()
         {
@@ -18,74 +20,49 @@ namespace Split.Game.Units.SelectedFolder
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 100, _unitLayerMask))
             {
-                var unit = hit.collider.GetComponent<UnitSwitcher>();
-                if (unit != null)
-                {
-                    if (unit != _lastUnit)
+                var unit = hit.collider.GetComponent<UnitState>();
+                
+                if (unit != _lastUnit)
                     {
                         unit.OnHoverEnter();
                         Debug.Log("unit under cursor");
                         _lastUnit = unit;
                     }
-                    
-                }
             }
-            else if (_lastUnit != null) 
-                /* вот тут почему-то не работает.
-                 логика такая: 
-                 если курсор не наведён на юнит и при этом есть какой-то последний юнит - то его нужно обнулить. 
-                 убирается курсор - пропадает подсветка.
-                 для того, чтобы этот Log срабатывал, приходится убирать курсор в угол экрана. 
-                 даже не в угол игрового экрана. а в угол экрана 32"
-                 я бы это показал через запись экрана но на записи экрана не виден курсор
-            */
             
+            else if (_lastUnit != null)
             {
                 Debug.Log("the unit went out from under the cursor");
                 _lastUnit.OnHoverExit();
                 _lastUnit = null;
             }
             
-            if (Input.GetMouseButtonDown(0)) 
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 100, _unitLayerMask))
             {
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    var unit = hit.collider.GetComponent<UnitSwitcher>();
-                    if (unit != null)
-                    {
-                        unit.OnSelected();
-                        SelectedService.Instance.SelectUnit(unit.gameObject);
-                    }
-                }
-            }
-            
-            else if (Input.GetMouseButtonDown(0)) // тут тоже почему-то не работает. чтобы работало - в скрипте Ground есть "костыль"
-            {
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    var ground = hit.collider.GetComponent<Ground>();
-                    if (ground != null)
-                    {
-                        SelectedService.Instance.DeselectAllUnits();
-                    }
-                }
+                    var unit = hit.collider.GetComponent<UnitState>();
+                    unit.OnSelected();
+                    SelectedService.Instance.SelectUnit(unit.gameObject);
             }
 
-            else if (Input.GetMouseButtonDown(1))
+
+            else if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 100, _groundLayerMask)) 
             {
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    var ground = hit.collider.GetComponent<Ground>();
-                    if (ground != null && SelectedService.Instance.SelectedUnits != null)
+                var ground = hit.collider.GetComponent<Ground>();
+                SelectedService.Instance.DeselectAllUnits();
+            }
+
+            if (Input.GetMouseButtonDown(1) && (Physics.Raycast(ray, out hit, 100, _groundLayerMask)))
+            {
+                var ground = hit.collider.GetComponent<Ground>();
+                    if (SelectedService.Instance.SelectedUnits != null)
                     {
                         foreach (var unit in SelectedService.Instance.SelectedUnits)
                         {
                             // направить в точку клика 
                         }
                     }
-                }
             }
         }
     }

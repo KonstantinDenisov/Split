@@ -38,7 +38,7 @@ namespace Split.Game.WithFasade
         {
             SelectedUnits.Add(unit);
             UnitFacade unitFacade = unit.transform.GetComponent<UnitFacade>();
-            unitFacade.UnitSwitcher.OnSelected();
+            unitFacade.unitState.OnSelected();
             Debug.Log("unit selected");
         }
 
@@ -47,7 +47,7 @@ namespace Split.Game.WithFasade
             foreach (var unit in SelectedUnits)
             {
                 UnitFacade unitFacade = unit.transform.GetComponent<UnitFacade>();
-                unitFacade.UnitSwitcher.OnSelectedExit();
+                unitFacade.unitState.OnSelectedExit();
             }
             
             SelectedUnits.Clear();
