@@ -22,6 +22,9 @@ namespace Split.Game.Units
         }
         public void OnHoverEnter()
         {
+            if (IsSelected == true)
+                return;
+            
             _outline.OutlineWidth = _widthOutlineOnHover;
             IsUnderTheCursor = true;
         }
