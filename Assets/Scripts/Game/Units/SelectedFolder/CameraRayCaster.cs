@@ -15,6 +15,7 @@ namespace Split.Game.Units.SelectedFolder
         private void Start()
         {
             _mainCamera = FindObjectOfType<Camera>();
+            _lastUnit = null;
         }
 
         private void Update()
@@ -22,16 +23,12 @@ namespace Split.Game.Units.SelectedFolder
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             
-            if (Physics.Raycast(ray, out hit, 100, _unitLayerMask))
+            if (Physics.Raycast(ray, out hit, 100, _unitLayerMask) && _lastUnit == null)
             {
                 var unit = hit.collider.GetComponent<UnitState>();
-                
-                if (_lastUnit != null)
-                    {
-                        unit.OnHoverEnter();
-                        Debug.Log("unit under cursor");
-                        _lastUnit = unit;
-                    }
+                unit.OnHoverEnter();
+                Debug.Log("unit under cursor");
+                _lastUnit = unit;
             }
             
             if (Physics.Raycast(ray, out hit, 100, _groundLayerMask) && _lastUnit != null)
@@ -49,9 +46,8 @@ namespace Split.Game.Units.SelectedFolder
             }
 
 
-            else if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 100, _groundLayerMask)) 
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 100, _groundLayerMask)) 
             {
-                var ground = hit.collider.GetComponent<Ground>();
                 SelectedService.Instance.DeselectAllUnits();
             }
 
@@ -65,8 +61,6 @@ namespace Split.Game.Units.SelectedFolder
                         _navMeshAgent.SetDestination(hit.point);
                     } 
                 }
-                    
-                    
             }
         }
     }
