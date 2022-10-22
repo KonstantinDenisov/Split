@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Split.Game.Units.SelectedFolder
 {
@@ -9,6 +10,7 @@ namespace Split.Game.Units.SelectedFolder
         [SerializeField] private LayerMask _groundLayerMask;
         private Camera _mainCamera;
         private UnitState _lastUnit;
+        private NavMeshAgent _navMeshAgent;
 
         private void Start()
         {
@@ -24,7 +26,7 @@ namespace Split.Game.Units.SelectedFolder
             {
                 var unit = hit.collider.GetComponent<UnitState>();
                 
-                if (unit != _lastUnit)
+                if (_lastUnit != null)
                     {
                         unit.OnHoverEnter();
                         Debug.Log("unit under cursor");
@@ -32,7 +34,7 @@ namespace Split.Game.Units.SelectedFolder
                     }
             }
             
-            else if (_lastUnit != null)
+            if (Physics.Raycast(ray, out hit, 100, _groundLayerMask) && _lastUnit != null)
             {
                 Debug.Log("the unit went out from under the cursor");
                 _lastUnit.OnHoverExit();
@@ -55,14 +57,16 @@ namespace Split.Game.Units.SelectedFolder
 
             if (Input.GetMouseButtonDown(1) && (Physics.Raycast(ray, out hit, 100, _groundLayerMask)))
             {
-                var ground = hit.collider.GetComponent<Ground>();
-                    if (SelectedService.Instance.SelectedUnits != null)
+                if (SelectedService.Instance.SelectedUnits != null)
+                {
+                    foreach (var unit in SelectedService.Instance.SelectedUnits)
                     {
-                        foreach (var unit in SelectedService.Instance.SelectedUnits)
-                        {
-                            // направить в точку клика 
-                        }
-                    }
+                        _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                        _navMeshAgent.SetDestination(hit.point);
+                    } 
+                }
+                    
+                    
             }
         }
     }
