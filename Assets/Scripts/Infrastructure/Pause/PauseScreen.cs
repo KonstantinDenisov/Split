@@ -18,7 +18,7 @@ namespace Split.Infrastructure
         {
             _continueButton.onClick.AddListener(delegate { OnContinue?.Invoke(); });
             _restartButton.onClick.AddListener(delegate { OnRestart?.Invoke(); });
-            _exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
+           // _exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
         }
 
         public event Action OnRestarted;

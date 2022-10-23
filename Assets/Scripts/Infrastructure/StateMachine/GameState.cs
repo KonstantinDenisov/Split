@@ -44,20 +44,9 @@ namespace Split.Infrastructure.StateMachine
 
             _loadingScreenService.ShowScreen();
             _sceneLoadService.Load(sceneName, OnSceneLoaded);
-            CreatePauseRunner();
         }
 
-        private void CreatePauseRunner()
-        {
-            //_pauseService = Services.Container.RegisterMono<IPauseService>(typeof(PauseService.PauseService));
-            InitPauseScreen();
-        }
-        
-        private void InitPauseScreen()
-        {
-            _pauseService.Init();
-            //_pauseService.OnRestarted += RestartGame;
-        }
+
 
         public override void Exit()
         {
@@ -83,6 +72,7 @@ namespace Split.Infrastructure.StateMachine
         {
             Initialize();
             _loadingScreenService.HideScreen();
+            _pauseService.Init();
         }
 
         private void Initialize()
@@ -99,9 +89,5 @@ namespace Split.Infrastructure.StateMachine
         {
             Exit();
         }
-
-
-        
-        
     }
 }
