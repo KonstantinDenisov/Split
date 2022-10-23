@@ -20,11 +20,13 @@ namespace Split.Infrastructure.StateMachine
         private readonly ILevelCompletionService _levelCompletionService;
         private readonly IPersistantService _persistantService;
         private readonly IPauseService _pauseService;
+        private readonly IUIService _uiService;
 
         public GameState(IGameStateMachine gameStateMachine, ISceneLoadService sceneLoadService,
             ILoadingScreenService loadingScreenService, INpcService npcService, IInputService inputService,
             IMissionService missionService, ILevelSettingsService levelSettingsService,
-            ILevelCompletionService levelCompletionService, IPersistantService persistantService,IPauseService pauseService) : base(gameStateMachine)
+            ILevelCompletionService levelCompletionService, IPersistantService persistantService,
+            IPauseService pauseService, IUIService uiService) : base(gameStateMachine)
         {
             _sceneLoadService = sceneLoadService;
             _loadingScreenService = loadingScreenService;
@@ -35,6 +37,7 @@ namespace Split.Infrastructure.StateMachine
             _levelCompletionService = levelCompletionService;
             _persistantService = persistantService;
             _pauseService = pauseService;
+            _uiService = uiService;
         }
 
         public void Enter(string sceneName)
@@ -45,8 +48,6 @@ namespace Split.Infrastructure.StateMachine
             _loadingScreenService.ShowScreen();
             _sceneLoadService.Load(sceneName, OnSceneLoaded);
         }
-
-
 
         public override void Exit()
         {
@@ -66,12 +67,14 @@ namespace Split.Infrastructure.StateMachine
             _missionService.Dispose();
             _levelCompletionService.Dispose();
             _pauseService.Dispose();
+            _uiService.Dispose();
         }
 
         private void OnSceneLoaded()
         {
             Initialize();
             _loadingScreenService.HideScreen();
+            _uiService.Init();
             _pauseService.Init();
         }
 
@@ -83,7 +86,6 @@ namespace Split.Infrastructure.StateMachine
         private void InitHealth()
         {
         }
-
 
         private void RestartGame()
         {

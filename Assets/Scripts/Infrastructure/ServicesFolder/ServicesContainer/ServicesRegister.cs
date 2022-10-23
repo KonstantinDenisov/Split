@@ -15,7 +15,6 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 {
     public static class ServicesRegister
     {
-
         public static void RegisterFor<TState>() where TState : class, IExitableState
         {
             Type type = typeof(TState);
@@ -48,47 +47,51 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
         private static void RegisterBootstrap()
         {
-            ServicesFolder.ServicesContainer.Services.Container.RegisterMono<ICoroutineRunner>(typeof(CoroutineRunner));
-            ServicesFolder.ServicesContainer.Services.Container.Register<ISceneLoadService>(
-                new AsyncSceneLoadService(ServicesFolder.ServicesContainer.Services.Container.Get<ICoroutineRunner>()));
+            Services.Container.RegisterMono<ICoroutineRunner>(typeof(CoroutineRunner));
+            Services.Container.Register<ISceneLoadService>(
+                new AsyncSceneLoadService(Services.Container.Get<ICoroutineRunner>()));
 
-            ServicesFolder.ServicesContainer.Services.Container.Register<ILoadingScreenService>(new LoadingScreenService());
-            ServicesFolder.ServicesContainer.Services.Container.Register<ILevelSettingsService>(new LevelSettingsService());
-            ServicesFolder.ServicesContainer.Services.Container.Register<IPersistantService>(new PersistantService());
+            Services.Container.Register<ILoadingScreenService>(new LoadingScreenService());
+            Services.Container.Register<ILevelSettingsService>(new LevelSettingsService());
+            Services.Container.Register<IPersistantService>(new PersistantService());
         }
 
         private static void RegisterMenu()
         {
-            ILevelSettingsService levelSettingsService = ServicesFolder.ServicesContainer.Services.Container.Get<ILevelSettingsService>();
-            IGameStateMachine gameStateMachine = ServicesFolder.ServicesContainer.Services.Container.Get<IGameStateMachine>();
-            IPersistantService persistantService = ServicesFolder.ServicesContainer.Services.Container.Get<IPersistantService>();
+            ILevelSettingsService levelSettingsService =
+                Services.Container.Get<ILevelSettingsService>();
+            IGameStateMachine gameStateMachine =
+                Services.Container.Get<IGameStateMachine>();
+            IPersistantService persistantService =
+                Services.Container.Get<IPersistantService>();
 
-            ServicesFolder.ServicesContainer.Services.Container.Register<IStartLevelService>(new StartLevelService(levelSettingsService,
+            Services.Container.Register<IStartLevelService>(new StartLevelService(
+                levelSettingsService,
                 gameStateMachine, persistantService));
         }
 
         private static void UnregisterMenu()
         {
-            ServicesFolder.ServicesContainer.Services.Container.UnRegister<IStartLevelService>();
+            Services.Container.UnRegister<IStartLevelService>();
         }
 
         private static void RegisterGame()
         {
-            ServicesFolder.ServicesContainer.Services.Container.Register<IInputService>(new StandaloneInputService());
-
-            ILevelSettingsService levelSettingsService = ServicesFolder.ServicesContainer.Services.Container.Get<ILevelSettingsService>();
-            IGameStateMachine gameStateMachine = ServicesFolder.ServicesContainer.Services.Container.Get<IGameStateMachine>();
-            IPauseService pauseService =
-                Services.Container.RegisterMono<IPauseService>(typeof(PauseService));
+            Services.Container.Register<IInputService>(new StandaloneInputService());
+            Services.Container.Get<ILevelSettingsService>();
+            Services.Container.Get<IGameStateMachine>();
+            Services.Container.RegisterMono<IPauseService>(typeof(PauseService));
+            Services.Container.RegisterMono<IUIService>(typeof(UIService));
         }
 
         private static void UnregisterGame()
         {
-            ServicesFolder.ServicesContainer.Services.Container.UnRegister<IInputService>();
-            ServicesFolder.ServicesContainer.Services.Container.UnRegister<INpcService>();
-            ServicesFolder.ServicesContainer.Services.Container.UnRegister<IMissionService>();
-            ServicesFolder.ServicesContainer.Services.Container.UnRegister<ILevelCompletionService>();
-            ServicesFolder.ServicesContainer.Services.Container.UnRegister<IPauseService>();
+            Services.Container.UnRegister<IInputService>();
+            Services.Container.UnRegister<INpcService>();
+            Services.Container.UnRegister<IMissionService>();
+            Services.Container.UnRegister<ILevelCompletionService>();
+            Services.Container.UnRegister<IPauseService>();
+            Services.Container.UnRegister<IUIService>();
         }
     }
 }

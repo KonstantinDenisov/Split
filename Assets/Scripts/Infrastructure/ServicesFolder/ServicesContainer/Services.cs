@@ -68,11 +68,5 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
                 _components.Remove(key);
             }
         }
-        
-        public void UnRegisterAndNullRef<TService>(ref TService service) where TService : class, IService
-        {
-            UnRegister<TService>();
-            service = null;
-        }
     }
 }
