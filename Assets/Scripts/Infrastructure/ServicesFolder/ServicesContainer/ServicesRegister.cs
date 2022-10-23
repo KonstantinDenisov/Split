@@ -15,6 +15,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 {
     public static class ServicesRegister
     {
+
         public static void RegisterFor<TState>() where TState : class, IExitableState
         {
             Type type = typeof(TState);
@@ -74,14 +75,11 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
         private static void RegisterGame()
         {
             ServicesFolder.ServicesContainer.Services.Container.Register<IInputService>(new StandaloneInputService());
-            
-
-            
 
             ILevelSettingsService levelSettingsService = ServicesFolder.ServicesContainer.Services.Container.Get<ILevelSettingsService>();
             IGameStateMachine gameStateMachine = ServicesFolder.ServicesContainer.Services.Container.Get<IGameStateMachine>();
-
-           
+            IPauseService pauseService =
+                Services.Container.RegisterMono<IPauseService>(typeof(PauseService));
         }
 
         private static void UnregisterGame()
@@ -90,6 +88,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
             ServicesFolder.ServicesContainer.Services.Container.UnRegister<INpcService>();
             ServicesFolder.ServicesContainer.Services.Container.UnRegister<IMissionService>();
             ServicesFolder.ServicesContainer.Services.Container.UnRegister<ILevelCompletionService>();
+            ServicesFolder.ServicesContainer.Services.Container.UnRegister<IPauseService>();
         }
     }
 }

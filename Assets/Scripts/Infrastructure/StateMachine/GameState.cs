@@ -6,7 +6,6 @@ using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Split.Infrastructure.ServicesFolder.Mission;
 using Split.Infrastructure.ServicesFolder.Npc;
 using Split.Infrastructure.ServicesFolder.Persistant;
-using UnityEngine;
 
 namespace Split.Infrastructure.StateMachine
 {
@@ -20,11 +19,12 @@ namespace Split.Infrastructure.StateMachine
         private readonly ILevelSettingsService _levelSettingsService;
         private readonly ILevelCompletionService _levelCompletionService;
         private readonly IPersistantService _persistantService;
+        private readonly IPauseService _pauseService;
 
         public GameState(IGameStateMachine gameStateMachine, ISceneLoadService sceneLoadService,
             ILoadingScreenService loadingScreenService, INpcService npcService, IInputService inputService,
             IMissionService missionService, ILevelSettingsService levelSettingsService,
-            ILevelCompletionService levelCompletionService, IPersistantService persistantService) : base(gameStateMachine)
+            ILevelCompletionService levelCompletionService, IPersistantService persistantService,IPauseService pauseService) : base(gameStateMachine)
         {
             _sceneLoadService = sceneLoadService;
             _loadingScreenService = loadingScreenService;
@@ -34,6 +34,7 @@ namespace Split.Infrastructure.StateMachine
             _levelSettingsService = levelSettingsService;
             _levelCompletionService = levelCompletionService;
             _persistantService = persistantService;
+            _pauseService = pauseService;
         }
 
         public void Enter(string sceneName)
@@ -43,6 +44,19 @@ namespace Split.Infrastructure.StateMachine
 
             _loadingScreenService.ShowScreen();
             _sceneLoadService.Load(sceneName, OnSceneLoaded);
+            CreatePauseRunner();
+        }
+
+        private void CreatePauseRunner()
+        {
+            //_pauseService = Services.Container.RegisterMono<IPauseService>(typeof(PauseService.PauseService));
+            InitPauseScreen();
+        }
+        
+        private void InitPauseScreen()
+        {
+            _pauseService.Init();
+            //_pauseService.OnRestarted += RestartGame;
         }
 
         public override void Exit()
@@ -62,6 +76,7 @@ namespace Split.Infrastructure.StateMachine
             _npcService.Dispose();
             _missionService.Dispose();
             _levelCompletionService.Dispose();
+            _pauseService.Dispose();
         }
 
         private void OnSceneLoaded()
@@ -78,5 +93,15 @@ namespace Split.Infrastructure.StateMachine
         private void InitHealth()
         {
         }
+
+
+        private void RestartGame()
+        {
+            Exit();
+        }
+
+
+        
+        
     }
 }
