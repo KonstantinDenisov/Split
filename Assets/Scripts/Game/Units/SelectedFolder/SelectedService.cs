@@ -49,7 +49,6 @@ namespace Split.Game.Units.SelectedFolder
             }
             
             SelectedUnits.Clear();
-            Debug.Log("all units deselect");
         }
 
     }
