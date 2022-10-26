@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Split.Game.Units.SelectedFolder
 {
@@ -9,6 +10,9 @@ namespace Split.Game.Units.SelectedFolder
         [SerializeField] private LayerMask _unitLayerMask;
         [SerializeField] private LayerMask _groundLayerMask;
         [SerializeField] private LayerMask _interactiveObjects;
+        [SerializeField] private Image _frameImage;
+        private Vector2 _frameStart;
+        private Vector2 _frameFinish;
         private Camera _mainCamera;
         private UnitState _lastUnit;
         private NavMeshAgent _navMeshAgent;
@@ -67,7 +71,24 @@ namespace Split.Game.Units.SelectedFolder
                     if (Input.GetMouseButtonDown(0))
                     {
                         Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
-                        SelectedService.Instance.DeselectAllUnits(); 
+                        SelectedService.Instance.DeselectAllUnits();
+
+                        _frameImage.enabled = true;
+                        _frameStart = Input.mousePosition;
+                    }
+
+                    if (Input.GetMouseButton(0))
+                    {
+                        _frameFinish = Input.mousePosition;
+                        _frameImage.rectTransform.anchoredPosition = _frameStart;
+
+                        Vector2 size = _frameFinish - _frameStart;
+                        _frameImage.rectTransform.sizeDelta = size;
+                    }
+
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        _frameImage.enabled = false;
                     }
 
                     if (Input.GetMouseButtonDown(1))
