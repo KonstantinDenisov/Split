@@ -73,17 +73,38 @@ namespace Split.Game.Units.SelectedFolder
                         Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
                         SelectedService.Instance.DeselectAllUnits();
 
-                        _frameImage.enabled = true;
+                        
                         _frameStart = Input.mousePosition;
                     }
 
                     if (Input.GetMouseButton(0))
                     {
                         _frameFinish = Input.mousePosition;
-                        _frameImage.rectTransform.anchoredPosition = _frameStart;
 
-                        Vector2 size = _frameFinish - _frameStart;
-                        _frameImage.rectTransform.sizeDelta = size;
+                        Vector2 min = Vector2.Min(_frameStart, _frameFinish);
+                        Vector2 max = Vector2.Max(_frameStart, _frameFinish);
+                        Vector2 size = max - min;
+                        if (size.magnitude > 10)
+                        {
+                            _frameImage.enabled = true;
+                            _frameImage.rectTransform.anchoredPosition = min;
+                            _frameImage.rectTransform.sizeDelta = size;
+
+                            Rect rect = new Rect(min, size);
+                        
+                            SelectedService.Instance.DeselectAllUnits();
+                        
+                            for (int i = 0; i < SelectedService.Instance.AllUnits.Count; i++)
+                            {
+                                Vector2 screePosition =
+                                    _mainCamera.WorldToScreenPoint(SelectedService.Instance.AllUnits[i].transform.position);
+                                if (rect.Contains(screePosition))
+                                {
+                                    var unit = SelectedService.Instance.AllUnits[i].gameObject.GetComponent<UnitState>();
+                                    unit.OnSelected();
+                                }
+                            }
+                        }
                     }
 
                     if (Input.GetMouseButtonUp(0))
