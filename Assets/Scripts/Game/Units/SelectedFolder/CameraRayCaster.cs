@@ -46,7 +46,7 @@ namespace Split.Game.Units.SelectedFolder
                         Debug.Log("юнит попал под курсор");
                         var unit = hit.collider.GetComponent<UnitState>();
                         unit.OnHoverEnter();
-                        _lastUnit = hit.collider.GetComponent<UnitState>();
+                        _lastUnit = unit;
                     }
 
                     if (Input.GetMouseButtonDown(0))
@@ -90,16 +90,27 @@ namespace Split.Game.Units.SelectedFolder
 
                             Rect rect = new Rect(min, size);
                         
-                            SelectedService.Instance.DeselectAllUnits();
+                                //SelectedService.Instance.DeselectAllUnits();
                         
                             for (int i = 0; i < SelectedService.Instance.AllUnits.Count; i++)
                             {
+                                var unitObject = SelectedService.Instance.AllUnits[i];
+                                bool isUnitSelected = SelectedService.Instance.IsUnitSelected(unitObject);
                                 Vector2 screePosition =
-                                    _mainCamera.WorldToScreenPoint(SelectedService.Instance.AllUnits[i].transform.position);
+                                    _mainCamera.WorldToScreenPoint(unitObject.transform.position);
                                 if (rect.Contains(screePosition))
                                 {
-                                    var unit = SelectedService.Instance.AllUnits[i].gameObject.GetComponent<UnitState>();
-                                    unit.OnSelected();
+                                    if (!isUnitSelected)
+                                    {
+                                        SelectedService.Instance.SelectUnit(unitObject); 
+                                    }
+                                }
+                                else
+                                {
+                                    if (isUnitSelected)
+                                    {
+                                        SelectedService.Instance.DeselectUnit(unitObject);
+                                    }
                                 }
                             }
                         }

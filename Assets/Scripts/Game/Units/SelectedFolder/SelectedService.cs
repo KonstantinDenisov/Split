@@ -45,6 +45,11 @@ namespace Split.Game.Units.SelectedFolder
             Debug.Log("unit selected");
         }
 
+        public bool IsUnitSelected(GameObject unit)
+        {
+            return SelectedUnits.Contains(unit);
+        }
+
         public void DeselectUnit(GameObject unit)
         {
             bool isRemoved = SelectedUnits.Remove(unit);
