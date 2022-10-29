@@ -32,12 +32,28 @@ namespace Split.Game.Units.SelectedFolder
             Debug.Log("unit add");
         }
 
+        public void RemoveUnit(GameObject unit)
+        {
+            AllUnits.Remove(unit);
+        }
+
         public void SelectUnit(GameObject unit)
         {
             SelectedUnits.Add(unit);
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelected();
             Debug.Log("unit selected");
+        }
+
+        public void DeselectUnit(GameObject unit)
+        {
+            bool isRemoved = SelectedUnits.Remove(unit);
+            if (!isRemoved)
+                return;
+            
+            UnitState unitState = unit.transform.GetComponent<UnitState>();
+            unitState.OnSelectedExit();
+            Debug.Log("unit deselected");
         }
 
         public void DeselectAllUnits()

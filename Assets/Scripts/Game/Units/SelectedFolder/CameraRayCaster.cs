@@ -11,8 +11,8 @@ namespace Split.Game.Units.SelectedFolder
         [SerializeField] private LayerMask _groundLayerMask;
         [SerializeField] private LayerMask _interactiveObjects;
         [SerializeField] private Image _frameImage;
-        private Vector2 _frameStart;
-        private Vector2 _frameFinish;
+        private Vector2 _frameStartPosition;
+        private Vector2 _frameFinishPosition;
         private Camera _mainCamera;
         private UnitState _lastUnit;
         private NavMeshAgent _navMeshAgent;
@@ -52,9 +52,7 @@ namespace Split.Game.Units.SelectedFolder
                     if (Input.GetMouseButtonDown(0))
                     {
                         Debug.Log("юнит попал под клик");
-                        var unit = hit.collider.GetComponent<UnitState>();
-                        unit.OnSelected();
-                        SelectedService.Instance.SelectUnit(unit.gameObject); 
+                        SelectedService.Instance.SelectUnit(hit.collider.gameObject); 
                     }
                 }
 
@@ -74,15 +72,15 @@ namespace Split.Game.Units.SelectedFolder
                         SelectedService.Instance.DeselectAllUnits();
 
                         
-                        _frameStart = Input.mousePosition;
+                        _frameStartPosition = Input.mousePosition;
                     }
 
                     if (Input.GetMouseButton(0))
                     {
-                        _frameFinish = Input.mousePosition;
+                        _frameFinishPosition = Input.mousePosition;
 
-                        Vector2 min = Vector2.Min(_frameStart, _frameFinish);
-                        Vector2 max = Vector2.Max(_frameStart, _frameFinish);
+                        Vector2 min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
+                        Vector2 max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
                         Vector2 size = max - min;
                         if (size.magnitude > 10)
                         {
