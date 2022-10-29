@@ -9,9 +9,9 @@
                     "name": "Pan",
                     "type": "PassThrough",
                     "id": "4b2daa48-a791-49dd-9109-40d8787b2a1d",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
+                    "expectedControlType": "Vector3",
+                    "processors": "ScaleVector3(x=2,y=2)",
+                    "interactions": "SlowTap",
                     "initialStateCheck": false
                 },
                 {
@@ -30,7 +30,7 @@
                     "id": "b1888a71-0a79-4a97-a506-754388747d5c",
                     "path": "<Mouse>/position",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "ScaleVector3",
                     "groups": "",
                     "action": "Pan",
                     "isComposite": false,
