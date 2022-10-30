@@ -10,7 +10,7 @@ namespace Split.Game.CameraServices
         [SerializeField] private float _zoomInMax = 40f;
         [SerializeField] private float _zoomOutMax = 90f;
         
-        
+        // слияние веток
         [SerializeField] private CinemachineInputProvider _inputProvider;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         
