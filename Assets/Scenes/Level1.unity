@@ -1674,6 +1674,8 @@ MonoBehaviour:
   _zoomSpeed: 5
   _zoomInMax: 40
   _zoomOutMax: 90
+  _inputProvider: {fileID: 1872491699}
+  _virtualCamera: {fileID: 1872491700}
 --- !u!1 &1880384440
 GameObject:
   m_ObjectHideFlags: 3
