@@ -11,8 +11,8 @@ namespace Split.Game.Units.SelectedFolder
         [SerializeField] private LayerMask _groundLayerMask;
         [SerializeField] private LayerMask _interactiveObjects;
         [SerializeField] private Image _frameImage;
-        private Vector2 _frameStart;
-        private Vector2 _frameFinish;
+        private Vector2 _frameStartPosition;
+        private Vector2 _frameFinishPosition;
         private Camera _mainCamera;
         private UnitState _lastUnit;
         private NavMeshAgent _navMeshAgent;
@@ -46,15 +46,13 @@ namespace Split.Game.Units.SelectedFolder
                         Debug.Log("юнит попал под курсор");
                         var unit = hit.collider.GetComponent<UnitState>();
                         unit.OnHoverEnter();
-                        _lastUnit = hit.collider.GetComponent<UnitState>();
+                        _lastUnit = unit;
                     }
 
                     if (Input.GetMouseButtonDown(0))
                     {
                         Debug.Log("юнит попал под клик");
-                        var unit = hit.collider.GetComponent<UnitState>();
-                        unit.OnSelected();
-                        SelectedService.Instance.SelectUnit(unit.gameObject); 
+                        SelectedService.Instance.SelectUnit(hit.collider.gameObject); 
                     }
                 }
 
@@ -74,15 +72,15 @@ namespace Split.Game.Units.SelectedFolder
                         SelectedService.Instance.DeselectAllUnits();
 
                         
-                        _frameStart = Input.mousePosition;
+                        _frameStartPosition = Input.mousePosition;
                     }
 
                     if (Input.GetMouseButton(0))
                     {
-                        _frameFinish = Input.mousePosition;
+                        _frameFinishPosition = Input.mousePosition;
 
-                        Vector2 min = Vector2.Min(_frameStart, _frameFinish);
-                        Vector2 max = Vector2.Max(_frameStart, _frameFinish);
+                        Vector2 min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
+                        Vector2 max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
                         Vector2 size = max - min;
                         if (size.magnitude > 10)
                         {
@@ -92,16 +90,27 @@ namespace Split.Game.Units.SelectedFolder
 
                             Rect rect = new Rect(min, size);
                         
-                            SelectedService.Instance.DeselectAllUnits();
+                                //SelectedService.Instance.DeselectAllUnits();
                         
                             for (int i = 0; i < SelectedService.Instance.AllUnits.Count; i++)
                             {
+                                var unitObject = SelectedService.Instance.AllUnits[i];
+                                bool isUnitSelected = SelectedService.Instance.IsUnitSelected(unitObject);
                                 Vector2 screePosition =
-                                    _mainCamera.WorldToScreenPoint(SelectedService.Instance.AllUnits[i].transform.position);
+                                    _mainCamera.WorldToScreenPoint(unitObject.transform.position);
                                 if (rect.Contains(screePosition))
                                 {
-                                    var unit = SelectedService.Instance.AllUnits[i].gameObject.GetComponent<UnitState>();
-                                    unit.OnSelected();
+                                    if (!isUnitSelected)
+                                    {
+                                        SelectedService.Instance.SelectUnit(unitObject); 
+                                    }
+                                }
+                                else
+                                {
+                                    if (isUnitSelected)
+                                    {
+                                        SelectedService.Instance.DeselectUnit(unitObject);
+                                    }
                                 }
                             }
                         }
