@@ -30,20 +30,20 @@ namespace Split.Game.Units.SelectedFolder
             
             if (Physics.Raycast(ray, out hit, 100, _interactiveObjects))
             {
-                Debug.Log("луч попадает во что-то со слоями из маски");
+                //Debug.Log("луч попадает во что-то со слоями из маски");
                 InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
 
                 if (interactiveObject == null)
                 {
                     return;
                 }
-                Debug.Log("луч попадает в интерактивный объект");
+                //Debug.Log("луч попадает в интерактивный объект");
                 if (interactiveObject.InteractiveType == InteractiveType.Unit)
                 {
-                    Debug.Log("луч попадает в юнита");
+                   // Debug.Log("луч попадает в юнита");
                     if (_lastUnit == null)
                     {
-                        Debug.Log("юнит попал под курсор");
+                        //Debug.Log("юнит попал под курсор");
                         var unit = hit.collider.GetComponent<UnitState>();
                         unit.OnHoverEnter();
                         _lastUnit = unit;
@@ -51,24 +51,24 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Debug.Log("юнит попал под клик");
+                        //Debug.Log("юнит попал под клик");
                         SelectedService.Instance.SelectUnit(hit.collider.gameObject); 
                     }
                 }
 
                 if (interactiveObject.InteractiveType == InteractiveType.Ground)
                 {
-                    Debug.Log("луч попал по земле");
+                    //Debug.Log("луч попал по земле");
                     if (_lastUnit != null)
                     {
-                        Debug.Log("юнит вышел из под луча");
+                        //Debug.Log("юнит вышел из под луча");
                         _lastUnit.OnHoverExit();
                         _lastUnit = null;    
                     }
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
+                        //Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
                         SelectedService.Instance.DeselectAllUnits();
 
                         
@@ -123,7 +123,7 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonDown(1))
                     {
-                        Debug.Log("клик mouse2 по земле");
+                        //Debug.Log("клик mouse2 по земле");
                         if (SelectedService.Instance.SelectedUnits != null)
                         {
                             foreach (var unit in SelectedService.Instance.SelectedUnits)

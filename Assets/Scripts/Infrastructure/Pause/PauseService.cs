@@ -1,4 +1,5 @@
 ﻿using System;
+using Split.Infrastructure.Pause;
 using UnityEngine;
 
 namespace Split.Infrastructure

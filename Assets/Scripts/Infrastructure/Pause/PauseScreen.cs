@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Split.Infrastructure
+namespace Split.Infrastructure.Pause
 {
     public class PauseScreen : MonoBehaviour
     {
@@ -21,7 +21,7 @@ namespace Split.Infrastructure
             _exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
         }
 
-        public event Action OnRestarted;
+        // public event Action OnRestarted;
         
     }
 }

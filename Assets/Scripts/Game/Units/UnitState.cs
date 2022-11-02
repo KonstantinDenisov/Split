@@ -1,4 +1,3 @@
-using System;
 using Split.Game.Units.SelectedFolder;
 using UnityEngine;
 namespace Split.Game.Units

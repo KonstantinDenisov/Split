@@ -29,7 +29,7 @@ namespace Split.Game.Units.SelectedFolder
         public void AddUnit(GameObject unit)
         {
             AllUnits.Add(unit);
-            Debug.Log("unit add");
+//            Debug.Log("unit add");
         }
 
         public void RemoveUnit(GameObject unit)
@@ -42,7 +42,7 @@ namespace Split.Game.Units.SelectedFolder
             SelectedUnits.Add(unit);
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelected();
-            Debug.Log("unit selected");
+            //Debug.Log("unit selected");
         }
 
         public bool IsUnitSelected(GameObject unit)
@@ -58,7 +58,7 @@ namespace Split.Game.Units.SelectedFolder
             
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelectedExit();
-            Debug.Log("unit deselected");
+           // Debug.Log("unit deselected");
         }
 
         public void DeselectAllUnits()
