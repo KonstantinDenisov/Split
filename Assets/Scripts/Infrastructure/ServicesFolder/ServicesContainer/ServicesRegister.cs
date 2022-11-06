@@ -1,5 +1,7 @@
 using System;
+using Split.Infrastructure.GameOver;
 using Split.Infrastructure.LoadingScreen;
+using Split.Infrastructure.Pause;
 using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.InputService;
 using Split.Infrastructure.ServicesFolder.Level;
@@ -82,6 +84,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
             Services.Container.Get<IGameStateMachine>();
             Services.Container.RegisterMono<IPauseService>(typeof(PauseService));
             Services.Container.RegisterMono<IUIService>(typeof(UIService));
+            Services.Container.RegisterMono<IGameOverService>(typeof(GameOverService));
         }
 
         private static void UnregisterGame()
@@ -92,6 +95,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
             Services.Container.UnRegister<ILevelCompletionService>();
             Services.Container.UnRegister<IPauseService>();
             Services.Container.UnRegister<IUIService>();
+            Services.Container.UnRegister<IGameOverService>();
         }
     }
 }

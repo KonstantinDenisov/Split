@@ -1,3 +1,4 @@
+using Split.Infrastructure.GameOver;
 using Split.Infrastructure.LoadingScreen;
 using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.InputService;
@@ -36,10 +37,11 @@ namespace Split.Infrastructure.StateMachine
             IPersistantService persistantService = Services.Container.Get<IPersistantService>();
             IPauseService pauseService = Services.Container.Get<IPauseService>();
             IUIService uiService = Services.Container.Get<IUIService>();
+            IGameOverService gameOverService = Services.Container.Get<IGameOverService>();
 
             return new GameState(stateMachine, sceneLoadService, loadingScreenService, npcService, inputService,
                 missionService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-                uiService) as TState;
+                uiService,gameOverService) as TState;
         }
 
         private static TState CreateMenuState<TState>() where TState : class, IExitableState

@@ -1,3 +1,4 @@
+using Split.Infrastructure.GameOver;
 using Split.Infrastructure.LoadingScreen;
 using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.InputService;
@@ -21,12 +22,13 @@ namespace Split.Infrastructure.StateMachine
         private readonly IPersistantService _persistantService;
         private readonly IPauseService _pauseService;
         private readonly IUIService _uiService;
+        private readonly IGameOverService _gameOverService;
 
         public GameState(IGameStateMachine gameStateMachine, ISceneLoadService sceneLoadService,
             ILoadingScreenService loadingScreenService, INpcService npcService, IInputService inputService,
             IMissionService missionService, ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
-            IPauseService pauseService, IUIService uiService) : base(gameStateMachine)
+            IPauseService pauseService, IUIService uiService,IGameOverService gameOverService) : base(gameStateMachine)
         {
             _sceneLoadService = sceneLoadService;
             _loadingScreenService = loadingScreenService;
@@ -38,6 +40,7 @@ namespace Split.Infrastructure.StateMachine
             _persistantService = persistantService;
             _pauseService = pauseService;
             _uiService = uiService;
+            _gameOverService = gameOverService;
         }
 
         public void Enter(string sceneName)
@@ -66,6 +69,7 @@ namespace Split.Infrastructure.StateMachine
             _npcService.Dispose();
             _missionService.Dispose();
             _levelCompletionService.Dispose();
+            _gameOverService.Dispose();
             _pauseService.Dispose();
             _uiService.Dispose();
         }
@@ -74,8 +78,10 @@ namespace Split.Infrastructure.StateMachine
         {
             Initialize();
             _loadingScreenService.HideScreen();
-            _uiService.Init();
             _pauseService.Init();
+            _gameOverService.Init();
+            _uiService.Init();
+      
         }
 
         private void Initialize()
