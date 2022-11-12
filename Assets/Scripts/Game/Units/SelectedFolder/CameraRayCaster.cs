@@ -52,6 +52,7 @@ namespace Split.Game.Units.SelectedFolder
                     if (Input.GetMouseButtonDown(0))
                     {
                         //Debug.Log("юнит попал под клик");
+                        SelectedService.Instance.DeselectAllUnits();
                         SelectedService.Instance.SelectUnit(hit.collider.gameObject); 
                     }
                 }
