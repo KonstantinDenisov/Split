@@ -15,11 +15,13 @@ namespace Split.Game.CameraServices
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                SwitchPriority();
+                _maxCamera.Priority = 10;
+                _minCamera.Priority = 0;
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
-                SwitchPriority();
+                _maxCamera.Priority = 0;
+                _minCamera.Priority = 10;
             }
         }
 
@@ -27,13 +29,11 @@ namespace Split.Game.CameraServices
         {
             if (_overWorldCamera)
             {
-                _maxCamera.Priority = 10;
-                _minCamera.Priority = 0;
+              
             }
             else
             {
-                _maxCamera.Priority = 0;
-                _minCamera.Priority = 10;
+            
             }
 
             _overWorldCamera = !_overWorldCamera;

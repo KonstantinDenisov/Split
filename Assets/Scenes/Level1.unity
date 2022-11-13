@@ -1887,8 +1887,8 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
+    m_Style: 6
+    m_Time: 0.6
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -3361,12 +3361,8 @@ MonoBehaviour:
   _zMaxValue: 4.5
   _xMinValue: -1.2
   _xMaxValue: 1.2
-  _zoomSpeed: 5
-  _zoomInMax: 40
-  _zoomOutMax: 90
   _inputProvider: {fileID: 1872491699}
   _virtualCamera: {fileID: 1872491700}
-  _minCamera: {fileID: 0}
 --- !u!1 &1880384440
 GameObject:
   m_ObjectHideFlags: 3

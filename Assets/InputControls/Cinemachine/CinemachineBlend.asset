@@ -17,7 +17,7 @@ MonoBehaviour:
     m_To: CinemachineCloseCamera
     m_Blend:
       m_Style: 6
-      m_Time: 5
+      m_Time: 0.6
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -28,7 +28,7 @@ MonoBehaviour:
     m_To: CinemachineMainCamera
     m_Blend:
       m_Style: 6
-      m_Time: 5
+      m_Time: 0.6
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
