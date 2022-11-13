@@ -10,16 +10,16 @@
                     "type": "PassThrough",
                     "id": "4b2daa48-a791-49dd-9109-40d8787b2a1d",
                     "expectedControlType": "Vector3",
-                    "processors": "ScaleVector3(x=2,y=2)",
-                    "interactions": "SlowTap",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Zoom",
                     "type": "PassThrough",
-                    "id": "86060933-e108-4042-85f9-50bade44b8c1",
+                    "id": "af274f32-29bb-44d4-baa4-aae965b695ad",
                     "expectedControlType": "Axis",
-                    "processors": "Normalize(min=-1,max=1)",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -38,7 +38,7 @@
                 },
                 {
                     "name": "",
-                    "id": "1175c2c2-7dce-47bd-80bd-dc10fbabc800",
+                    "id": "34a99c40-1745-4d8c-9ff2-122cb98c0d28",
                     "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
