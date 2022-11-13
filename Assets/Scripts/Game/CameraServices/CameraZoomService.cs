@@ -5,16 +5,23 @@ namespace Split.Game.CameraServices
 {
     public class CameraZoomService : MonoBehaviour
     {
+        [Header("Pan")]
         [SerializeField] private float _panSpeed = 2f;
-        [SerializeField] private float _zoomSpeed = 5f;
-        [SerializeField] private float _zoomInMax = 40f;
-        [SerializeField] private float _zoomOutMax = 90f;
-        
-        // слияние веток
+        [SerializeField] private float _panDelta = 1f;
+        [SerializeField] private float _panWidthPercent = 0.95f;
+        [SerializeField] private float _panHeightPercent = 0.05f;
+
+        [Header("Limits")]
+        [SerializeField] private float _zMinValue = -4.30f;
+        [SerializeField] private float _zMaxValue = 4.5f;
+        [SerializeField] private float _xMinValue = -1.2f;
+        [SerializeField] private float _xMaxValue = 1.2f;
+
         [SerializeField] private CinemachineInputProvider _inputProvider;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
-        
+
         private Transform _cameraTransform;
+        private float _target;
 
         private void Awake()
         {
@@ -26,42 +33,32 @@ namespace Split.Game.CameraServices
             float x = _inputProvider.GetAxisValue(0);
             float y = _inputProvider.GetAxisValue(1);
             float z = _inputProvider.GetAxisValue(2);
-            if (x != 0 || y != 0)
-                PanScreen(x, y);
-
-            if (z != 0)
-                ZoomScreen(z);
+            if (x != 0 || z != 0)
+                PanScreen(x, y, z);
         }
 
-        public Vector2 PanDirection(float x, float y)
+        private Vector3 PanDirection(float x, float y, float z)
         {
-            Vector2 direction = Vector2.zero;
-            if (y >= Screen.height * 0.95f)
-                direction.y += 1;
-            else if (y <= Screen.height  * 0.05f)
-                direction.y -= 1;
+            Vector3 direction = Vector3.zero;
+            if (y >= Screen.height * _panWidthPercent && _cameraTransform.position.z <= _zMaxValue)
+                direction.z += _panDelta;
 
-            if (x >=Screen.width * 0.95f)
-                direction.x += 1;
-            else if (x <=Screen.width * 0.05f)
-                direction.x -= 1;
+            else if (y <= Screen.height * _panHeightPercent && _cameraTransform.position.z >= _zMinValue)
+                direction.z -= _panDelta;
+
+            if (x >= Screen.width * _panWidthPercent && _cameraTransform.position.x <= _xMaxValue)
+                direction.x += _panDelta;
+            else if (x <= Screen.width * _panHeightPercent && _cameraTransform.position.x >= _xMinValue)
+                direction.x -= _panDelta;
+
             return direction;
         }
 
-        public void PanScreen(float x, float y)
+        private void PanScreen(float x, float y, float z)
         {
-            Vector2 direction = PanDirection(x, y);
+            Vector3 direction = PanDirection(x, y, z);
             _cameraTransform.position = Vector3.Lerp(_cameraTransform.position,
-                _cameraTransform.position + (Vector3) direction * _panSpeed, Time.deltaTime);
+                _cameraTransform.position +  direction * _panSpeed, Time.deltaTime);
         }
-
-        public void ZoomScreen(float increment)
-        {
-            float fov = _virtualCamera.m_Lens.FieldOfView;
-            float target = Mathf.Clamp(fov + increment, _zoomInMax, _zoomOutMax);
-            _virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(fov, target, _zoomSpeed * Time.deltaTime);
-        }
-        
-        
     }
 }
