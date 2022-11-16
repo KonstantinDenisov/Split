@@ -32,7 +32,7 @@ namespace Split.Infrastructure.StateMachine
             INpcService npcService = Services.Container.Get<INpcService>();
             IInputService inputService = Services.Container.Get<IInputService>();
             IMissionService missionService = Services.Container.Get<IMissionService>();
-            ILevelSettingsService levelSettingsService = Services.Container.Get<ILevelSettingsService>();
+            ILevelSettingsService levelSettingsService = null;
             ILevelCompletionService levelCompletionService = Services.Container.Get<ILevelCompletionService>();
             IPersistantService persistantService = Services.Container.Get<IPersistantService>();
             IPauseService pauseService = Services.Container.Get<IPauseService>();
@@ -54,9 +54,8 @@ namespace Split.Infrastructure.StateMachine
         private static TState CreateBootstrapState<TState>() where TState : class, IExitableState
         {
             var stateMachine = Services.Container.Get<IGameStateMachine>();
-            ILevelSettingsService levelSettingsService =
-                Services.Container.Get<ILevelSettingsService>();
-            IPersistantService persistantService =
+            ILevelSettingsService levelSettingsService = null;
+                IPersistantService persistantService =
                 Services.Container.Get<IPersistantService>();
 
             return new BootstrapState(stateMachine, levelSettingsService, persistantService) as TState;

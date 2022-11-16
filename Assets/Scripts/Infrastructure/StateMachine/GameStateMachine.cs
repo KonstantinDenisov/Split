@@ -1,17 +1,22 @@
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
-
 namespace Split.Infrastructure.StateMachine
 {
     public class GameStateMachine : IGameStateMachine
     {
+        private readonly IStateFactory _stateFactory;
         private IExitableState _currentState;
+
+        public GameStateMachine(IStateFactory stateFactory)
+        {
+            _stateFactory = stateFactory;
+        }
 
         public void Enter<TState>() where TState : class, IState
         {
             ExitCurrent();
            
-            ServicesRegister.RegisterFor<TState>();
-            TState newState = StateFactory.Create<TState>(); 
+            // ServicesRegister.RegisterFor<TState>();
+            //TState newState = StateFactory.Create<TState>(); 
+            TState newState = _stateFactory.Create<TState>();
             newState.Enter();
             _currentState = newState;
         }
@@ -20,8 +25,9 @@ namespace Split.Infrastructure.StateMachine
         { 
             ExitCurrent();
             
-            ServicesRegister.RegisterFor<TState>();
-            TState newState = StateFactory.Create<TState>();
+            // ServicesRegister.RegisterFor<TState>();
+            //TState newState = StateFactory.Create<TState>();
+            TState newState = _stateFactory.Create<TState>();
             newState.Enter(payload);
             _currentState = newState;
         }
@@ -31,7 +37,7 @@ namespace Split.Infrastructure.StateMachine
             if (_currentState != null)
             {
                 _currentState.Exit();
-                ServicesRegister.UnregisterFor(_currentState.GetType());
+                // ServicesRegister.UnregisterFor(_currentState.GetType());
             }
         }
     }
