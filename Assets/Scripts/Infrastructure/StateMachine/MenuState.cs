@@ -25,7 +25,6 @@ namespace Split.Infrastructure.StateMachine
 
             _loadingScreenService.ShowScreen();
             _sceneLoadService.Load("MenuScene", OnSceneLoaded);
-            Debug.Log($"Работает что ли ?");
         }
 
         private void OnSceneLoaded()

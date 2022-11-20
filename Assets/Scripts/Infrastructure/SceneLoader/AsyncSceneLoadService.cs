@@ -3,7 +3,6 @@ using System.Collections;
 using Split.Infrastructure.Utility.Coroutine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 namespace Split.Infrastructure.SceneLoader
 {

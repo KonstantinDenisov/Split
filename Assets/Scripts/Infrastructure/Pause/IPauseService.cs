@@ -3,7 +3,7 @@ using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
 namespace Split.Infrastructure
 {
-    public interface IPauseService:IService
+    public interface IPauseService
     {
         public event Action OnRestarted;
         void Init();

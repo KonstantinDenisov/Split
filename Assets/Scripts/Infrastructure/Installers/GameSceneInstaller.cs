@@ -1,4 +1,6 @@
-﻿using Split.Infrastructure.ServicesFolder.Level;
+﻿using Split.Infrastructure.GameOver;
+using Split.Infrastructure.SceneLoader;
+using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Zenject;
 
 namespace Split.Infrastructure.Installers
@@ -7,7 +9,12 @@ namespace Split.Infrastructure.Installers
     {
         public override void InstallBindings()
         {
-            LevelSettingsServiceInstaller.Install(Container);
+            //LevelSettingsServiceInstaller.Install(Container);
+            SceneLoadServiceInstaller.Install(Container);
+            LevelCompletionServiceInstaller.Install(Container);
+            PauseServiceInstaller.Install(Container);
+            UIServiceInstaller.Install(Container);
+            GameOverServiceInstaller.Install(Container);
         }
     }
 }

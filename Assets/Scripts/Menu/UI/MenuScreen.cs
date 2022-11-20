@@ -2,6 +2,7 @@ using Split.Infrastructure.ServicesFolder.ServicesContainer;
 using Split.Infrastructure.ServicesFolder.StartLevel;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Split.Menu.UI
 {
@@ -11,6 +12,13 @@ namespace Split.Menu.UI
 
         private IStartLevelService _startLevelService;
 
+        [Inject]
+        public void Construct(IStartLevelService startLevelService)
+        {
+            _startLevelService = startLevelService;
+
+        }
+
         private void Awake()
         {
             _playButton.onClick.AddListener(OnPlayButtonClicked);
@@ -18,7 +26,7 @@ namespace Split.Menu.UI
 
         private void Start()
         {
-            _startLevelService = Services.Container.Get<IStartLevelService>();
+           // _startLevelService = Services.Container.Get<IStartLevelService>();
         }
 
         private void OnPlayButtonClicked()

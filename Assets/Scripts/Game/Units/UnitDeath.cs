@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.StateMachine;
+﻿using Split.Infrastructure;
+using Split.Infrastructure.StateMachine;
 using UnityEngine;
 
 namespace Split.Game.Units

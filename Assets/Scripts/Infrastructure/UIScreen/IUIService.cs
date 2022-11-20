@@ -2,7 +2,7 @@
 
 namespace Split.Infrastructure
 {
-    public interface IUIService:IService
+    public interface IUIService
     {
         void Init();
 

@@ -1,8 +1,6 @@
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
-
 namespace Split.Infrastructure.ServicesFolder.StartLevel
 {
-    public interface IStartLevelService : IService
+    public interface IStartLevelService 
     {
         void StartGame();
     }

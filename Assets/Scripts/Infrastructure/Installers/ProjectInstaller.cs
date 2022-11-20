@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.ServicesFolder.Level;
+﻿using Split.Infrastructure.SceneLoader;
+using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.StateMachine;
 using UnityEditor;
@@ -11,8 +12,9 @@ namespace Split.Infrastructure.Installers
         public override void InstallBindings()
         {
             GameStateMachineInstaller.Install(Container);
-            //LevelSettingsServiceInstaller.Install(Container);
+            LevelSettingsServiceInstaller.Install(Container);
             PersistantServiceIntaller.Install(Container);
+            //SceneLoadServiceInstaller.Install(Container);
         }
     }
 }

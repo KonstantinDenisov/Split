@@ -1,38 +1,35 @@
 using Split.Infrastructure.GameOver;
-using Split.Infrastructure.LoadingScreen;
-using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.InputService;
 using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Split.Infrastructure.ServicesFolder.Mission;
-using Split.Infrastructure.ServicesFolder.Npc;
 using Split.Infrastructure.ServicesFolder.Persistant;
+using Split.Infrastructure.StateMachine;
 
-namespace Split.Infrastructure.StateMachine
+namespace Split.Infrastructure
 {
     public class GameState : BaseExitableState, IPayloadState<string>
     {
-        private readonly ISceneLoadService _sceneLoadService;
-        private readonly ILoadingScreenService _loadingScreenService;
-        private readonly INpcService _npcService;
+        //private readonly INpcService _npcService;
         private readonly IInputService _inputService;
+        //не понятно
         private readonly IMissionService _missionService;
+        //глобальный?
         private readonly ILevelSettingsService _levelSettingsService;
+        //есть локальный
         private readonly ILevelCompletionService _levelCompletionService;
+        //глобальный
         private readonly IPersistantService _persistantService;
+        
         private readonly IPauseService _pauseService;
         private readonly IUIService _uiService;
         private readonly IGameOverService _gameOverService;
 
-        public GameState(IGameStateMachine gameStateMachine, ISceneLoadService sceneLoadService,
-            ILoadingScreenService loadingScreenService, INpcService npcService, IInputService inputService,
+        public GameState(IGameStateMachine gameStateMachine, IInputService inputService,
             IMissionService missionService, ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
             IPauseService pauseService, IUIService uiService,IGameOverService gameOverService) : base(gameStateMachine)
         {
-            _sceneLoadService = sceneLoadService;
-            _loadingScreenService = loadingScreenService;
-            _npcService = npcService;
             _inputService = inputService;
             _missionService = missionService;
             _levelSettingsService = levelSettingsService;
@@ -45,11 +42,12 @@ namespace Split.Infrastructure.StateMachine
 
         public void Enter(string sceneName)
         {
-            _levelSettingsService.SetCurrentLevelSettings(sceneName);
+           // _levelSettingsService.SetCurrentLevelSettings(sceneName);
             SaveCurrentScene(sceneName);
-
-            _loadingScreenService.ShowScreen();
-            _sceneLoadService.Load(sceneName, OnSceneLoaded);
+            Initialize();
+            _pauseService.Init();
+            _gameOverService.Init();
+            _uiService.Init();
         }
 
         public override void Exit()
@@ -66,21 +64,20 @@ namespace Split.Infrastructure.StateMachine
 
         private void Dispose()
         {
-            _npcService.Dispose();
-            _missionService.Dispose();
-            _levelCompletionService.Dispose();
-            _gameOverService.Dispose();
-            _pauseService.Dispose();
-            _uiService.Dispose();
+          // _npcService.Dispose();
+           _missionService.Dispose();
+           _levelCompletionService.Dispose();
+           _gameOverService.Dispose();
+           _pauseService.Dispose();
+           _uiService.Dispose();
         }
 
         private void OnSceneLoaded()
         {
-            Initialize();
-            _loadingScreenService.HideScreen();
-            _pauseService.Init();
-            _gameOverService.Init();
-            _uiService.Init();
+            //Initialize();
+             //_pauseService.Init();
+           //_gameOverService.Init();
+            //_uiService.Init();
       
         }
 

@@ -4,7 +4,6 @@ using Split.Infrastructure.Pause;
 using Split.Infrastructure.ServicesFolder.InputService;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Split.Infrastructure.ServicesFolder.Mission;
-using Split.Infrastructure.ServicesFolder.Npc;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.ServicesFolder.StartLevel;
 using Split.Infrastructure.StateMachine;
@@ -70,28 +69,28 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
         private static void UnregisterMenu()
         {
-            Services.Container.UnRegister<IStartLevelService>();
+            //Services.Container.UnRegister<IStartLevelService>();
         }
 
         private static void RegisterGame()
         {
-            Services.Container.Register<IInputService>(new StandaloneInputService());
+            //Services.Container.Register<IInputService>(new StandaloneInputService());
             //Services.Container.Get<ILevelSettingsService>();
             Services.Container.Get<IGameStateMachine>();
-            Services.Container.RegisterMono<IPauseService>(typeof(PauseService));
-            Services.Container.RegisterMono<IUIService>(typeof(UIService));
-            Services.Container.RegisterMono<IGameOverService>(typeof(GameOverService));
+           // Services.Container.RegisterMono<IPauseService>(typeof(PauseService));
+            //Services.Container.RegisterMono<IUIService>(typeof(UIService));
+           // Services.Container.RegisterMono<IGameOverService>(typeof(GameOverService));
         }
 
         private static void UnregisterGame()
         {
-            Services.Container.UnRegister<IInputService>();
-            Services.Container.UnRegister<INpcService>();
-            Services.Container.UnRegister<IMissionService>();
-            Services.Container.UnRegister<ILevelCompletionService>();
-            Services.Container.UnRegister<IPauseService>();
-            Services.Container.UnRegister<IUIService>();
-            Services.Container.UnRegister<IGameOverService>();
+            //Services.Container.UnRegister<IInputService>();
+            //Services.Container.UnRegister<INpcService>();
+            //Services.Container.UnRegister<IMissionService>();
+            //Services.Container.UnRegister<ILevelCompletionService>();
+           // Services.Container.UnRegister<IPauseService>();
+           // Services.Container.UnRegister<IUIService>();
+            //Services.Container.UnRegister<IGameOverService>();
         }
     }
 }

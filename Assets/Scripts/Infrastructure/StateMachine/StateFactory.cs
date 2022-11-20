@@ -5,7 +5,6 @@ using Split.Infrastructure.ServicesFolder.InputService;
 using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Split.Infrastructure.ServicesFolder.Mission;
-using Split.Infrastructure.ServicesFolder.Npc;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
@@ -20,28 +19,19 @@ namespace Split.Infrastructure.StateMachine
                 nameof(BootstrapState) => CreateBootstrapState<TState>(),
                 nameof(MenuState) => CreateMenuState<TState>(),
                 nameof(GameState) => CreateGameState<TState>(),
+                nameof(LoadState) => CreateLoadState<TState>(),
                 _ => null
             };
         }
 
-        private static TState CreateGameState<TState>() where TState : class, IExitableState
+        private static TState CreateBootstrapState<TState>() where TState : class, IExitableState
         {
-            IGameStateMachine stateMachine = Services.Container.Get<IGameStateMachine>();
-            ISceneLoadService sceneLoadService = null;
-            ILoadingScreenService loadingScreenService = null;
-            INpcService npcService = Services.Container.Get<INpcService>();
-            IInputService inputService = Services.Container.Get<IInputService>();
-            IMissionService missionService = Services.Container.Get<IMissionService>();
+            var stateMachine = Services.Container.Get<IGameStateMachine>();
             ILevelSettingsService levelSettingsService = null;
-            ILevelCompletionService levelCompletionService = Services.Container.Get<ILevelCompletionService>();
-            IPersistantService persistantService = Services.Container.Get<IPersistantService>();
-            IPauseService pauseService = Services.Container.Get<IPauseService>();
-            IUIService uiService = Services.Container.Get<IUIService>();
-            IGameOverService gameOverService = Services.Container.Get<IGameOverService>();
+            IPersistantService persistantService =
+                Services.Container.Get<IPersistantService>();
 
-            return new GameState(stateMachine, sceneLoadService, loadingScreenService, npcService, inputService,
-                missionService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-                uiService, gameOverService) as TState;
+            return new BootstrapState(stateMachine, levelSettingsService, persistantService) as TState;
         }
 
         private static TState CreateMenuState<TState>() where TState : class, IExitableState
@@ -53,14 +43,34 @@ namespace Split.Infrastructure.StateMachine
             return new MenuState(stateMachine, loadingScreenService, sceneLoadService) as TState;
         }
 
-        private static TState CreateBootstrapState<TState>() where TState : class, IExitableState
+        private static TState CreateLoadState<TState>() where TState : class, IExitableState
         {
-            var stateMachine = Services.Container.Get<IGameStateMachine>();
+            IGameStateMachine stateMachine = Services.Container.Get<IGameStateMachine>();
+            ISceneLoadService sceneLoadService = null;
+            ILoadingScreenService loadingScreenService = null;
             ILevelSettingsService levelSettingsService = null;
-            IPersistantService persistantService =
-                Services.Container.Get<IPersistantService>();
 
-            return new BootstrapState(stateMachine, levelSettingsService, persistantService) as TState;
+            return new LoadState(stateMachine, sceneLoadService, loadingScreenService, levelSettingsService) as TState;
+        }
+
+        private static TState CreateGameState<TState>() where TState : class, IExitableState
+        {
+            IGameStateMachine stateMachine = Services.Container.Get<IGameStateMachine>();
+            ISceneLoadService sceneLoadService = null;
+            ILoadingScreenService loadingScreenService = null;
+            // INpcService npcService = Services.Container.Get<INpcService>();
+            IInputService inputService = null;
+            IMissionService missionService = Services.Container.Get<IMissionService>();
+            ILevelSettingsService levelSettingsService = null;
+            ILevelCompletionService levelCompletionService = null;
+            IPersistantService persistantService = null;
+            IPauseService pauseService = null;
+            IUIService uiService = null;
+            IGameOverService gameOverService = null;
+
+            return new GameState(stateMachine, inputService,
+                missionService, levelSettingsService, levelCompletionService, persistantService, pauseService,
+                uiService, gameOverService) as TState;
         }
     }
 }

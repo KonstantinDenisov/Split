@@ -1,6 +1,7 @@
 using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.StateMachine;
+using UnityEngine;
 
 namespace Split.Infrastructure.ServicesFolder.StartLevel
 {
@@ -24,12 +25,12 @@ namespace Split.Infrastructure.ServicesFolder.StartLevel
             if(string.IsNullOrEmpty(data.LevelData.CurrentSceneId))
             {
                 LevelSettings firstLevelSettings = _levelSettingsService.GetFirstLevelSettings();
-                _stateMachine.Enter<GameState, string>(firstLevelSettings.SceneName);    
+                _stateMachine.Enter<LoadState, string>(firstLevelSettings.SceneName);    
             }
             else
             {
                 LevelSettings savedSettings = _levelSettingsService.GetLevelSettings(data.LevelData.CurrentSceneId);
-                _stateMachine.Enter<GameState, string>(savedSettings.SceneName);    
+                _stateMachine.Enter<LoadState, string>(savedSettings.SceneName);    
             }
         }
     }

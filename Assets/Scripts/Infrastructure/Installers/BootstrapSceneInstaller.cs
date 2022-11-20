@@ -10,7 +10,7 @@ namespace Split.Infrastructure.Installers
     {
         public override void InstallBindings()
         {
-            LevelSettingsServiceInstaller.Install(Container);
+            //LevelSettingsServiceInstaller.Install(Container);
             LoadingScreenServiceInstaller.Install(Container);
             SceneLoadServiceInstaller.Install(Container);
             CoroutineRunnerInstaller.Install(Container);

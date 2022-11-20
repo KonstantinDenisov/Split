@@ -12,6 +12,7 @@ namespace Split.Infrastructure.ServicesFolder.Level
         public void Bootstrap()
         {
             _container = Resources.Load<LevelSettingsContainer>(SettingsPath);
+            
         }
 
         public void SetCurrentLevelSettings(string id)

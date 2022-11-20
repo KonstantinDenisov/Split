@@ -3,7 +3,7 @@ using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
 namespace Split.Infrastructure.ServicesFolder.Mission
 {
-    public interface IMissionService : IService
+    public interface IMissionService 
     {
         event Action OnCompleted;
         

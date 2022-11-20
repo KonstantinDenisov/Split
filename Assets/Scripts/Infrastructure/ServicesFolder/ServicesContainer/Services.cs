@@ -36,7 +36,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
             return Register<TService>(service as TService);
         }
 
-        public TService Get<TService>() where TService : class, IService
+        public TService Get<TService>() where TService : class
         {
             Type key = typeof(TService);
 
