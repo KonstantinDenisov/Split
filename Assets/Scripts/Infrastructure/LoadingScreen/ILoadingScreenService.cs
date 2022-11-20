@@ -2,7 +2,7 @@ using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
 namespace Split.Infrastructure.LoadingScreen
 {
-    public interface ILoadingScreenService : IService
+    public interface ILoadingScreenService
     {
         void ShowScreen();
         void HideScreen();

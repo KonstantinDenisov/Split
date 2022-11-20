@@ -1,10 +1,7 @@
 using System;
 using Split.Infrastructure.GameOver;
-using Split.Infrastructure.LoadingScreen;
 using Split.Infrastructure.Pause;
-using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.InputService;
-using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Split.Infrastructure.ServicesFolder.Mission;
 using Split.Infrastructure.ServicesFolder.Npc;
@@ -48,14 +45,13 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
         }
 
         private static void RegisterBootstrap()
-        {
-            Services.Container.RegisterMono<ICoroutineRunner>(typeof(CoroutineRunner));
-            Services.Container.Register<ISceneLoadService>(
-                new AsyncSceneLoadService(Services.Container.Get<ICoroutineRunner>()));
+        { //Services.Container.RegisterMono<ICoroutineRunner>(typeof(CoroutineRunner));
+           // Services.Container.Register<ISceneLoadService>(
+                //new AsyncSceneLoadService(Services.Container.Get<ICoroutineRunner>()));
 
-            Services.Container.Register<ILoadingScreenService>(new LoadingScreenService());
+                //Services.Container.Register<ILoadingScreenService>(new LoadingScreenService());
             //Services.Container.Register<ILevelSettingsService>(new LevelSettingsService());
-            Services.Container.Register<IPersistantService>(new PersistantService());
+           Services.Container.Register<IPersistantService>(new PersistantService());
         }
 
         private static void RegisterMenu()

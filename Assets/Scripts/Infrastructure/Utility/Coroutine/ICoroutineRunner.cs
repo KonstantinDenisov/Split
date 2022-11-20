@@ -3,7 +3,7 @@ using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
 namespace Split.Infrastructure.Utility.Coroutine
 {
-    public interface ICoroutineRunner : IService
+    public interface ICoroutineRunner
     {
         UnityEngine.Coroutine StartCoroutine(IEnumerator enumerator);
     }

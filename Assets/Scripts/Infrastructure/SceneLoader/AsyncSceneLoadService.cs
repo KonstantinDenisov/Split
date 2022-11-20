@@ -3,13 +3,14 @@ using System.Collections;
 using Split.Infrastructure.Utility.Coroutine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Split.Infrastructure.SceneLoader
 {
     public class AsyncSceneLoadService : ISceneLoadService
     {
-        private readonly ICoroutineRunner _coroutineRunner;
-
+        private ICoroutineRunner _coroutineRunner;
+        
         public AsyncSceneLoadService(ICoroutineRunner coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
