@@ -8,7 +8,7 @@ namespace Split.Infrastructure.SceneLoader
 {
     public class AsyncSceneLoadService : ISceneLoadService
     {
-        private ICoroutineRunner _coroutineRunner;
+        private readonly ICoroutineRunner _coroutineRunner;
         
         public AsyncSceneLoadService(ICoroutineRunner coroutineRunner)
         {

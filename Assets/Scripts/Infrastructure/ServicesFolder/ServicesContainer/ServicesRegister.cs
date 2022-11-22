@@ -50,7 +50,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
                 //Services.Container.Register<ILoadingScreenService>(new LoadingScreenService());
             //Services.Container.Register<ILevelSettingsService>(new LevelSettingsService());
-           Services.Container.Register<IPersistantService>(new PersistantService());
+          // Services.Container.Register<IPersistantService>(new PersistantService());
         }
 
         private static void RegisterMenu()

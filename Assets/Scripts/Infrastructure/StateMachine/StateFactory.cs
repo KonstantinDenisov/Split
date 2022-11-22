@@ -60,7 +60,7 @@ namespace Split.Infrastructure.StateMachine
             ILoadingScreenService loadingScreenService = null;
             // INpcService npcService = Services.Container.Get<INpcService>();
             IInputService inputService = null;
-            IMissionService missionService = Services.Container.Get<IMissionService>();
+            IMissionService missionService = null;
             ILevelSettingsService levelSettingsService = null;
             ILevelCompletionService levelCompletionService = null;
             IPersistantService persistantService = null;

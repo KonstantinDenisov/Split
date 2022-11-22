@@ -25,16 +25,14 @@ namespace Split.Infrastructure
         {
             _levelSettingsService.SetCurrentLevelSettings(sceneName);
             _loadingScreenService.ShowScreen();
-            _sceneLoadService.Load(sceneName, OnSceneLoaded);
             _sceneName = sceneName;
+            _sceneLoadService.Load(sceneName, OnSceneLoaded);
         }
 
         private void OnSceneLoaded()
         {
+            StateMachine.Enter<GameState, string>(_sceneName);
             _loadingScreenService.HideScreen();
-            StateMachine.Enter<LoadState, string>(_sceneName);
-            _loadingScreenService.HideScreen();
-            Exit();
         }
 
         public override void Exit()

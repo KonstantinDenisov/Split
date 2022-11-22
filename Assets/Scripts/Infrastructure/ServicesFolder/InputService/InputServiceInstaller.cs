@@ -3,7 +3,7 @@
 
 namespace Split.Infrastructure.ServicesFolder.InputService
 {
-    public class SceneLoadServiceInstaller : Installer<SceneLoadServiceInstaller>
+    public class InputServiceInstaller : Installer<InputServiceInstaller>
     {
         public override void InstallBindings()
         {

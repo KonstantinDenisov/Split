@@ -1,8 +1,9 @@
-﻿using Split.Infrastructure.SceneLoader;
+﻿using Split.Infrastructure.LoadingScreen;
+using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.StateMachine;
-using UnityEditor;
+using Split.Infrastructure.Utility.Coroutine;
 using Zenject;
 
 namespace Split.Infrastructure.Installers
@@ -14,7 +15,9 @@ namespace Split.Infrastructure.Installers
             GameStateMachineInstaller.Install(Container);
             LevelSettingsServiceInstaller.Install(Container);
             PersistantServiceIntaller.Install(Container);
-            //SceneLoadServiceInstaller.Install(Container);
+            SceneLoadServiceInstaller.Install(Container);
+            CoroutineRunnerInstaller.Install(Container);
+            LoadingScreenServiceInstaller.Install(Container);
         }
     }
 }
