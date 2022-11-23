@@ -6,26 +6,26 @@ namespace Split.Infrastructure.ServicesFolder.LevelCompletion
 {
     public class LevelCompletionService : ILevelCompletionService
     {
-        private readonly IMissionService _missionService;
+        //private readonly IMissionService _missionService;
         private readonly ILevelSettingsService _levelSettingsService;
         private readonly IGameStateMachine _stateMachine;
 
-        public LevelCompletionService(IMissionService missionService, ILevelSettingsService levelSettingsService,
+        public LevelCompletionService( ILevelSettingsService levelSettingsService,
             IGameStateMachine stateMachine)
         {
-            _missionService = missionService;
+            //_missionService = missionService;
             _levelSettingsService = levelSettingsService;
             _stateMachine = stateMachine;
         }
 
         public void Init()
         {
-            _missionService.OnCompleted += MissionCompleted;
+            //_missionService.OnCompleted += MissionCompleted;
         }
 
         public void Dispose()
         {
-            _missionService.OnCompleted -= MissionCompleted;
+            //_missionService.OnCompleted -= MissionCompleted;
         }
 
         private void MissionCompleted()

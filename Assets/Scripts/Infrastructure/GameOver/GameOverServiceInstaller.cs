@@ -6,7 +6,7 @@ namespace Split.Infrastructure.GameOver
     {
         public override void InstallBindings()
         {
-            Container.Bind<IGameOverService >().To<GameOverService >().AsSingle();
+            Container.Bind<IGameOverService >().To<GameOverService >().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }

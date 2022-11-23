@@ -13,7 +13,7 @@ namespace Split.Infrastructure
         //private readonly INpcService _npcService;
         private readonly IInputService _inputService;
         //не понятно
-        private readonly IMissionService _missionService;
+        //private readonly IMissionService _missionService;
         //глобальный?
         private readonly ILevelSettingsService _levelSettingsService;
         //есть локальный
@@ -25,13 +25,12 @@ namespace Split.Infrastructure
         private readonly IUIService _uiService;
         private readonly IGameOverService _gameOverService;
 
-        public GameState(IGameStateMachine gameStateMachine, IInputService inputService,
-            IMissionService missionService, ILevelSettingsService levelSettingsService,
+        public GameState(IGameStateMachine gameStateMachine, IInputService inputService, ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
             IPauseService pauseService, IUIService uiService,IGameOverService gameOverService) : base(gameStateMachine)
         {
             _inputService = inputService;
-            _missionService = missionService;
+            //_missionService = missionService;
             _levelSettingsService = levelSettingsService;
             _levelCompletionService = levelCompletionService;
             _persistantService = persistantService;
@@ -65,7 +64,7 @@ namespace Split.Infrastructure
         private void Dispose()
         {
           // _npcService.Dispose();
-           _missionService.Dispose();
+           //_missionService.Dispose();
            _levelCompletionService.Dispose();
            _gameOverService.Dispose();
            _pauseService.Dispose();

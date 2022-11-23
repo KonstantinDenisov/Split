@@ -60,7 +60,7 @@ namespace Split.Infrastructure.StateMachine
             ILoadingScreenService loadingScreenService = null;
             // INpcService npcService = Services.Container.Get<INpcService>();
             IInputService inputService = null;
-            IMissionService missionService = null;
+            //IMissionService missionService = null;
             ILevelSettingsService levelSettingsService = null;
             ILevelCompletionService levelCompletionService = null;
             IPersistantService persistantService = null;
@@ -68,8 +68,7 @@ namespace Split.Infrastructure.StateMachine
             IUIService uiService = null;
             IGameOverService gameOverService = null;
 
-            return new GameState(stateMachine, inputService,
-                missionService, levelSettingsService, levelCompletionService, persistantService, pauseService,
+            return new GameState(stateMachine, inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
                 uiService, gameOverService) as TState;
         }
     }

@@ -1,6 +1,6 @@
-﻿using Zenject;
-/* 
-namespace Split.Infrastructure.ServicesFolder.Mission.KillOneEnemy
+﻿/*using Zenject;
+
+namespace Split.Infrastructure.ServicesFolder.Mission
 {
  public class MissionServiceInstaller : Installer<MissionServiceInstaller>
    {
