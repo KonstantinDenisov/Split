@@ -127,14 +127,45 @@ namespace Split.Game.Units.SelectedFolder
                         //Debug.Log("клик mouse2 по земле");
                         if (SelectedService.Instance.SelectedUnits != null)
                         {
-                            foreach (var unit in SelectedService.Instance.SelectedUnits)
+                            if (SelectedService.Instance.SelectedUnits.Count == 1)
                             {
-                                _navMeshAgent = unit.GetComponent<NavMeshAgent>();
-                                _navMeshAgent.SetDestination(hit.point);
-                            }  
+                                foreach (var unit in SelectedService.Instance.SelectedUnits)
+                                {
+                                    _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                                    _navMeshAgent.SetDestination(hit.point);
+                                }
+                            }
+                            
+                            else 
+                            {
+                                float sumX = 0f;
+                                float sumY = 0f;
+                                float sumZ = 0f;
+                                foreach (var unit in SelectedService.Instance.SelectedUnits)
+                                {
+                                    sumX += unit.transform.position.x;
+                                    sumY += unit.transform.position.x;
+                                    sumZ += unit.transform.position.z;
+                                }
+
+                                float centrX = sumX / SelectedService.Instance.SelectedUnits.Count;
+                                float centrY = sumY / SelectedService.Instance.SelectedUnits.Count;
+                                float centrZ = sumZ / SelectedService.Instance.SelectedUnits.Count;
+
+                                Vector3 centralPoint = new Vector3(centrX, centrY, centrZ);
+                            
+                                foreach (var unit in SelectedService.Instance.SelectedUnits)
+                                {
+                                    Vector3 difference = centralPoint - unit.transform.position;
+                                    Vector3 currentUnitTargetPoint = hit.point - difference;
+                                
+                                    _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                                    _navMeshAgent.SetDestination(currentUnitTargetPoint);
+                                }  
+                            }
+                           
                         }
                     }
-                    
                 }
             }
         }
