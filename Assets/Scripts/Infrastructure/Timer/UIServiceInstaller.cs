@@ -6,7 +6,7 @@ namespace Split.Infrastructure
     {
         public override void InstallBindings()
         {
-            Container.Bind<IUIService>().To<UIService>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<ITimerService>().To<TimerService>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }

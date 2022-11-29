@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Split.Infrastructure
 {
-    public class UIScreen : MonoBehaviour
+    public class TimerScreen : MonoBehaviour
     {
         [Header("Timer UI")]
         [SerializeField] private GameObject _countdown;
-        [SerializeField] private TextMeshProUGUI _uiTimerLabel;
+        [SerializeField] private TextMeshProUGUI _timerLabel;
         [SerializeField] private int _remainingDuration;
 
         public void BeginTimer()
@@ -36,12 +36,12 @@ namespace Split.Infrastructure
                 return;
             }
 
-            _uiTimerLabel.text = remainingDuration.ToString();
+            _timerLabel.text = remainingDuration.ToString();
         }
 
         public void ResetTimer()
         {
-            _uiTimerLabel.text = "0";
+            _timerLabel.text = "0";
             _remainingDuration = 0;
         }
     }

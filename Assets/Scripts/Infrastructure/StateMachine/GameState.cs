@@ -22,12 +22,12 @@ namespace Split.Infrastructure
         private readonly IPersistantService _persistantService;
         
         private readonly IPauseService _pauseService;
-        private readonly IUIService _uiService;
+        private readonly ITimerService _timerService;
         private readonly IGameOverService _gameOverService;
 
         public GameState(IGameStateMachine gameStateMachine, IInputService inputService, ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
-            IPauseService pauseService, IUIService uiService,IGameOverService gameOverService) : base(gameStateMachine)
+            IPauseService pauseService, ITimerService timerService,IGameOverService gameOverService) : base(gameStateMachine)
         {
             _inputService = inputService;
             //_missionService = missionService;
@@ -35,7 +35,7 @@ namespace Split.Infrastructure
             _levelCompletionService = levelCompletionService;
             _persistantService = persistantService;
             _pauseService = pauseService;
-            _uiService = uiService;
+            _timerService = timerService;
             _gameOverService = gameOverService;
         }
 
@@ -46,7 +46,7 @@ namespace Split.Infrastructure
             Initialize();
             _pauseService.Init();
             _gameOverService.Init();
-            _uiService.Init();
+            _timerService.Init();
         }
 
         public override void Exit()
@@ -68,7 +68,7 @@ namespace Split.Infrastructure
            _levelCompletionService.Dispose();
            _gameOverService.Dispose();
            _pauseService.Dispose();
-           _uiService.Dispose();
+           _timerService.Dispose();
         }
 
         private void OnSceneLoaded()
@@ -76,7 +76,7 @@ namespace Split.Infrastructure
             //Initialize();
              //_pauseService.Init();
            //_gameOverService.Init();
-            //_uiService.Init();
+            //_timerService.Init();
       
         }
 

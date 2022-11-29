@@ -65,11 +65,11 @@ namespace Split.Infrastructure.StateMachine
             ILevelCompletionService levelCompletionService = null;
             IPersistantService persistantService = null;
             IPauseService pauseService = null;
-            IUIService uiService = null;
+            ITimerService timerService = null;
             IGameOverService gameOverService = null;
 
             return new GameState(stateMachine, inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-                uiService, gameOverService) as TState;
+                timerService, gameOverService) as TState;
         }
     }
 }
