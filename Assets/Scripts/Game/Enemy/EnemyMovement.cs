@@ -1,18 +1,39 @@
-﻿using System;
-using Split.Infrastructure;
+﻿using Split.Infrastructure.ServicesFolder.Npc;
 using UnityEngine;
 using UnityEngine.AI;
-using Object = UnityEngine.Object;
+using Zenject;
 
 namespace Split.Game.Enemy
 {
     public class EnemyMovement : MonoBehaviour
     {
         [SerializeField] private Transform[] _targets;
-        [SerializeField] private  NavMeshAgent _agent;
-        [SerializeField] private float _timeDelay = 6f;
-        
-        private void ChooseTarget()
+        [SerializeField] private NavMeshAgent _agent;
+
+        private INpcService _npcService;
+
+        [Inject]
+        public void Construct(INpcService npcService)
+        {
+            _npcService = npcService;
+        }
+
+        private void Start()
+        {
+            _npcService.RegisterMovingObject(this);
+        }
+
+        private void OnDestroy()
+        {
+            _npcService.UnregisterObject(this);
+        }
+
+        public void StartMove()
+        {
+            ChooseTarget();
+        }
+
+        public void ChooseTarget()
         {
             float closestTargetDistance = float.MaxValue;
             NavMeshPath Path = null;
@@ -49,21 +70,5 @@ namespace Split.Game.Enemy
                 _agent.SetPath(ShortestPath);
             }
         }
-
-        public bool Move(bool isActive)
-        {
-            if (isActive)
-                ChooseTarget();
-
-            return isActive;
-        }
-        private void OnGUI()
-        {
-            if (GUI.Button(new Rect(20, 20, 300, 50), "Move To Target"))
-            {
-                ChooseTarget();
-            }
-        }
-        
     }
 }

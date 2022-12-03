@@ -617,9 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ba754b688048ad9aa6b68534d1abc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countdown: {fileID: 383927410834286411}
   _timerLabel: {fileID: 4318427367319676480}
-  _remainingDuration: 5
+  _countdown: {fileID: 383927410834286411}
 --- !u!1 &8867626981910117702
 GameObject:
   m_ObjectHideFlags: 0

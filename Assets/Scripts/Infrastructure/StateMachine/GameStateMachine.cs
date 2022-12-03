@@ -13,20 +13,14 @@ namespace Split.Infrastructure.StateMachine
         public void Enter<TState>() where TState : class, IState
         {
             ExitCurrent();
-           
-            // ServicesRegister.RegisterFor<TState>();
-            //TState newState = StateFactory.Create<TState>(); 
             TState newState = _stateFactory.Create<TState>();
             newState.Enter();
             _currentState = newState;
         }
 
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
-        { 
+        {
             ExitCurrent();
-            
-            // ServicesRegister.RegisterFor<TState>();
-            //TState newState = StateFactory.Create<TState>();
             TState newState = _stateFactory.Create<TState>();
             newState.Enter(payload);
             _currentState = newState;
@@ -37,7 +31,6 @@ namespace Split.Infrastructure.StateMachine
             if (_currentState != null)
             {
                 _currentState.Exit();
-                // ServicesRegister.UnregisterFor(_currentState.GetType());
             }
         }
     }

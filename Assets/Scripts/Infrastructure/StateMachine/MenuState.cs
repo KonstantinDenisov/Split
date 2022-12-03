@@ -12,17 +12,12 @@ namespace Split.Infrastructure.StateMachine
         public MenuState(IGameStateMachine gameStateMachine, ILoadingScreenService loadingScreenService,
             ISceneLoadService sceneLoadService) : base(gameStateMachine)
         {
-
             _loadingScreenService = loadingScreenService;
             _sceneLoadService = sceneLoadService;
         }
-        
-  
+
         public override void Enter()
         {
-            // ServicesFolder.ServicesContainer.Services.Container.Get(out _loadingScreenService);
-            //ServicesFolder.ServicesContainer.Services.Container.Get(out _sceneLoadService);
-
             _loadingScreenService.ShowScreen();
             _sceneLoadService.Load("MenuScene", OnSceneLoaded);
         }

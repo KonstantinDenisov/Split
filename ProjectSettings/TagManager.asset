@@ -6,8 +6,10 @@ TagManager:
   tags:
   - Obstacle
   - Unit
-  - ObstacleThreat
   - UnitUiActivate
+  - EnemyThreat
+  - Enemy
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
@@ -18,10 +20,10 @@ TagManager:
   - Ground
   - Unit
   - Obstacle
-  - ObstacleThreat
+  - EnemyThreat
   - UnitUiActivate
-  - 
-  - 
+  - Enemy
+  - EnemyAttack
   - 
   - 
   - 

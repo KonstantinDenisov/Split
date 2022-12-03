@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace Split.Infrastructure
 {
@@ -6,25 +7,50 @@ namespace Split.Infrastructure
     {
         private const string GameStateScreenPath = "GameStateScreen";
 
+        private int _remainingDuration = 5;
         private TimerScreen _timerScreen;
 
         public void Init()
         {
-            if (_timerScreen != null)
-            {
-            }
-
             CreateUIScreen();
         }
 
-        private void CreateUIScreen()
+        public void CreateUIScreen()
         {
+            if (_timerScreen != null)
+                return;
+
             TimerScreen prefab = Resources.Load<TimerScreen>(GameStateScreenPath);
             _timerScreen = Instantiate(prefab);
-
             _timerScreen.gameObject.SetActive(true);
+        }
 
-            _timerScreen.BeginTimer();
+        private void UpdateUI(int remainingDuration)
+        {
+            _timerScreen.SetLabel(_remainingDuration);
+
+            if (remainingDuration == 0)
+            {
+                _timerScreen.ActivateCountdown(false);
+            }
+        }
+
+        private void ResetTimer()
+        {
+            _timerScreen.SetLabel(0);
+            _remainingDuration = 0;
+        }
+
+        public async UniTask Timer()
+
+        {
+            _timerScreen.ActivateCountdown(true);
+            while (_remainingDuration >= 0)
+            {
+                await UniTask.Delay(500);
+                UpdateUI(_remainingDuration);
+                _remainingDuration--;
+            }
         }
 
         public void Dispose()
@@ -33,7 +59,7 @@ namespace Split.Infrastructure
             {
             }
 
-            _timerScreen.ResetTimer();
+            ResetTimer();
             Destroy(_timerScreen.gameObject);
             _timerScreen = null;
         }

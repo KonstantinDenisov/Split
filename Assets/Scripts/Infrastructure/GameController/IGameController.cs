@@ -1,12 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Split.Infrastructure
+namespace Split.Infrastructure.GameController
 {
-    public interface ITimerService
+    public interface IGameController
     {
         void Init();
-
         void Dispose();
-        UniTask Timer();
+        
     }
 }
