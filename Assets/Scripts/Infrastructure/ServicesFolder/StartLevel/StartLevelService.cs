@@ -33,5 +33,11 @@ namespace Split.Infrastructure.ServicesFolder.StartLevel
                 _stateMachine.Enter<LoadState, string>(savedSettings.SceneName);    
             }
         }
+
+        public void RestartGame()
+        {
+            LevelSettings firstLevelSettings = _levelSettingsService.GetFirstLevelSettings();
+            _stateMachine.Enter<LoadState, string>(firstLevelSettings.SceneName);   
+        }
     }
 }

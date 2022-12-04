@@ -1,7 +1,7 @@
 ﻿using Split.Game.Units;
 using UnityEngine;
 
-namespace Split.Game.Enemy
+namespace Split.Game.EnemySettings
 {
     public class EnemyAttack : MonoBehaviour
     {
@@ -12,6 +12,9 @@ namespace Split.Game.Enemy
         [SerializeField] private int _enemyDamage = 1;
 
         private bool _isExplode;
+        
+        
+        
 
         private void OnTriggerEnter(Collider col)
         {

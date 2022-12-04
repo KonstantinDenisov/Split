@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-namespace Split.Game.Enemy
+namespace Split.Game.EnemySettings
 {
     public class EnemyDeath : MonoBehaviour
     {

@@ -1,5 +1,8 @@
 ﻿using System;
+using Split.Infrastructure.ServicesFolder.StartLevel;
+using Split.Infrastructure.StateMachine;
 using UnityEngine;
+using Zenject;
 
 namespace Split.Infrastructure.Pause
 {
@@ -9,11 +12,16 @@ namespace Split.Infrastructure.Pause
 
         public bool IsPauseActive { get; set; } = true;
 
-        public event Action OnRestarted;
-
         private bool _isPause;
         private PauseScreen _screen;
-        
+        private IStartLevelService _startLevelService;
+
+        [Inject]
+        public void Construct(IStartLevelService startLevelService)
+        {
+            _startLevelService = startLevelService;
+        }
+
         private void Update()
         {
             if (!Input.GetKeyDown(KeyCode.Escape) || !IsPauseActive)
@@ -34,13 +42,10 @@ namespace Split.Infrastructure.Pause
         {
             PauseScreen prefab = Resources.Load<PauseScreen>(PauseScreenPath);
             _screen = Instantiate(prefab);
-
             _screen.gameObject.SetActive(false);
             _screen.OnContinue += TogglePause;
             _screen.OnRestart += RestartGame;
             _screen.OnExit += ExitGame;
-            //UnitsObserver.OnDead += GameOver;
-
         }
 
         public void Dispose()
@@ -52,7 +57,6 @@ namespace Split.Infrastructure.Pause
             _screen.OnContinue -= TogglePause;
             _screen.OnRestart -= RestartGame;
             _screen.OnExit -= ExitGame;
-            //UnitsObserver.OnDead -= GameOver;
 
             Destroy(_screen.gameObject);
             _screen = null;
@@ -65,17 +69,20 @@ namespace Split.Infrastructure.Pause
             Time.timeScale = _isPause ? 0 : 1;
         }
 
-        private void RestartGame() =>
-            OnRestarted?.Invoke();
+        private void RestartGame()
+        {
+             TogglePause();
+            _startLevelService.RestartGame();
+        }
 
         private void ExitGame()
         {
             Exit.ExitButtonClicked();
         }
 
-        private void GameOver(bool gameOver)
+        public void GameWin(bool gameOver)
         {
-            if(gameOver)
+            if (gameOver)
                 IsPauseActive = true;
         }
     }

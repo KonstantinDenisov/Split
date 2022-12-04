@@ -27,6 +27,9 @@ namespace Split.Infrastructure
 
         private void UpdateUI(int remainingDuration)
         {
+            if(_timerScreen==null)
+                return;
+            
             _timerScreen.SetLabel(_remainingDuration);
 
             if (remainingDuration == 0)

@@ -1,14 +1,26 @@
-﻿using UnityEngine;
+﻿using Split.Infrastructure.Pause;
+using Split.Infrastructure.ServicesFolder.StartLevel;
+using UnityEngine;
+using Zenject;
 
 namespace Split.Infrastructure.GameOver
 {
     public class GameOverService : MonoBehaviour, IGameOverService
     {
         private const string GameOverScreenPath = "GameOverScreen";
-        
+
         private GameOverScreen _gameOverScreen;
         private IGameOverService _gameOverServiceImplementation;
-        
+        private IStartLevelService _startLevelService;
+        private IPauseService _pauseService;
+
+        [Inject]
+        public void Construct(IStartLevelService startLevelService, IPauseService pauseService)
+        {
+            _startLevelService = startLevelService;
+            _pauseService = pauseService;
+        }
+
         public void Init()
         {
             if (_gameOverScreen == null)
@@ -23,9 +35,8 @@ namespace Split.Infrastructure.GameOver
             _gameOverScreen = Instantiate(prefab);
 
             _gameOverScreen.gameObject.SetActive(false);
-            // _gameOverScreen.OnRestart += RestartGame;
+            _gameOverScreen.OnRestart += RestartGame;
             _gameOverScreen.OnExit += ExitGame;
-            //UnitsObserver.OnDead += ActivateGameOver;
         }
 
         public void Dispose()
@@ -33,18 +44,23 @@ namespace Split.Infrastructure.GameOver
             if (_gameOverScreen != null)
             {
                 _gameOverScreen.OnExit -= ExitGame;
-                //UnitsObserver.OnDead -= ActivateGameOver;
+                _gameOverScreen.OnRestart -= RestartGame;
                 Destroy(_gameOverScreen.gameObject);
                 _gameOverScreen = null;
             }
-            // _gameOverScreen.OnRestart -= RestartGame;
+        }
+
+        private void RestartGame()
+        {
+            _startLevelService.RestartGame();
         }
 
         public void ActivateGameOver(bool isActive)
         {
-            if(_gameOverScreen==null)
+            if (_gameOverScreen == null)
                 return;
             _gameOverScreen.gameObject.SetActive(isActive);
+            _pauseService.IsPauseActive = false;
         }
 
         private void ExitGame()

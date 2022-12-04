@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Split.Game.Enemy;
+using Split.Game.EnemySettings;
 
 namespace Split.Infrastructure.ServicesFolder.Npc
 {
@@ -20,11 +20,16 @@ namespace Split.Infrastructure.ServicesFolder.Npc
 
         public void UnregisterObject(EnemyMovement enemyMovement)
         {
+            if (_enemies ==null)
+                return;
+            
             _enemies.Remove(enemyMovement);
+            
             if (_enemies.Count == 0)
             {
                 OnAllDead?.Invoke();
             }
+    
         }
         public void Dispose()
         {
@@ -32,7 +37,9 @@ namespace Split.Infrastructure.ServicesFolder.Npc
         }
 
         public void BeginMove()
-        {
+        {  
+            if (_enemies ==null)
+                return;
             foreach (EnemyMovement enemyMovement in _enemies)
             {
                 enemyMovement.StartMove();

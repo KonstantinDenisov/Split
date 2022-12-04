@@ -20,8 +20,5 @@ namespace Split.Infrastructure.Pause
             _restartButton.onClick.AddListener(delegate { OnRestart?.Invoke(); });
             _exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
         }
-
-        // public event Action OnRestarted;
-        
     }
 }

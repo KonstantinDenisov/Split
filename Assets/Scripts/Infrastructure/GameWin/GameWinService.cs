@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Split.Infrastructure.ServicesFolder.StartLevel;
+using UnityEngine;
+using Zenject;
 
 namespace Split.Infrastructure.GameWin
 {
@@ -8,7 +10,15 @@ namespace Split.Infrastructure.GameWin
 
         private GameWinScreen _gameWinScreen;
         private IGameWinService _iGameWinService;
+        private IStartLevelService _startLevelService;
 
+        [Inject]
+        public void Construct(IStartLevelService startLevelService)
+        {
+            _startLevelService = startLevelService;
+        }
+
+        
         public void Init()
         {
             if (_gameWinScreen == null)
@@ -23,9 +33,13 @@ namespace Split.Infrastructure.GameWin
             _gameWinScreen = Instantiate(prefab);
 
             _gameWinScreen.gameObject.SetActive(false);
-            // _gameOverScreen.OnRestart += RestartGame;
+            _gameWinScreen.OnRestart += RestartGame;
             _gameWinScreen.OnExit += ExitGame;
-            //UnitsObserver.OnDead += ActivateGameOver;
+        }
+
+        private void RestartGame()
+        {
+            _startLevelService.RestartGame();
         }
 
         public void Dispose()
@@ -33,11 +47,11 @@ namespace Split.Infrastructure.GameWin
             if (_gameWinScreen != null)
             {
                 _gameWinScreen.OnExit -= ExitGame;
-                //UnitsObserver.OnDead -= ActivateGameOver;
+                _gameWinScreen.OnRestart -= RestartGame;
                 Destroy(_gameWinScreen.gameObject);
                 _gameWinScreen = null;
             }
-            // _gameOverScreen.OnRestart -= RestartGame;
+        
         }
 
         public void ActivateGameWin(bool isActive)

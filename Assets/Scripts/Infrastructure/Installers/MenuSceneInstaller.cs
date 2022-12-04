@@ -7,7 +7,6 @@ namespace Split.Infrastructure.Installers
     {
         public override void InstallBindings()
         {
-            StartLevelServiceInstaller.Install(Container);
         }
     }
 }

@@ -572,7 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f60dedf0f340ed9fcb52037bbfa8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _exitButton: {fileID: 0}
+  _restartButton: {fileID: 7353001372140896258}
+  _exitButton: {fileID: 7353001371447626568}
 --- !u!1 &7353001373045134896
 GameObject:
   m_ObjectHideFlags: 0

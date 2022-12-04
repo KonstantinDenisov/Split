@@ -1,6 +1,5 @@
 using System;
-using Split.Game.Enemy;
-
+using Split.Game.EnemySettings;
 
 namespace Split.Infrastructure.ServicesFolder.Npc
 {

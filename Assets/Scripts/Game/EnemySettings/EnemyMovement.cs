@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-namespace Split.Game.Enemy
+namespace Split.Game.EnemySettings
 {
     public class EnemyMovement : MonoBehaviour
     {

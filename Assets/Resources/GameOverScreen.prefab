@@ -572,8 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d198b6e8fe149dcbe898e6733b3e9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _restartButton: {fileID: 7353001372140896258}
   _exitButton: {fileID: 7353001371447626568}
-  _pauseScreen: {fileID: 7012221571562971935, guid: cd615fd2cd687c7489774abc5198d98c, type: 3}
 --- !u!1 &7353001373045134896
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Split.Game.Enemy
+namespace Split.Game.EnemySettings
 {
     public class EnemyHp : MonoBehaviour
     {
@@ -18,12 +18,6 @@ namespace Split.Game.Enemy
             CurrentHp = _originalHp;
             MaxHp = _maxHp;
             OnHpChanged?.Invoke(CurrentHp);
-            Debug.Log($"{CurrentHp}");
-        }
-
-        private void Update()
-        {
-            Debug.Log($"{CurrentHp}");
         }
 
         public void AddHp(int hp)
@@ -36,7 +30,6 @@ namespace Split.Game.Enemy
         {
             CurrentHp = Mathf.Max(0, CurrentHp - hp);
             OnHpChanged?.Invoke(CurrentHp);
-            //Debug.Log($"{CurrentHp}");
         }
     }
 }
