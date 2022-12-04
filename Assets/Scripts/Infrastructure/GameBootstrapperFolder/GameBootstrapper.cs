@@ -15,9 +15,6 @@ namespace Split.Infrastructure.GameBootstrapperFolder
         }
         private void Start()
         {
-            //GameStateMachine gameStateMachine = new GameStateMachine();
-            //ServicesFolder.ServicesContainer.Services.Container.Register<IGameStateMachine>(gameStateMachine);
-            
             _gameStateMachine.Enter<BootstrapState>();
         }
     }

@@ -1,4 +1,4 @@
-namespace Split.Infrastructure.StateMachine
+namespace Split.Infrastructure
 {
     public interface IExitableState
     {

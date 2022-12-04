@@ -1,5 +1,4 @@
 ﻿using System;
-using Split.Game.Units;
 using UnityEngine;
 
 namespace Split.Infrastructure.Pause
@@ -8,16 +7,16 @@ namespace Split.Infrastructure.Pause
     {
         private const string PauseScreenPath = "PauseScreen";
 
-        private bool IsGameOver{get; set; }
+        public bool IsPauseActive { get; set; } = true;
 
         public event Action OnRestarted;
 
         private bool _isPause;
         private PauseScreen _screen;
-
+        
         private void Update()
         {
-            if (!Input.GetKeyDown(KeyCode.Escape) || IsGameOver)
+            if (!Input.GetKeyDown(KeyCode.Escape) || !IsPauseActive)
                 return;
             TogglePause();
         }
@@ -40,7 +39,7 @@ namespace Split.Infrastructure.Pause
             _screen.OnContinue += TogglePause;
             _screen.OnRestart += RestartGame;
             _screen.OnExit += ExitGame;
-            UnitsObserver.OnDead += GameOver;
+            //UnitsObserver.OnDead += GameOver;
 
         }
 
@@ -53,7 +52,7 @@ namespace Split.Infrastructure.Pause
             _screen.OnContinue -= TogglePause;
             _screen.OnRestart -= RestartGame;
             _screen.OnExit -= ExitGame;
-            UnitsObserver.OnDead -= GameOver;
+            //UnitsObserver.OnDead -= GameOver;
 
             Destroy(_screen.gameObject);
             _screen = null;
@@ -77,7 +76,7 @@ namespace Split.Infrastructure.Pause
         private void GameOver(bool gameOver)
         {
             if(gameOver)
-                IsGameOver = true;
+                IsPauseActive = true;
         }
     }
 }

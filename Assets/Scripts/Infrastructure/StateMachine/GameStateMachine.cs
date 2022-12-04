@@ -1,4 +1,6 @@
-namespace Split.Infrastructure.StateMachine
+using Split.Infrastructure.StateMachine;
+
+namespace Split.Infrastructure
 {
     public class GameStateMachine : IGameStateMachine
     {

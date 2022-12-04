@@ -1,5 +1,4 @@
-﻿using Split.Game.Units;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Split.Infrastructure.GameOver
 {
@@ -26,7 +25,7 @@ namespace Split.Infrastructure.GameOver
             _gameOverScreen.gameObject.SetActive(false);
             // _gameOverScreen.OnRestart += RestartGame;
             _gameOverScreen.OnExit += ExitGame;
-            UnitsObserver.OnDead += ActivateGameOver;
+            //UnitsObserver.OnDead += ActivateGameOver;
         }
 
         public void Dispose()
@@ -34,14 +33,14 @@ namespace Split.Infrastructure.GameOver
             if (_gameOverScreen != null)
             {
                 _gameOverScreen.OnExit -= ExitGame;
-                UnitsObserver.OnDead -= ActivateGameOver;
+                //UnitsObserver.OnDead -= ActivateGameOver;
                 Destroy(_gameOverScreen.gameObject);
                 _gameOverScreen = null;
             }
             // _gameOverScreen.OnRestart -= RestartGame;
         }
 
-        private void ActivateGameOver(bool isActive)
+        public void ActivateGameOver(bool isActive)
         {
             if(_gameOverScreen==null)
                 return;

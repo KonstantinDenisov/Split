@@ -1,6 +1,7 @@
-﻿using Zenject;
+﻿using Split.Infrastructure.StateMachine;
+using Zenject;
 
-namespace Split.Infrastructure.StateMachine
+namespace Split.Infrastructure
 {
     public class GameStateMachineInstaller : Installer <GameStateMachineInstaller>
     {

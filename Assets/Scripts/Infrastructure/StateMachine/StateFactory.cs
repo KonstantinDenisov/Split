@@ -1,15 +1,16 @@
-using Split.Game.Enemy;
 using Split.Infrastructure.GameController;
 using Split.Infrastructure.GameOver;
+using Split.Infrastructure.GameWin;
 using Split.Infrastructure.LoadingScreen;
+using Split.Infrastructure.Pause;
 using Split.Infrastructure.SceneLoader;
 using Split.Infrastructure.ServicesFolder.InputService;
 using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
-using Split.Infrastructure.ServicesFolder.Mission;
 using Split.Infrastructure.ServicesFolder.Npc;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.ServicesFolder.ServicesContainer;
+using Split.Infrastructure.UnitRegisterService;
 
 namespace Split.Infrastructure.StateMachine
 {
@@ -71,12 +72,11 @@ namespace Split.Infrastructure.StateMachine
             ITimerService timerService = null;
             IGameOverService gameOverService = null;
             IGameController gameController = null;
-            //IEnemyRegister enemyRegister = null;
-
+            IUnitRegisterService unitRegisterService = null;
+            IGameWinService winService = null;
+            
             return new GameState(stateMachine, npcService,inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-                timerService, gameOverService,gameController) as TState;   
-            // return new GameState(stateMachine, npcService,inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-            //     timerService, gameOverService,gameController,enemyRegister) as TState;
+                timerService, gameOverService,gameController,unitRegisterService,winService) as TState;
         }
     }
 }

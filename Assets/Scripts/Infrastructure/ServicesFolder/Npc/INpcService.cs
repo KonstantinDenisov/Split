@@ -1,10 +1,10 @@
 using System;
 using Split.Game.Enemy;
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
+
 
 namespace Split.Infrastructure.ServicesFolder.Npc
 {
-    public interface INpcService : IService
+    public interface INpcService 
     {
         event Action OnAllDead; 
         

@@ -1,5 +1,4 @@
 using System;
-using Split.Infrastructure.GameOver;
 using Split.Infrastructure.Pause;
 using Split.Infrastructure.ServicesFolder.InputService;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
