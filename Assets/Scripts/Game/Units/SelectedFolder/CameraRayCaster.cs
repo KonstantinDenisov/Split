@@ -21,7 +21,6 @@ namespace Split.Game.Units.SelectedFolder
 
         #endregion
 
-
         #region Unity Lifecycle
 
         private void Start()
@@ -106,7 +105,7 @@ namespace Split.Game.Units.SelectedFolder
 
         private void IlluminationUnitTurnOn(RaycastHit hit)
         {
-            //Debug.Log("курсор попал по юниту");
+            Debug.Log("курсор попал по юниту");
             var unit = hit.collider.GetComponent<UnitState>();
             unit.OnHoverEnter();
             _lastUnit = unit;
@@ -114,21 +113,21 @@ namespace Split.Game.Units.SelectedFolder
 
         private void SelectThisUnit(RaycastHit hit)
         {
-            //Debug.Log("клип попал по юниту");
+            Debug.Log("клип попал по юниту");
             SelectedService.Instance.DeselectAllUnits();
             SelectedService.Instance.SelectUnit(hit.collider.gameObject);
         }
 
         private void IlluminationUnitTurnOff()
         {
-            //Debug.Log("юнит вышел из под луча");
+            Debug.Log("юнит вышел из под луча");
             _lastUnit.OnHoverExit();
             _lastUnit = null;
         }
 
         private void DeselectAllUnits()
         {
-            //Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
+            Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
             SelectedService.Instance.DeselectAllUnits();
 
             _frameStartPosition = Input.mousePosition;
@@ -177,6 +176,7 @@ namespace Split.Game.Units.SelectedFolder
 
         private void ForwardUnit(RaycastHit hit)
         {
+            Debug.Log("один юнит отправляется в точку");
             foreach (var unit in SelectedService.Instance.SelectedUnits)
             {
                 _navMeshAgent = unit.GetComponent<NavMeshAgent>();
@@ -186,6 +186,7 @@ namespace Split.Game.Units.SelectedFolder
 
         private void ForwardUnits(RaycastHit hit)
         {
+            
             float sumX = 0f;
             float sumY = 0f;
             float sumZ = 0f;
@@ -216,6 +217,7 @@ namespace Split.Game.Units.SelectedFolder
 
             if (groupRadius > distanceToTheTarget)
             {
+                Debug.Log("много юнитов отправляются в точку");
                 foreach (var unit in SelectedService.Instance.SelectedUnits)
                 {
                     Vector3 difference = centralPoint - unit.transform.position;
@@ -227,6 +229,7 @@ namespace Split.Game.Units.SelectedFolder
             }
             else
             {
+                Debug.Log("юниты кучкуются");
                 foreach (var unit in SelectedService.Instance.SelectedUnits)
                 {
                     Vector3 difference = centralPoint - unit.transform.position;
