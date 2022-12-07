@@ -214,10 +214,13 @@ namespace Split.Game.Units.SelectedFolder
                     groupRadius = Vector3.Distance(centralPoint, unit.transform.position);
                 }
             }
+            
+            Debug.Log($"радиус группы - {groupRadius}, дистанция до цели - {distanceToTheTarget}");
 
             if (groupRadius > distanceToTheTarget)
             {
-                Debug.Log("много юнитов отправляются в точку");
+                Debug.Log("юниты кучкуются");
+                
                 foreach (var unit in SelectedService.Instance.SelectedUnits)
                 {
                     Vector3 difference = centralPoint - unit.transform.position;
@@ -229,7 +232,8 @@ namespace Split.Game.Units.SelectedFolder
             }
             else
             {
-                Debug.Log("юниты кучкуются");
+                Debug.Log("много юнитов отправляются в точку");
+                
                 foreach (var unit in SelectedService.Instance.SelectedUnits)
                 {
                     Vector3 difference = centralPoint - unit.transform.position;
