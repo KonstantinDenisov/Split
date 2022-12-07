@@ -8,7 +8,7 @@ namespace Split.Game.EnemySettings
         [SerializeField] private EnemyHp _enemyHp;
         [SerializeField] private Collider _collider;
         [SerializeField] private GameObject _gameObject;
-        [SerializeField] private float _delay=3f;
+        [SerializeField] private float _delay = 3f;
         // public event Action OnDead;
         // public event Action<EnemyDeath> OnHappened;
 
@@ -29,7 +29,7 @@ namespace Split.Game.EnemySettings
 
             _enemyHp.OnHpChanged -= CheckDeath;
             StartCoroutine(WaitCoroutine(_delay));
-           
+
 
             // OnDead?.Invoke();
 

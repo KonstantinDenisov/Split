@@ -4,5 +4,6 @@ namespace Split.Infrastructure.ServicesFolder.StartLevel
     {
         void StartGame();
         void RestartGame();
+        void RestartRestartLevel();
     }
 }

@@ -55,6 +55,7 @@ namespace Split.Infrastructure
             _gameOverService.Init();
             _timerService.Init();
             _gameController.Init();
+            _gameWinService.Init();
         }
 
         public override void Exit()

@@ -8,7 +8,6 @@ namespace Split.Game.Units
     {
         [SerializeField] private int _startHp;
         [SerializeField] private int _maxHp;
-        
 
         public event Action<int> OnChanged;
 
@@ -18,12 +17,13 @@ namespace Split.Game.Units
         private void Awake()
         {
             CurrentHp = _startHp;
-           OnChanged?.Invoke(CurrentHp);
+            OnChanged?.Invoke(CurrentHp);
         }
+
         public void ApplyDamage(int damage)
         {
             CurrentHp -= damage;
-           OnChanged?.Invoke(CurrentHp);
+            OnChanged?.Invoke(CurrentHp);
         }
 
         public void ApplyHeal(int heal)
@@ -31,7 +31,5 @@ namespace Split.Game.Units
             CurrentHp = Mathf.Min(_maxHp, CurrentHp + heal);
             OnChanged?.Invoke(CurrentHp);
         }
-        
-        
     }
 }

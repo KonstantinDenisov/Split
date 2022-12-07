@@ -10,7 +10,7 @@ namespace Split.Infrastructure.ServicesFolder.Level
 
         [SerializeField] private LevelSettings[] _settings;
 
-        private readonly Dictionary<string, LevelSettings> _settingsById = new Dictionary<string, LevelSettings>();
+        private readonly Dictionary<string, LevelSettings> _settingsById = new ();
 
         private void OnEnable()
         {
@@ -25,10 +25,8 @@ namespace Split.Infrastructure.ServicesFolder.Level
                 {
                     return;
                 }
-                else
-                {
-                    _settingsById.Add(setting.SceneName, setting);
-                }
+                _settingsById.Add(setting.SceneName, setting);
+                
             }
         }
 

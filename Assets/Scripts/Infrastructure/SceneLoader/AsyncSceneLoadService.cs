@@ -21,7 +21,6 @@ namespace Split.Infrastructure.SceneLoader
         private IEnumerator LoadInternal(string sceneName, Action completeCallback)
         {
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
-
             while (!loadSceneAsync.isDone)
                 yield return null;
             

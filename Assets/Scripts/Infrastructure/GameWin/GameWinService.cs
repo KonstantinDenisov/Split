@@ -18,7 +18,6 @@ namespace Split.Infrastructure.GameWin
             _startLevelService = startLevelService;
         }
 
-        
         public void Init()
         {
             if (_gameWinScreen == null)
@@ -51,7 +50,6 @@ namespace Split.Infrastructure.GameWin
                 Destroy(_gameWinScreen.gameObject);
                 _gameWinScreen = null;
             }
-        
         }
 
         public void ActivateGameWin(bool isActive)

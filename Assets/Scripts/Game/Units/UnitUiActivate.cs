@@ -10,9 +10,8 @@ namespace Split.Game.Units
         {
             Diactivate();
         }
-        
 
-       public void Activate()
+        public void Activate()
         {
             _gameObject.SetActive(true);
         }

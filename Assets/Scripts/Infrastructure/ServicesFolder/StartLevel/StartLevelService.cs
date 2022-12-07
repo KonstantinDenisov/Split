@@ -38,6 +38,12 @@ namespace Split.Infrastructure.ServicesFolder.StartLevel
         {
             LevelSettings firstLevelSettings = _levelSettingsService.GetFirstLevelSettings();
             _stateMachine.Enter<LoadState, string>(firstLevelSettings.SceneName);   
+        }   
+        public void RestartRestartLevel()
+        {
+            PersistantData data = _persistantService.Data;
+            LevelSettings savedSettings = _levelSettingsService.GetLevelSettings(data.LevelData.CurrentSceneId);
+            _stateMachine.Enter<LoadState, string>(savedSettings.SceneName);     
         }
     }
 }

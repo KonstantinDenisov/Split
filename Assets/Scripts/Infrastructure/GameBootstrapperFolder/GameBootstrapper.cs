@@ -13,6 +13,7 @@ namespace Split.Infrastructure.GameBootstrapperFolder
         {
             _gameStateMachine = gameStateMachine;
         }
+
         private void Start()
         {
             _gameStateMachine.Enter<BootstrapState>();

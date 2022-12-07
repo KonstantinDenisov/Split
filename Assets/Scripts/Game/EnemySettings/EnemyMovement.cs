@@ -31,7 +31,7 @@ namespace Split.Game.EnemySettings
         public void StartMove()
         {
             ChooseTarget();
-        } 
+        }
 
         public void ChooseTarget()
         {

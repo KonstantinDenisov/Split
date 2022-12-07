@@ -12,9 +12,6 @@ namespace Split.Game.EnemySettings
         [SerializeField] private int _enemyDamage = 1;
 
         private bool _isExplode;
-        
-        
-        
 
         private void OnTriggerEnter(Collider col)
         {

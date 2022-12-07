@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Split.Infrastructure.ServicesFolder.LevelCompletion;
 using Split.Infrastructure.ServicesFolder.StartLevel;
-using Split.Infrastructure.StateMachine;
 using UnityEngine;
 using Zenject;
 
@@ -15,11 +14,13 @@ namespace Split.Infrastructure.Pause
         private bool _isPause;
         private PauseScreen _screen;
         private IStartLevelService _startLevelService;
+        private ILevelCompletionService _levelCompletionService;
 
         [Inject]
-        public void Construct(IStartLevelService startLevelService)
+        public void Construct(IStartLevelService startLevelService,ILevelCompletionService levelCompletionService)
         {
             _startLevelService = startLevelService;
+            _levelCompletionService = levelCompletionService;
         }
 
         private void Update()
@@ -45,6 +46,7 @@ namespace Split.Infrastructure.Pause
             _screen.gameObject.SetActive(false);
             _screen.OnContinue += TogglePause;
             _screen.OnRestart += RestartGame;
+            _screen.OnRestartLevel += RestartLevel;
             _screen.OnExit += ExitGame;
         }
 
@@ -56,10 +58,18 @@ namespace Split.Infrastructure.Pause
 
             _screen.OnContinue -= TogglePause;
             _screen.OnRestart -= RestartGame;
+            _screen.OnRestartLevel -= RestartLevel;
             _screen.OnExit -= ExitGame;
 
             Destroy(_screen.gameObject);
             _screen = null;
+        }
+
+        private void RestartLevel()
+        {
+            TogglePause();
+            
+            
         }
 
         private void TogglePause()
@@ -71,8 +81,8 @@ namespace Split.Infrastructure.Pause
 
         private void RestartGame()
         {
-             TogglePause();
-            _startLevelService.RestartGame();
+            TogglePause();
+            _levelCompletionService.RestartLevel();
         }
 
         private void ExitGame()

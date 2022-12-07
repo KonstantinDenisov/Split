@@ -1,4 +1,4 @@
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
+using Split.Infrastructure.ServicesFolder.Level;
 
 namespace Split.Infrastructure.ServicesFolder.LevelCompletion
 {
@@ -6,5 +6,7 @@ namespace Split.Infrastructure.ServicesFolder.LevelCompletion
     {
         void Init();
         void Dispose();
+        void MissionCompleted();
+        void RestartLevel();
     }
 }

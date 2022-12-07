@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using Split.Game.EnemySettings;
+using Split.Infrastructure.ServicesFolder.Level;
+using Split.Infrastructure.ServicesFolder.LevelCompletion;
+using Split.Infrastructure.StateMachine;
+using UnityEngine;
 
 namespace Split.Infrastructure.ServicesFolder.Npc
 {
     public class NpcService : INpcService
     {
+        private ILevelCompletionService _levelCompletionService;
+        public NpcService(ILevelCompletionService levelCompletionService)
+        {
+            _levelCompletionService = levelCompletionService;
+        }
         public event Action OnAllDead;
 
         private List<EnemyMovement> _enemies = new();
@@ -27,6 +36,7 @@ namespace Split.Infrastructure.ServicesFolder.Npc
             
             if (_enemies.Count == 0)
             {
+                _levelCompletionService.MissionCompleted();
                 OnAllDead?.Invoke();
             }
     

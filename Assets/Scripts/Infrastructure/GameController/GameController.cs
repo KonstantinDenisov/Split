@@ -17,17 +17,11 @@ namespace Split.Infrastructure.GameController
         public async void Init()
         {
             await _timerService.Timer();
-           _npcService.BeginMove();
+            _npcService.BeginMove();
         }
-
-        private void StartGame(UniTask startTimer)
-        {
-        }
-
+        
         public void Dispose()
         {
         }
-        
-
     }
 }

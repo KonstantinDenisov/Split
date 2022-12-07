@@ -959,7 +959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990315, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy___
       objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990316, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: m_StoppingDistance
@@ -1583,7 +1583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1275656107
 MonoBehaviour:
   m_ObjectHideFlags: 0
