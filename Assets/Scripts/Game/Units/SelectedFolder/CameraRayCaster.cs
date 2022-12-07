@@ -215,7 +215,8 @@ namespace Split.Game.Units.SelectedFolder
                 }
             }
             
-            Debug.Log($"радиус группы - {groupRadius}, дистанция до цели - {distanceToTheTarget}");
+            Debug.Log($"радиус группы - {groupRadius}, дистанция до цели - {distanceToTheTarget}," +
+                $" координаты центральной точки - {centralPoint}");
 
             if (groupRadius > distanceToTheTarget)
             {
