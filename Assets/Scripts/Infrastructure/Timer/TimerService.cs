@@ -59,8 +59,7 @@ namespace Split.Infrastructure
         public void Dispose()
         {
             if (_timerScreen == null)
-            {
-            }
+                return;
 
             ResetTimer();
             Destroy(_timerScreen.gameObject);

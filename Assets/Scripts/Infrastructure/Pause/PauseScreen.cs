@@ -20,7 +20,7 @@ namespace Split.Infrastructure.Pause
         {
             _continueButton.onClick.AddListener(delegate { OnContinue?.Invoke(); });
             _restartButton.onClick.AddListener(delegate { OnRestart?.Invoke(); });
-            _restartLevelButton.onClick.AddListener(delegate { OnRestart?.Invoke(); });
+            _restartLevelButton.onClick.AddListener(delegate { OnRestartLevel?.Invoke(); });
             _exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
         }
     }

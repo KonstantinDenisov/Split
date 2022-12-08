@@ -17,7 +17,7 @@ namespace Split.Infrastructure.Pause
         private ILevelCompletionService _levelCompletionService;
 
         [Inject]
-        public void Construct(IStartLevelService startLevelService,ILevelCompletionService levelCompletionService)
+        public void Construct(IStartLevelService startLevelService, ILevelCompletionService levelCompletionService)
         {
             _startLevelService = startLevelService;
             _levelCompletionService = levelCompletionService;
@@ -53,8 +53,7 @@ namespace Split.Infrastructure.Pause
         public void Dispose()
         {
             if (_screen == null)
-            {
-            }
+                return;
 
             _screen.OnContinue -= TogglePause;
             _screen.OnRestart -= RestartGame;
@@ -68,8 +67,7 @@ namespace Split.Infrastructure.Pause
         private void RestartLevel()
         {
             TogglePause();
-            
-            
+            _levelCompletionService.RestartLevel();
         }
 
         private void TogglePause()
@@ -82,7 +80,7 @@ namespace Split.Infrastructure.Pause
         private void RestartGame()
         {
             TogglePause();
-            _levelCompletionService.RestartLevel();
+            _startLevelService.RestartGame();
         }
 
         private void ExitGame()
