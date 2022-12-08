@@ -193,7 +193,7 @@ namespace Split.Game.Units.SelectedFolder
             foreach (var unit in SelectedService.Instance.SelectedUnits)
             {
                 sumX += unit.transform.position.x;
-                sumY += unit.transform.position.x;
+                sumY += unit.transform.position.y;
                 sumZ += unit.transform.position.z;
             }
 
