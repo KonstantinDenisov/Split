@@ -7,6 +7,8 @@ namespace Split.Game.Units.SelectedFolder
 {
     public class CameraRayCaster : MonoBehaviour
     {
+        #region Variables
+
         [SerializeField] private LayerMask _unitLayerMask;
         [SerializeField] private LayerMask _groundLayerMask;
         [SerializeField] private LayerMask _interactiveObjects;
@@ -16,6 +18,10 @@ namespace Split.Game.Units.SelectedFolder
         private Camera _mainCamera;
         private UnitState _lastUnit;
         private NavMeshAgent _navMeshAgent;
+
+        #endregion
+
+        #region Unity Lifecycle
 
         private void Start()
         {
@@ -27,94 +33,44 @@ namespace Split.Game.Units.SelectedFolder
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            
+
             if (Physics.Raycast(ray, out hit, 100, _interactiveObjects))
             {
-                //Debug.Log("луч попадает во что-то со слоями из маски");
                 InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
 
                 if (interactiveObject == null)
                 {
                     return;
                 }
-                //Debug.Log("луч попадает в интерактивный объект");
+
                 if (interactiveObject.InteractiveType == InteractiveType.Unit)
                 {
-                   // Debug.Log("луч попадает в юнита");
                     if (_lastUnit == null)
                     {
-                        //Debug.Log("юнит попал под курсор");
-                        var unit = hit.collider.GetComponent<UnitState>();
-                        unit.OnHoverEnter();
-                        _lastUnit = unit;
+                        IlluminationUnitTurnOn(hit);
                     }
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        //Debug.Log("юнит попал под клик");
-                        SelectedService.Instance.DeselectAllUnits();
-                        SelectedService.Instance.SelectUnit(hit.collider.gameObject); 
+                        SelectThisUnit(hit);
                     }
                 }
 
                 if (interactiveObject.InteractiveType == InteractiveType.Ground)
                 {
-                    //Debug.Log("луч попал по земле");
                     if (_lastUnit != null)
                     {
-                        //Debug.Log("юнит вышел из под луча");
-                        _lastUnit.OnHoverExit();
-                        _lastUnit = null;    
+                        IlluminationUnitTurnOff();
                     }
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        //Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
-                        SelectedService.Instance.DeselectAllUnits();
-
-                        
-                        _frameStartPosition = Input.mousePosition;
+                        DeselectAllUnits();
                     }
 
                     if (Input.GetMouseButton(0))
                     {
-                        _frameFinishPosition = Input.mousePosition;
-
-                        Vector2 min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
-                        Vector2 max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
-                        Vector2 size = max - min;
-                        if (size.magnitude > 10)
-                        {
-                            _frameImage.enabled = true;
-                            _frameImage.rectTransform.anchoredPosition = min;
-                            _frameImage.rectTransform.sizeDelta = size;
-
-                            Rect rect = new Rect(min, size);
-                        
-                                //SelectedService.Instance.DeselectAllUnits();
-                        
-                            for (int i = 0; i < SelectedService.Instance.AllUnits.Count; i++)
-                            {
-                                var unitObject = SelectedService.Instance.AllUnits[i];
-                                bool isUnitSelected = SelectedService.Instance.IsUnitSelected(unitObject);
-                                Vector2 screePosition =
-                                    _mainCamera.WorldToScreenPoint(unitObject.transform.position);
-                                if (rect.Contains(screePosition))
-                                {
-                                    if (!isUnitSelected)
-                                    {
-                                        SelectedService.Instance.SelectUnit(unitObject); 
-                                    }
-                                }
-                                else
-                                {
-                                    if (isUnitSelected)
-                                    {
-                                        SelectedService.Instance.DeselectUnit(unitObject);
-                                    }
-                                }
-                            }
-                        }
+                        CreateSelectionFrame();
                     }
 
                     if (Input.GetMouseButtonUp(0))
@@ -127,16 +83,169 @@ namespace Split.Game.Units.SelectedFolder
                         //Debug.Log("клик mouse2 по земле");
                         if (SelectedService.Instance.SelectedUnits != null)
                         {
-                            foreach (var unit in SelectedService.Instance.SelectedUnits)
+                            if (SelectedService.Instance.SelectedUnits.Count == 1)
                             {
-                                _navMeshAgent = unit.GetComponent<NavMeshAgent>();
-                                _navMeshAgent.SetDestination(hit.point);
-                            }  
+                                ForwardUnit(hit);
+                            }
+
+                            else
+                            {
+                                ForwardUnits(hit);
+                            }
                         }
                     }
-                    
                 }
             }
         }
+
+        #endregion
+
+
+        #region Private Methods
+
+        private void IlluminationUnitTurnOn(RaycastHit hit)
+        {
+            Debug.Log("курсор попал по юниту");
+            var unit = hit.collider.GetComponent<UnitState>();
+            unit.OnHoverEnter();
+            _lastUnit = unit;
+        }
+
+        private void SelectThisUnit(RaycastHit hit)
+        {
+            Debug.Log("клип попал по юниту");
+            SelectedService.Instance.DeselectAllUnits();
+            SelectedService.Instance.SelectUnit(hit.collider.gameObject);
+        }
+
+        private void IlluminationUnitTurnOff()
+        {
+            Debug.Log("юнит вышел из под луча");
+            _lastUnit.OnHoverExit();
+            _lastUnit = null;
+        }
+
+        private void DeselectAllUnits()
+        {
+            Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
+            SelectedService.Instance.DeselectAllUnits();
+
+            _frameStartPosition = Input.mousePosition;
+        }
+
+        private void CreateSelectionFrame()
+        {
+            _frameFinishPosition = Input.mousePosition;
+
+            Vector2 min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
+            Vector2 max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
+            Vector2 size = max - min;
+            if (size.magnitude > 10)
+            {
+                _frameImage.enabled = true;
+                _frameImage.rectTransform.anchoredPosition = min;
+                _frameImage.rectTransform.sizeDelta = size;
+
+                Rect rect = new Rect(min, size);
+
+                //SelectedService.Instance.DeselectAllUnits();
+
+                for (int i = 0; i < SelectedService.Instance.AllUnits.Count; i++)
+                {
+                    var unitObject = SelectedService.Instance.AllUnits[i];
+                    bool isUnitSelected = SelectedService.Instance.IsUnitSelected(unitObject);
+                    Vector2 screePosition =
+                        _mainCamera.WorldToScreenPoint(unitObject.transform.position);
+                    if (rect.Contains(screePosition))
+                    {
+                        if (!isUnitSelected)
+                        {
+                            SelectedService.Instance.SelectUnit(unitObject);
+                        }
+                    }
+                    else
+                    {
+                        if (isUnitSelected)
+                        {
+                            SelectedService.Instance.DeselectUnit(unitObject);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ForwardUnit(RaycastHit hit)
+        {
+            Debug.Log("один юнит отправляется в точку");
+            foreach (var unit in SelectedService.Instance.SelectedUnits)
+            {
+                _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                _navMeshAgent.SetDestination(hit.point);
+            }
+        }
+
+        private void ForwardUnits(RaycastHit hit)
+        {
+            
+            float sumX = 0f;
+            float sumY = 0f;
+            float sumZ = 0f;
+            foreach (var unit in SelectedService.Instance.SelectedUnits)
+            {
+                sumX += unit.transform.position.x;
+                sumY += unit.transform.position.y;
+                sumZ += unit.transform.position.z;
+            }
+
+            float centrX = sumX / SelectedService.Instance.SelectedUnits.Count;
+            float centrY = sumY / SelectedService.Instance.SelectedUnits.Count;
+            float centrZ = sumZ / SelectedService.Instance.SelectedUnits.Count;
+
+            Vector3 centralPoint = new Vector3(centrX, centrY, centrZ);
+
+            float distanceToTheTarget = Vector3.Distance(centralPoint, hit.point);
+
+            float groupRadius = 0;
+
+            foreach (var unit in SelectedService.Instance.SelectedUnits)
+            {
+                if (groupRadius < Vector3.Distance(centralPoint, unit.transform.position))
+                {
+                    groupRadius = Vector3.Distance(centralPoint, unit.transform.position);
+                }
+            }
+            
+            Debug.Log($"радиус группы - {groupRadius}, дистанция до цели - {distanceToTheTarget}," +
+                $" координаты центральной точки - {centralPoint}");
+
+            if (groupRadius > distanceToTheTarget)
+            {
+                Debug.Log("юниты кучкуются");
+                
+                foreach (var unit in SelectedService.Instance.SelectedUnits)
+                {
+                    Vector3 difference = centralPoint - unit.transform.position;
+                    Vector3 currentUnitTargetPoint = hit.point - difference / 2;
+
+                    _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                    _navMeshAgent.SetDestination(currentUnitTargetPoint);
+                }
+            }
+            else
+            {
+                Debug.Log("много юнитов отправляются в точку");
+                
+                foreach (var unit in SelectedService.Instance.SelectedUnits)
+                {
+                    Vector3 difference = centralPoint - unit.transform.position;
+                    Vector3 currentUnitTargetPoint = hit.point - difference;
+
+                    _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                    _navMeshAgent.SetDestination(currentUnitTargetPoint);
+                }
+            }
+        }
+
+        #endregion
     }
 }
