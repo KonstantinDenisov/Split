@@ -1,3 +1,4 @@
+using Split.Game.Units.SelectedFolder;
 using Split.Infrastructure.GameController;
 using Split.Infrastructure.GameOver;
 using Split.Infrastructure.GameWin;
@@ -74,9 +75,10 @@ namespace Split.Infrastructure.StateMachine
             IGameController gameController = null;
             IUnitRegisterService unitRegisterService = null;
             IGameWinService winService = null;
+            ISelectedService selectedService = null;
             
             return new GameState(stateMachine, npcService,inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-                timerService, gameOverService,gameController,unitRegisterService,winService) as TState;
+                timerService, gameOverService,gameController,unitRegisterService,winService,selectedService) as TState;
         }
     }
 }

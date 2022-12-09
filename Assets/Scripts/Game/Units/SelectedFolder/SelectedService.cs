@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Split.Game.Units.SelectedFolder
 {
-    public class SelectedService : MonoBehaviour
+    public class SelectedService : MonoBehaviour, ISelectedService
 
     {
-        public static SelectedService Instance { get; private set; }
-        
+
         public List<GameObject> AllUnits;
         public List<GameObject> SelectedUnits;
 
@@ -17,20 +15,11 @@ namespace Split.Game.Units.SelectedFolder
             AllUnits = new List<GameObject>();
             SelectedUnits = new List<GameObject>();
             
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = GetComponent<SelectedService>();
-            DontDestroyOnLoad(gameObject);
         }
 
         public void AddUnit(GameObject unit)
         {
             AllUnits.Add(unit);
-//            Debug.Log("unit add");
         }
 
         public void RemoveUnit(GameObject unit)
@@ -43,7 +32,6 @@ namespace Split.Game.Units.SelectedFolder
             SelectedUnits.Add(unit);
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelected();
-            //Debug.Log("unit selected");
         }
 
         public bool IsUnitSelected(GameObject unit)
@@ -59,7 +47,6 @@ namespace Split.Game.Units.SelectedFolder
             
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelectedExit();
-           // Debug.Log("unit deselected");
         }
 
         public void DeselectAllUnits()

@@ -25,7 +25,7 @@ namespace Split.Game.Units
 
         public void OnHoverEnter()
         {
-            if (IsSelected == true)
+            if (IsSelected)
                 return;
 
             _outline.OutlineWidth = _widthOutlineOnHover;
@@ -34,7 +34,7 @@ namespace Split.Game.Units
 
         public void OnHoverExit()
         {
-            if (IsSelected == true)
+            if (IsSelected)
                 return;
 
             _outline.OutlineWidth = 0;

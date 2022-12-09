@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.GameController;
+﻿using Split.Game.Units.SelectedFolder;
+using Split.Infrastructure.GameController;
 using Split.Infrastructure.GameOver;
 using Split.Infrastructure.GameWin;
 using Split.Infrastructure.ServicesFolder.InputService;
@@ -23,6 +24,8 @@ namespace Split.Infrastructure.Installers
             GameControllerInstaller.Install(Container);
             UnitRegisterServiceInstaller.Install(Container);
             WinServiceInstaller.Install(Container);
+            SelectedServiceInstaller.Install(Container);
+
         }
     }
 }

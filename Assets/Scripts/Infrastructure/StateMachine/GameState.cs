@@ -1,3 +1,4 @@
+using Split.Game.Units.SelectedFolder;
 using Split.Infrastructure.GameController;
 using Split.Infrastructure.GameOver;
 using Split.Infrastructure.GameWin;
@@ -26,12 +27,14 @@ namespace Split.Infrastructure
         private readonly IGameController _gameController;
         private readonly IUnitRegisterService _registerService;
         private readonly IGameWinService _gameWinService;
+        private readonly ISelectedService _selectedService;
 
         public GameState(IGameStateMachine gameStateMachine, INpcService npcService, IInputService inputService,
             ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
             IPauseService pauseService, ITimerService timerService, IGameOverService gameOverService,
-            IGameController gameController,IUnitRegisterService unitRegisterService,IGameWinService gameWinService) : base(gameStateMachine)
+            IGameController gameController, IUnitRegisterService unitRegisterService, IGameWinService gameWinService,
+            ISelectedService selectedService) : base(gameStateMachine)
         {
             _npcService = npcService;
             _inputService = inputService;
@@ -44,6 +47,7 @@ namespace Split.Infrastructure
             _gameController = gameController;
             _registerService = unitRegisterService;
             _gameWinService = gameWinService;
+            _selectedService = selectedService;
         }
 
         public void Enter(string sceneName)

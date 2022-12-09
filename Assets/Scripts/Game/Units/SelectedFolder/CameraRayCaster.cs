@@ -2,12 +2,21 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Split.Game.Units.SelectedFolder
 {
     public class CameraRayCaster : MonoBehaviour
     {
         #region Variables
+
+        private ISelectedService _selectedService;
+
+        [Inject]
+        public void Construct(ISelectedService selectedService)
+        {
+            _selectedService = selectedService;
+        }
 
         [SerializeField] private LayerMask _unitLayerMask;
         [SerializeField] private LayerMask _groundLayerMask;
@@ -81,7 +90,7 @@ namespace Split.Game.Units.SelectedFolder
                     if (Input.GetMouseButtonDown(1))
                     {
                         //Debug.Log("клик mouse2 по земле");
-                        if (SelectedService.Instance.SelectedUnits != null)
+                        if (SelectedService.SelectedUnits != null)
                         {
                             if (SelectedService.Instance.SelectedUnits.Count == 1)
                             {
@@ -114,8 +123,8 @@ namespace Split.Game.Units.SelectedFolder
         private void SelectThisUnit(RaycastHit hit)
         {
             Debug.Log("клип попал по юниту");
-            SelectedService.Instance.DeselectAllUnits();
-            SelectedService.Instance.SelectUnit(hit.collider.gameObject);
+            _selectedService.DeselectAllUnits();
+            _selectedService.SelectUnit(hit.collider.gameObject);
         }
 
         private void IlluminationUnitTurnOff()
@@ -128,7 +137,7 @@ namespace Split.Game.Units.SelectedFolder
         private void DeselectAllUnits()
         {
             Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
-            SelectedService.Instance.DeselectAllUnits();
+            _selectedService.DeselectAllUnits();
 
             _frameStartPosition = Input.mousePosition;
         }
@@ -160,14 +169,14 @@ namespace Split.Game.Units.SelectedFolder
                     {
                         if (!isUnitSelected)
                         {
-                            SelectedService.Instance.SelectUnit(unitObject);
+                            _selectedService.SelectUnit(unitObject);
                         }
                     }
                     else
                     {
                         if (isUnitSelected)
                         {
-                            SelectedService.Instance.DeselectUnit(unitObject);
+                            _selectedService.DeselectUnit(unitObject);
                         }
                     }
                 }
