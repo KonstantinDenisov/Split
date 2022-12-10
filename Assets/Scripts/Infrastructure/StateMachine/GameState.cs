@@ -28,13 +28,14 @@ namespace Split.Infrastructure
         private readonly IUnitRegisterService _registerService;
         private readonly IGameWinService _gameWinService;
         private readonly ISelectedService _selectedService;
+        private readonly ICameraRayCaster _cameraRayCaster;
 
         public GameState(IGameStateMachine gameStateMachine, INpcService npcService, IInputService inputService,
             ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
             IPauseService pauseService, ITimerService timerService, IGameOverService gameOverService,
             IGameController gameController, IUnitRegisterService unitRegisterService, IGameWinService gameWinService,
-            ISelectedService selectedService) : base(gameStateMachine)
+            ISelectedService selectedService,ICameraRayCaster cameraRayCaster) : base(gameStateMachine)
         {
             _npcService = npcService;
             _inputService = inputService;
@@ -48,6 +49,7 @@ namespace Split.Infrastructure
             _registerService = unitRegisterService;
             _gameWinService = gameWinService;
             _selectedService = selectedService;
+            _cameraRayCaster = cameraRayCaster;
         }
 
         public void Enter(string sceneName)

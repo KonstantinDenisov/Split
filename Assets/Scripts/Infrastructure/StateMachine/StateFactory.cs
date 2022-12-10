@@ -76,9 +76,10 @@ namespace Split.Infrastructure.StateMachine
             IUnitRegisterService unitRegisterService = null;
             IGameWinService winService = null;
             ISelectedService selectedService = null;
+            ICameraRayCaster cameraRayCaster = null;
             
             return new GameState(stateMachine, npcService,inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
-                timerService, gameOverService,gameController,unitRegisterService,winService,selectedService) as TState;
+                timerService, gameOverService,gameController,unitRegisterService,winService,selectedService,cameraRayCaster) as TState;
         }
     }
 }

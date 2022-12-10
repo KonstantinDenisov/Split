@@ -19,8 +19,7 @@ namespace Split.Game.Units
         }
 
         private void Start()
-        {
-            SelectedService.Instance.AddUnit(gameObject);
+        { //SelectedService.Instance.AddUnit(gameObject);
         }
 
         public void OnHoverEnter()

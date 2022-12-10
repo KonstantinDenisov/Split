@@ -1,12 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Split.Game.Units.SelectedFolder
 {
-    public class CameraRayCaster : MonoBehaviour
+    public class CameraRayCaster : MonoBehaviour,ICameraRayCaster
     {
         #region Variables
 
@@ -89,7 +88,6 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonDown(1))
                     {
-                        //Debug.Log("клик mouse2 по земле");
                         if (SelectedService.SelectedUnits != null)
                         {
                             if (SelectedService.Instance.SelectedUnits.Count == 1)
@@ -122,7 +120,6 @@ namespace Split.Game.Units.SelectedFolder
 
         private void SelectThisUnit(RaycastHit hit)
         {
-            Debug.Log("клип попал по юниту");
             _selectedService.DeselectAllUnits();
             _selectedService.SelectUnit(hit.collider.gameObject);
         }
