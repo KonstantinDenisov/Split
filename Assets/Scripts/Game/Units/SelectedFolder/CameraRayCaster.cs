@@ -88,9 +88,9 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonDown(1))
                     {
-                        if (SelectedService.SelectedUnits != null)
+                        if (_selectedService.GetSelectedUnitsQuantity() != 0)
                         {
-                            if (SelectedService.Instance.SelectedUnits.Count == 1)
+                            if (_selectedService.GetSelectedUnitsQuantity() == 1)
                             {
                                 ForwardUnit(hit);
                             }
@@ -154,12 +154,10 @@ namespace Split.Game.Units.SelectedFolder
 
                 Rect rect = new Rect(min, size);
 
-                //SelectedService.Instance.DeselectAllUnits();
-
-                for (int i = 0; i < SelectedService.Instance.AllUnits.Count; i++)
+                for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
                 {
-                    var unitObject = SelectedService.Instance.AllUnits[i];
-                    bool isUnitSelected = SelectedService.Instance.IsUnitSelected(unitObject);
+                    var unitObject = _selectedService.GetUnitInAllUnits(i);
+                    bool isUnitSelected = _selectedService.IsUnitSelected(unitObject);
                     Vector2 screePosition =
                         _mainCamera.WorldToScreenPoint(unitObject.transform.position);
                     if (rect.Contains(screePosition))
@@ -183,8 +181,10 @@ namespace Split.Game.Units.SelectedFolder
         private void ForwardUnit(RaycastHit hit)
         {
             Debug.Log("один юнит отправляется в точку");
-            foreach (var unit in SelectedService.Instance.SelectedUnits)
+
+            for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
             {
+                var unit = _selectedService.GetUnitInAllUnits(i);
                 _navMeshAgent = unit.GetComponent<NavMeshAgent>();
                 _navMeshAgent.SetDestination(hit.point);
             }
@@ -196,16 +196,19 @@ namespace Split.Game.Units.SelectedFolder
             float sumX = 0f;
             float sumY = 0f;
             float sumZ = 0f;
-            foreach (var unit in SelectedService.Instance.SelectedUnits)
+
+            for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
             {
-                sumX += unit.transform.position.x;
-                sumY += unit.transform.position.y;
-                sumZ += unit.transform.position.z;
+                var unit = _selectedService.GetUnitInAllUnits(i);
+                var position = unit.transform.position;
+                sumX += position.x;
+                sumY += position.y;
+                sumZ += position.z;
             }
 
-            float centrX = sumX / SelectedService.Instance.SelectedUnits.Count;
-            float centrY = sumY / SelectedService.Instance.SelectedUnits.Count;
-            float centrZ = sumZ / SelectedService.Instance.SelectedUnits.Count;
+            float centrX = sumX / _selectedService.GetSelectedUnitsQuantity();
+            float centrY = sumY / _selectedService.GetSelectedUnitsQuantity();
+            float centrZ = sumZ / _selectedService.GetSelectedUnitsQuantity();
 
             Vector3 centralPoint = new Vector3(centrX, centrY, centrZ);
 
@@ -213,8 +216,10 @@ namespace Split.Game.Units.SelectedFolder
 
             float groupRadius = 0;
 
-            foreach (var unit in SelectedService.Instance.SelectedUnits)
+            for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
             {
+                var unit = _selectedService.GetUnitInAllUnits(i);
+                
                 if (groupRadius < Vector3.Distance(centralPoint, unit.transform.position))
                 {
                     groupRadius = Vector3.Distance(centralPoint, unit.transform.position);
@@ -227,9 +232,11 @@ namespace Split.Game.Units.SelectedFolder
             if (groupRadius > distanceToTheTarget)
             {
                 Debug.Log("юниты кучкуются");
-                
-                foreach (var unit in SelectedService.Instance.SelectedUnits)
+
+                for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
                 {
+                    var unit = _selectedService.GetUnitInAllUnits(i);
+                    
                     Vector3 difference = centralPoint - unit.transform.position;
                     Vector3 currentUnitTargetPoint = hit.point - difference / 2;
 
@@ -240,14 +247,17 @@ namespace Split.Game.Units.SelectedFolder
             else
             {
                 Debug.Log("много юнитов отправляются в точку");
-                
-                foreach (var unit in SelectedService.Instance.SelectedUnits)
+
+                for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
                 {
+                    var unit = _selectedService.GetUnitInAllUnits(i);
+                    
                     Vector3 difference = centralPoint - unit.transform.position;
                     Vector3 currentUnitTargetPoint = hit.point - difference;
 
                     _navMeshAgent = unit.GetComponent<NavMeshAgent>();
                     _navMeshAgent.SetDestination(currentUnitTargetPoint);
+                    
                 }
             }
         }

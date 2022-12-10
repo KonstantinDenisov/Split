@@ -11,6 +11,8 @@ namespace Split.Game.Units.SelectedFolder
 
         void DeselectUnit(GameObject unit);
         void DeselectAllUnits();
-        
+        int GetSelectedUnitsQuantity();
+        GameObject GetUnitInAllUnits(int i);
+
     }
 }

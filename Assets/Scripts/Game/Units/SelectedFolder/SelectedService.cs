@@ -6,42 +6,52 @@ namespace Split.Game.Units.SelectedFolder
     public class SelectedService : MonoBehaviour, ISelectedService
 
     {
+        #region Variables
 
-        public List<GameObject> AllUnits;
-        public List<GameObject> SelectedUnits;
+        private List<GameObject> _allUnits;
+        private List<GameObject> _selectedUnits;
+
+        #endregion
+
+
+        #region Unity Lifecycle
 
         private void Awake()
         {
-            AllUnits = new List<GameObject>();
-            SelectedUnits = new List<GameObject>();
-            
+            _allUnits = new List<GameObject>();
+            _selectedUnits = new List<GameObject>();
         }
+
+        #endregion
+
+
+        #region Public Methods
 
         public void AddUnit(GameObject unit)
         {
-            AllUnits.Add(unit);
+            _allUnits.Add(unit);
         }
 
         public void RemoveUnit(GameObject unit)
         {
-            AllUnits.Remove(unit);
+            _allUnits.Remove(unit);
         }
 
         public void SelectUnit(GameObject unit)
         {
-            SelectedUnits.Add(unit);
+            _selectedUnits.Add(unit);
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelected();
         }
 
         public bool IsUnitSelected(GameObject unit)
         {
-            return SelectedUnits.Contains(unit);
+            return _selectedUnits.Contains(unit);
         }
 
         public void DeselectUnit(GameObject unit)
         {
-            bool isRemoved = SelectedUnits.Remove(unit);
+            bool isRemoved = _selectedUnits.Remove(unit);
             if (!isRemoved)
                 return;
             
@@ -51,14 +61,27 @@ namespace Split.Game.Units.SelectedFolder
 
         public void DeselectAllUnits()
         {
-            foreach (var unit in SelectedUnits)
+            foreach (var unit in _selectedUnits)
             {
                 UnitState unitState = unit.transform.GetComponent<UnitState>();
                 unitState.OnSelectedExit();
             }
             
-            SelectedUnits.Clear();
+            _selectedUnits.Clear();
+        }
+        
+        public int GetSelectedUnitsQuantity()
+        {
+            int selectedUnitsQuantity = _selectedUnits.Count;
+            return selectedUnitsQuantity;
         }
 
+        public GameObject GetUnitInAllUnits(int i)
+        {
+            GameObject unit = _allUnits[i];
+            return unit;
+        }
+
+        #endregion
     }
 }
