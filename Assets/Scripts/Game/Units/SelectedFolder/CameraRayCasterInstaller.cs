@@ -2,7 +2,7 @@
 
 namespace Split.Game.Units.SelectedFolder
 {
-    public class CameraRayCasterInstaller: Installer<SelectedServiceInstaller>
+    public class CameraRayCasterInstaller: Installer<CameraRayCasterInstaller>
     {
         public override void InstallBindings()
         {

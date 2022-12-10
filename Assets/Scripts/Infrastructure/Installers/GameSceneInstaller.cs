@@ -25,6 +25,7 @@ namespace Split.Infrastructure.Installers
             UnitRegisterServiceInstaller.Install(Container);
             WinServiceInstaller.Install(Container);
             SelectedServiceInstaller.Install(Container);
+            CameraRayCasterInstaller.Install(Container);
 
         }
     }
