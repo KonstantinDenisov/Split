@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.ServicesFolder.StartLevel;
+﻿using Split.Infrastructure.Pause;
+using Split.Infrastructure.ServicesFolder.StartLevel;
 using UnityEngine;
 using Zenject;
 
@@ -11,11 +12,13 @@ namespace Split.Infrastructure.GameWin
         private GameWinScreen _gameWinScreen;
         private IGameWinService _iGameWinService;
         private IStartLevelService _startLevelService;
+        private IPauseService _pauseService;
 
         [Inject]
-        public void Construct(IStartLevelService startLevelService)
+        public void Construct(IStartLevelService startLevelService,IPauseService pauseService)
         {
             _startLevelService = startLevelService;
+            _pauseService = pauseService;
         }
 
         public void Init()
@@ -57,6 +60,7 @@ namespace Split.Infrastructure.GameWin
             if (_gameWinScreen == null)
                 return;
             _gameWinScreen.gameObject.SetActive(isActive);
+            _pauseService.Deactivate(false);
         }
 
         private void ExitGame()

@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.ServicesFolder.Npc;
+﻿using Split.Infrastructure.GameOver;
+using Split.Infrastructure.ServicesFolder.Npc;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -12,11 +13,13 @@ namespace Split.Game.EnemySettings
 
         private INpcService _npcService;
         private EnemyDeath _enemyDeath;
+        private IGameOverService _gameOverService;
         
         [Inject]
-        public void Construct(INpcService npcService)
+        public void Construct(INpcService npcService,IGameOverService gameOverService)
         {
             _npcService = npcService;
+            _gameOverService = gameOverService;
         }
 
         private void Start()
@@ -33,12 +36,15 @@ namespace Split.Game.EnemySettings
         private void Die()
         {
             _npcService.UnregisterObject(this);
+            _gameOverService.IsGameOver = true;
             _enemyDeath.OnDead -= Die;
             
         }
 
         public void StartMove()
         {
+            if (_gameOverService.IsGameOver )
+                return;
             ChooseTarget();
         }
 

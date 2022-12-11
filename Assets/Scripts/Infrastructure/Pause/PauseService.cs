@@ -50,6 +50,14 @@ namespace Split.Infrastructure.Pause
             _screen.OnExit += ExitGame;
         }
 
+        public void Deactivate(bool isActive)
+        {
+            if (_screen == null)
+                return;
+            _screen.gameObject.SetActive(false);
+            IsPauseActive = false;
+        }
+
         public void Dispose()
         {
             if (_screen == null)
@@ -87,11 +95,6 @@ namespace Split.Infrastructure.Pause
         {
             Exit.ExitButtonClicked();
         }
-
-        public void GameWin(bool gameOver)
-        {
-            if (gameOver)
-                IsPauseActive = true;
-        }
+        
     }
 }
