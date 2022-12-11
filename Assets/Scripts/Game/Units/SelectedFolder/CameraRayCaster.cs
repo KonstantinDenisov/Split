@@ -205,9 +205,10 @@ namespace Split.Game.Units.SelectedFolder
             float sumZ = 0f;
             foreach (var unit in _selectedService.SelectedUnits)
             {
-                sumX += unit.transform.position.x;
-                sumY += unit.transform.position.y;
-                sumZ += unit.transform.position.z;
+                var position = unit.transform.position;
+                sumX += position.x;
+                sumY += position.y;
+                sumZ += position.z;
             }
 
             float centrX = sumX / _selectedService.SelectedUnits.Count;

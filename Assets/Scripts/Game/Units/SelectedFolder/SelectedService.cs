@@ -30,7 +30,6 @@ namespace Split.Game.Units.SelectedFolder
         public void AddUnit(GameObject unit)
         {
             AllUnits.Add(unit);
-//            Debug.Log("unit add");
         }
 
         public void RemoveUnit(GameObject unit)

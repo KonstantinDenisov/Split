@@ -1,5 +1,6 @@
 using Split.Game.Units.SelectedFolder;
 using UnityEngine;
+using Zenject;
 
 namespace Split.Game.Units
 {
@@ -11,7 +12,13 @@ namespace Split.Game.Units
         [SerializeField] private float _widthOutlineOnHover = 1;
         [SerializeField] private float _widthOutlineOnSelected = 3;
         private Outline _outline;
+        private SelectedService _selectedService;
 
+        [Inject]
+        public void Construct(SelectedService selectedService)
+        {
+            _selectedService = selectedService;
+        }
         private void OnEnable()
         {
             _outline = GetComponent<Outline>();
@@ -19,7 +26,8 @@ namespace Split.Game.Units
         }
 
         private void Start()
-        { //SelectedService.Instance.AddUnit(gameObject);
+        { 
+            _selectedService.AddUnit(gameObject);
         }
 
         public void OnHoverEnter()
