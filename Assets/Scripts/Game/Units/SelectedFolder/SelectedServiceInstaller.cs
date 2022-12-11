@@ -7,7 +7,7 @@ namespace Split.Game.Units.SelectedFolder
     {
         public override void InstallBindings()
         {
-            Container.Bind<ISelectedService>().To<SelectedService>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<SelectedService>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }

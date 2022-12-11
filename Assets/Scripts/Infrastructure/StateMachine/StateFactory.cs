@@ -75,8 +75,8 @@ namespace Split.Infrastructure.StateMachine
             IGameController gameController = null;
             IUnitRegisterService unitRegisterService = null;
             IGameWinService winService = null;
-            ISelectedService selectedService = null;
-            ICameraRayCaster cameraRayCaster = null;
+            SelectedService selectedService = null;
+            CameraRayCaster cameraRayCaster = null;
             
             return new GameState(stateMachine, npcService,inputService, levelSettingsService, levelCompletionService, persistantService, pauseService,
                 timerService, gameOverService,gameController,unitRegisterService,winService,selectedService,cameraRayCaster) as TState;

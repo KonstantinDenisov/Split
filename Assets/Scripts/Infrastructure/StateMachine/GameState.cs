@@ -27,15 +27,15 @@ namespace Split.Infrastructure
         private readonly IGameController _gameController;
         private readonly IUnitRegisterService _registerService;
         private readonly IGameWinService _gameWinService;
-        private readonly ISelectedService _selectedService;
-        private readonly ICameraRayCaster _cameraRayCaster;
+        private readonly SelectedService _selectedService;
+        private readonly CameraRayCaster _cameraRayCaster;
 
         public GameState(IGameStateMachine gameStateMachine, INpcService npcService, IInputService inputService,
             ILevelSettingsService levelSettingsService,
             ILevelCompletionService levelCompletionService, IPersistantService persistantService,
             IPauseService pauseService, ITimerService timerService, IGameOverService gameOverService,
             IGameController gameController, IUnitRegisterService unitRegisterService, IGameWinService gameWinService,
-            ISelectedService selectedService,ICameraRayCaster cameraRayCaster) : base(gameStateMachine)
+            SelectedService selectedService,CameraRayCaster cameraRayCaster) : base(gameStateMachine)
         {
             _npcService = npcService;
             _inputService = inputService;
