@@ -1,21 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Split.Game.Units.SelectedFolder
 {
-    public class CameraRayCaster : MonoBehaviour,ICameraRayCaster
+    public class CameraRayCaster : MonoBehaviour
     {
         #region Variables
-
-        private ISelectedService _selectedService;
-
-        [Inject]
-        public void Construct(ISelectedService selectedService)
-        {
-            _selectedService = selectedService;
-        }
 
         [SerializeField] private LayerMask _unitLayerMask;
         [SerializeField] private LayerMask _groundLayerMask;
@@ -26,6 +19,18 @@ namespace Split.Game.Units.SelectedFolder
         private Camera _mainCamera;
         private UnitState _lastUnit;
         private NavMeshAgent _navMeshAgent;
+        private SelectedService _selectedService;
+
+        #endregion
+
+
+        #region Constructor
+
+        [Inject]
+        private void Construct(SelectedService selectedService)
+        {
+            _selectedService = selectedService;
+        }
 
         #endregion
 
@@ -88,9 +93,10 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonDown(1))
                     {
-                        if (_selectedService.GetSelectedUnitsQuantity() != 0)
+                        //Debug.Log("клик mouse2 по земле");
+                        if (_selectedService.SelectedUnits != null)
                         {
-                            if (_selectedService.GetSelectedUnitsQuantity() == 1)
+                            if (_selectedService.SelectedUnits.Count == 1)
                             {
                                 ForwardUnit(hit);
                             }
@@ -120,6 +126,7 @@ namespace Split.Game.Units.SelectedFolder
 
         private void SelectThisUnit(RaycastHit hit)
         {
+            Debug.Log("клип попал по юниту");
             _selectedService.DeselectAllUnits();
             _selectedService.SelectUnit(hit.collider.gameObject);
         }
@@ -154,9 +161,11 @@ namespace Split.Game.Units.SelectedFolder
 
                 Rect rect = new Rect(min, size);
 
-                for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
+                //SelectedService.Instance.DeselectAllUnits();
+
+                for (int i = 0; i < _selectedService.AllUnits.Count; i++)
                 {
-                    var unitObject = _selectedService.GetUnitInAllUnits(i);
+                    var unitObject = _selectedService.AllUnits[i];
                     bool isUnitSelected = _selectedService.IsUnitSelected(unitObject);
                     Vector2 screePosition =
                         _mainCamera.WorldToScreenPoint(unitObject.transform.position);
@@ -181,10 +190,8 @@ namespace Split.Game.Units.SelectedFolder
         private void ForwardUnit(RaycastHit hit)
         {
             Debug.Log("один юнит отправляется в точку");
-
-            for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
+            foreach (var unit in _selectedService.SelectedUnits)
             {
-                var unit = _selectedService.GetUnitInAllUnits(i);
                 _navMeshAgent = unit.GetComponent<NavMeshAgent>();
                 _navMeshAgent.SetDestination(hit.point);
             }
@@ -196,19 +203,17 @@ namespace Split.Game.Units.SelectedFolder
             float sumX = 0f;
             float sumY = 0f;
             float sumZ = 0f;
-
-            for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
+            foreach (var unit in _selectedService.SelectedUnits)
             {
-                var unit = _selectedService.GetUnitInAllUnits(i);
                 var position = unit.transform.position;
                 sumX += position.x;
                 sumY += position.y;
                 sumZ += position.z;
             }
 
-            float centrX = sumX / _selectedService.GetSelectedUnitsQuantity();
-            float centrY = sumY / _selectedService.GetSelectedUnitsQuantity();
-            float centrZ = sumZ / _selectedService.GetSelectedUnitsQuantity();
+            float centrX = sumX / _selectedService.SelectedUnits.Count;
+            float centrY = sumY / _selectedService.SelectedUnits.Count;
+            float centrZ = sumZ / _selectedService.SelectedUnits.Count;
 
             Vector3 centralPoint = new Vector3(centrX, centrY, centrZ);
 
@@ -216,10 +221,8 @@ namespace Split.Game.Units.SelectedFolder
 
             float groupRadius = 0;
 
-            for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
+            foreach (var unit in _selectedService.SelectedUnits)
             {
-                var unit = _selectedService.GetUnitInAllUnits(i);
-                
                 if (groupRadius < Vector3.Distance(centralPoint, unit.transform.position))
                 {
                     groupRadius = Vector3.Distance(centralPoint, unit.transform.position);
@@ -232,11 +235,9 @@ namespace Split.Game.Units.SelectedFolder
             if (groupRadius > distanceToTheTarget)
             {
                 Debug.Log("юниты кучкуются");
-
-                for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
+                
+                foreach (var unit in _selectedService.SelectedUnits)
                 {
-                    var unit = _selectedService.GetUnitInAllUnits(i);
-                    
                     Vector3 difference = centralPoint - unit.transform.position;
                     Vector3 currentUnitTargetPoint = hit.point - difference / 2;
 
@@ -247,17 +248,14 @@ namespace Split.Game.Units.SelectedFolder
             else
             {
                 Debug.Log("много юнитов отправляются в точку");
-
-                for (int i = 0; i < _selectedService.GetSelectedUnitsQuantity(); i++)
+                
+                foreach (var unit in _selectedService.SelectedUnits)
                 {
-                    var unit = _selectedService.GetUnitInAllUnits(i);
-                    
                     Vector3 difference = centralPoint - unit.transform.position;
                     Vector3 currentUnitTargetPoint = hit.point - difference;
 
                     _navMeshAgent = unit.GetComponent<NavMeshAgent>();
                     _navMeshAgent.SetDestination(currentUnitTargetPoint);
-                    
                 }
             }
         }

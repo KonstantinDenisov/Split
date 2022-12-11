@@ -6,7 +6,7 @@ namespace Split.Game.Units.SelectedFolder
     {
         public override void InstallBindings()
         {
-            Container.Bind<ICameraRayCaster>().To<CameraRayCaster>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<CameraRayCaster>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }

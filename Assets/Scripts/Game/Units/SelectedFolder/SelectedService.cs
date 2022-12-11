@@ -1,87 +1,76 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Split.Game.Units.SelectedFolder
 {
-    public class SelectedService : MonoBehaviour, ISelectedService
+    public class SelectedService : MonoBehaviour
 
     {
-        #region Variables
-
-        private List<GameObject> _allUnits;
-        private List<GameObject> _selectedUnits;
-
-        #endregion
-
-
-        #region Unity Lifecycle
+        public static SelectedService Instance { get; private set; }
+        
+        public List<GameObject> AllUnits;
+        public List<GameObject> SelectedUnits;
 
         private void Awake()
         {
-            _allUnits = new List<GameObject>();
-            _selectedUnits = new List<GameObject>();
+            AllUnits = new List<GameObject>();
+            SelectedUnits = new List<GameObject>();
+            
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = GetComponent<SelectedService>();
+            DontDestroyOnLoad(gameObject);
         }
-
-        #endregion
-
-
-        #region Public Methods
 
         public void AddUnit(GameObject unit)
         {
-            _allUnits.Add(unit);
+            AllUnits.Add(unit);
         }
 
         public void RemoveUnit(GameObject unit)
         {
-            _allUnits.Remove(unit);
+            AllUnits.Remove(unit);
         }
 
         public void SelectUnit(GameObject unit)
         {
-            _selectedUnits.Add(unit);
+            SelectedUnits.Add(unit);
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelected();
+            //Debug.Log("unit selected");
         }
 
         public bool IsUnitSelected(GameObject unit)
         {
-            return _selectedUnits.Contains(unit);
+            return SelectedUnits.Contains(unit);
         }
 
         public void DeselectUnit(GameObject unit)
         {
-            bool isRemoved = _selectedUnits.Remove(unit);
+            bool isRemoved = SelectedUnits.Remove(unit);
             if (!isRemoved)
                 return;
             
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelectedExit();
+           // Debug.Log("unit deselected");
         }
 
         public void DeselectAllUnits()
         {
-            foreach (var unit in _selectedUnits)
+            foreach (var unit in SelectedUnits)
             {
                 UnitState unitState = unit.transform.GetComponent<UnitState>();
                 unitState.OnSelectedExit();
             }
             
-            _selectedUnits.Clear();
-        }
-        
-        public int GetSelectedUnitsQuantity()
-        {
-            int selectedUnitsQuantity = _selectedUnits.Count;
-            return selectedUnitsQuantity;
+            SelectedUnits.Clear();
         }
 
-        public GameObject GetUnitInAllUnits(int i)
-        {
-            GameObject unit = _allUnits[i];
-            return unit;
-        }
-
-        #endregion
     }
 }
