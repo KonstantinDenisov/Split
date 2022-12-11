@@ -11,7 +11,8 @@ namespace Split.Game.EnemySettings
         [SerializeField] private NavMeshAgent _agent;
 
         private INpcService _npcService;
-
+        private EnemyDeath _enemyDeath;
+        
         [Inject]
         public void Construct(INpcService npcService)
         {
@@ -20,12 +21,20 @@ namespace Split.Game.EnemySettings
 
         private void Start()
         {
+            _enemyDeath = GetComponent<EnemyDeath>();
+            _enemyDeath.OnDead += Die;
+        }
+
+        private void OnEnable()
+        {
             _npcService.RegisterMovingObject(this);
         }
 
-        private void OnDestroy()
+        private void Die()
         {
             _npcService.UnregisterObject(this);
+            _enemyDeath.OnDead -= Die;
+            
         }
 
         public void StartMove()
@@ -36,7 +45,7 @@ namespace Split.Game.EnemySettings
         public void ChooseTarget()
         {
             float closestTargetDistance = float.MaxValue;
-            NavMeshPath Path = null;
+            NavMeshPath Path;
             NavMeshPath ShortestPath = null;
 
             for (int i = 0; i < _targets.Length; i++)

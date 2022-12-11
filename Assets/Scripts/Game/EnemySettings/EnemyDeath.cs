@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Split.Game.EnemySettings
@@ -8,18 +9,12 @@ namespace Split.Game.EnemySettings
         [SerializeField] private EnemyHp _enemyHp;
         [SerializeField] private Collider _collider;
         [SerializeField] private GameObject _gameObject;
-        [SerializeField] private float _delay = 3f;
-        // public event Action OnDead;
-        // public event Action<EnemyDeath> OnHappened;
+        [SerializeField] private float _delay = 2000;
+        public event Action OnDead;
 
         private void OnEnable()
         {
             _enemyHp.OnHpChanged += CheckDeath;
-        }
-
-        private void OnDisable()
-        {
-            _enemyHp.OnHpChanged -= CheckDeath;
         }
 
         private void CheckDeath(int hp)
@@ -28,21 +23,16 @@ namespace Split.Game.EnemySettings
                 return;
 
             _enemyHp.OnHpChanged -= CheckDeath;
-            StartCoroutine(WaitCoroutine(_delay));
-
-
-            // OnDead?.Invoke();
-
-
-            //_enemyAnimation.PlayDeath();
             _collider.enabled = false;
-            //enemyDirectMovement.enabled = false;
+
+            StartCoroutine(WaitCoroutine(_delay));
         }
 
         private IEnumerator WaitCoroutine(float time)
         {
             yield return new WaitForSeconds(time);
             Destroy(_gameObject);
+            OnDead?.Invoke();
         }
     }
 }

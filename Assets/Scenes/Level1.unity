@@ -957,6 +957,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7469445040564990293, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+      propertyPath: _originalHp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469445040564990294, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+      propertyPath: _delay
+      value: 235.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990315, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -965,6 +973,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+      propertyPath: _enemyDeath
+      value: 
+      objectReference: {fileID: 792106822}
     - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: _targets.Array.size
       value: 5
@@ -1011,6 +1023,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+--- !u!114 &792106822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7469445040564990294, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+  m_PrefabInstance: {fileID: 792106821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dda6c2caec04797ad31658c4f0fc474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &860775410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2131,8 +2154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc2d938b9b4fe34e884a01871cbb104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllUnits: []
-  SelectedUnits: []
 --- !u!4 &1968356162
 Transform:
   m_ObjectHideFlags: 0
