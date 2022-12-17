@@ -24,6 +24,9 @@ namespace Split.Game.Units
 
             IsDead = true;
             Destroy(_unit);
+            
+            
+            
         }
     }
 }
