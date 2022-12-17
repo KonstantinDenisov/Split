@@ -21,5 +21,6 @@ namespace Split.Infrastructure.Installers
             LoadingScreenServiceInstaller.Install(Container);
             StartLevelServiceInstaller.Install(Container);
         }
+        
     }
 }
