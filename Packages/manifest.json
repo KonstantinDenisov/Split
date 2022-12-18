@@ -3,6 +3,7 @@
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.miskonm.spl": "https://github.com/miskonm/SceneProjectLauncher.git?path=/Assets/Plugins/SPL",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.animation.rigging": "1.1.1",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.2",
     "com.unity.feature.development": "1.0.1",
