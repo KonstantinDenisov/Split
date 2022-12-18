@@ -142,7 +142,8 @@ MonoBehaviour:
   _enemyHp: {fileID: 7469445040564990293}
   _collider: {fileID: 7469445040564990317}
   _gameObject: {fileID: 7469445040564990315}
-  _delay: 1
+  _model: {fileID: 137659670492254896}
+  _delay: 8
 --- !u!135 &7469445040564990317
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -238,7 +239,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.39
+  m_Radius: 1
   m_Center: {x: 0, y: 0.23, z: 0}
 --- !u!114 &7469445040570199142
 MonoBehaviour:
@@ -331,5 +332,10 @@ PrefabInstance:
 --- !u!4 &136163777645346632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431084402279646, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
+  m_PrefabInstance: {fileID: 138624466553404310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &137659670492254896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1528915638184230, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
   m_PrefabInstance: {fileID: 138624466553404310}
   m_PrefabAsset: {fileID: 0}

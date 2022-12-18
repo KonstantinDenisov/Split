@@ -353,12 +353,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990294, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: _delay
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7469445040564990294, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+      propertyPath: _model
+      value: 
+      objectReference: {fileID: 311947021}
     - target: {fileID: 7469445040564990294, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: _particle
       value: 
-      objectReference: {fileID: 8714244275622671896, guid: abf8d5b763621654486813c5c8af8234, type: 3}
+      objectReference: {fileID: 6357574571977031891, guid: 059f30d526f3f18429b13bdb72952d64, type: 3}
     - target: {fileID: 7469445040564990315, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -385,6 +389,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+--- !u!1 &311947021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 137659670492254896, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
+  m_PrefabInstance: {fileID: 311947020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &343580662
 PrefabInstance:
   m_ObjectHideFlags: 0
