@@ -7,7 +7,7 @@ namespace Split.Game.EnemySettings
     public class EnemyDeath : MonoBehaviour
     {
         [Header("Particle")]
-        [SerializeField] private GameObject _particle;
+      //  [SerializeField] private GameObject _particle;
         
         [SerializeField] private EnemyHp _enemyHp;
         [SerializeField] private Collider _collider;
@@ -28,6 +28,8 @@ namespace Split.Game.EnemySettings
             _enemyHp.OnHpChanged -= CheckDeath;
             _collider.enabled = false;
             // SpawnVfx();
+            if (_gameObject == null)
+                return;
             StartCoroutine(WaitCoroutine(_delay));
         }
 
