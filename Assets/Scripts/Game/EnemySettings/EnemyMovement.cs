@@ -10,13 +10,15 @@ namespace Split.Game.EnemySettings
     {
         [SerializeField] private Transform[] _targets;
         [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private EnemyAnimation _animation;
 
         private INpcService _npcService;
         private EnemyDeath _enemyDeath;
         private IGameOverService _gameOverService;
-        
+        // public float AgentSpeed => _agent.speed;
+
         [Inject]
-        public void Construct(INpcService npcService,IGameOverService gameOverService)
+        public void Construct(INpcService npcService, IGameOverService gameOverService)
         {
             _npcService = npcService;
             _gameOverService = gameOverService;
@@ -38,14 +40,14 @@ namespace Split.Game.EnemySettings
             _npcService.UnregisterObject(this);
             _gameOverService.IsGameOver = true;
             _enemyDeath.OnDead -= Die;
-            
         }
 
         public void StartMove()
         {
-            if (_gameOverService.IsGameOver )
+            if (_gameOverService.IsGameOver)
                 return;
             ChooseTarget();
+            _animation.SetSpeedHorizontal(_agent.speed);
         }
 
         public void ChooseTarget()

@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 7469445040564990289}
   - component: {fileID: 7469445040564990319}
   - component: {fileID: 7469445040564990293}
+  - component: {fileID: 5345714193617897105}
   - component: {fileID: 7469445040564990294}
   - component: {fileID: 7469445040564990317}
   - component: {fileID: 7469445040564990290}
@@ -112,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targets: []
   _agent: {fileID: 1724219040158992472}
+  _animation: {fileID: 5345714193617897105}
 --- !u!114 &7469445040564990293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +128,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _originalHp: 1
   _maxHp: 1
+--- !u!114 &5345714193617897105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7469445040564990315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff08b1896124e62a047dba0908425be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: {fileID: 53721466829809154}
+  _enemyMovement: {fileID: 7469445040564990319}
 --- !u!114 &7469445040564990294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,8 +343,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95320324289322388, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a0bf24b812c2bdd43967fa935f3d1fc9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
+--- !u!95 &53721466829809154 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95320324289322388, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
+  m_PrefabInstance: {fileID: 138624466553404310}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &136163777645346632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431084402279646, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
