@@ -7,8 +7,6 @@ namespace Split.Game.Units.SelectedFolder
     public class SelectedService : MonoBehaviour
 
     {
-        public static SelectedService Instance { get; private set; }
-        
         public List<GameObject> AllUnits;
         public List<GameObject> SelectedUnits;
 
@@ -16,15 +14,6 @@ namespace Split.Game.Units.SelectedFolder
         {
             AllUnits = new List<GameObject>();
             SelectedUnits = new List<GameObject>();
-            
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = GetComponent<SelectedService>();
-            DontDestroyOnLoad(gameObject);
         }
 
         public void AddUnit(GameObject unit)

@@ -9,9 +9,7 @@ namespace Split.Game.Units.SelectedFolder
     public class CameraRayCaster : MonoBehaviour
     {
         #region Variables
-
-        [SerializeField] private LayerMask _unitLayerMask;
-        [SerializeField] private LayerMask _groundLayerMask;
+        
         [SerializeField] private LayerMask _interactiveObjects;
         [SerializeField] private Image _frameImage;
         private Vector2 _frameStartPosition;
