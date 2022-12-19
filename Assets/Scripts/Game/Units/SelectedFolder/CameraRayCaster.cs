@@ -9,9 +9,9 @@ namespace Split.Game.Units.SelectedFolder
     public class CameraRayCaster : MonoBehaviour
     {
         #region Variables
+
+        [SerializeField] private CameraRayCasterParams _cameraRayCasterParams;
         
-        [SerializeField] private LayerMask _interactiveObjects;
-        [SerializeField] private Image _frameImage;
         private Vector2 _frameStartPosition;
         private Vector2 _frameFinishPosition;
         private Camera _mainCamera;
@@ -45,7 +45,7 @@ namespace Split.Game.Units.SelectedFolder
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100, _interactiveObjects))
+            if (Physics.Raycast(ray, out hit, 100, _cameraRayCasterParams.InteractiveObjects))
             {
                 InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
 
@@ -86,7 +86,7 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonUp(0))
                     {
-                        _frameImage.enabled = false;
+                        _cameraRayCasterParams.FrameImage.enabled = false;
                     }
 
                     if (Input.GetMouseButtonDown(1))
@@ -153,9 +153,9 @@ namespace Split.Game.Units.SelectedFolder
             Vector2 size = max - min;
             if (size.magnitude > 10)
             {
-                _frameImage.enabled = true;
-                _frameImage.rectTransform.anchoredPosition = min;
-                _frameImage.rectTransform.sizeDelta = size;
+                _cameraRayCasterParams.FrameImage.enabled = true;
+                _cameraRayCasterParams.FrameImage.rectTransform.anchoredPosition = min;
+                _cameraRayCasterParams.FrameImage.rectTransform.sizeDelta = size;
 
                 Rect rect = new Rect(min, size);
 
