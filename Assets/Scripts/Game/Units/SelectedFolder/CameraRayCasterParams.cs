@@ -1,12 +1,13 @@
-﻿using UnityEngine.UI;
+﻿using System;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace Split.Game.Units.SelectedFolder
 {
-    public class CameraRayCasterParams : MonoBehaviour
-
+    [Serializable] public class CameraRayCasterParams
+    
     {
-        public LayerMask InteractiveObjects;
-        public Image FrameImage;
+        [SerializeField] public LayerMask InteractiveObjects;
+        [SerializeField] public Image FrameImage;
     }
 }
