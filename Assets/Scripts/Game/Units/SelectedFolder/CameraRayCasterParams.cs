@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Split.Game.Units.SelectedFolder
 {
-    [Serializable] public class CameraRayCasterParams
-    
+    [Serializable] 
+    public class CameraRayCasterParams
     {
-        [SerializeField] public LayerMask InteractiveObjects;
-        [SerializeField] public Image FrameImage;
+        public LayerMask InteractiveObjects; 
+        public Image FrameImage;
     }
 }

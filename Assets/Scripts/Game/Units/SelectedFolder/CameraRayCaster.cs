@@ -1,7 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Split.Game.Units.SelectedFolder
@@ -9,8 +7,6 @@ namespace Split.Game.Units.SelectedFolder
     public class CameraRayCaster : MonoBehaviour
     {
         #region Variables
-
-        [SerializeField] private CameraRayCasterParams _cameraRayCasterParams;
         
         private Vector2 _frameStartPosition;
         private Vector2 _frameFinishPosition;
@@ -18,6 +14,7 @@ namespace Split.Game.Units.SelectedFolder
         private UnitState _lastUnit;
         private NavMeshAgent _navMeshAgent;
         private SelectedService _selectedService;
+        private CameraRayCasterParams _cameraRayCasterParams;
 
         #endregion
 
@@ -25,9 +22,10 @@ namespace Split.Game.Units.SelectedFolder
         #region Constructor
 
         [Inject]
-        private void Construct(SelectedService selectedService)
+        private void Construct(SelectedService selectedService,CameraRayCasterParams cameraRayCasterParams)
         {
             _selectedService = selectedService;
+            _cameraRayCasterParams = cameraRayCasterParams;
         }
 
         #endregion
