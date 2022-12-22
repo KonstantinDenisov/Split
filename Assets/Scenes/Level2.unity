@@ -1498,7 +1498,7 @@ MonoBehaviour:
   _cameraRayCasterParams:
     InteractiveObjects:
       serializedVersion: 2
-      m_Bits: 2176
+      m_Bits: 192
     FrameImage: {fileID: 1445093138}
 --- !u!1 &1826273223
 GameObject:
