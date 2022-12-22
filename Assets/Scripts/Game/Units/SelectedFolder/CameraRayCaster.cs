@@ -136,7 +136,6 @@ namespace Split.Game.Units.SelectedFolder
 
         private void DeselectAllUnits()
         {
-            Debug.Log("клип mouse1 по земле отменяет выделение юнитам");
             _selectedService.DeselectAllUnits();
 
             _frameStartPosition = Input.mousePosition;
@@ -185,7 +184,6 @@ namespace Split.Game.Units.SelectedFolder
 
         private void ForwardUnit(RaycastHit hit)
         {
-            Debug.Log("один юнит отправляется в точку");
             foreach (var unit in _selectedService.SelectedUnits)
             {
                 _navMeshAgent = unit.GetComponent<NavMeshAgent>();
