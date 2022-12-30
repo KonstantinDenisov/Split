@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Split.Game.Units
 {
-    public class UnitDeath:MonoBehaviour
+    public class UnitDeath : MonoBehaviour
     {
         [SerializeField] private UnitHp _unitHp;
         [SerializeField] private GameObject _unit;
-        
+
         private GameState _gameState;
 
         public bool IsDead { get; private set; }
@@ -16,7 +16,6 @@ namespace Split.Game.Units
         private void Start() =>
             _unitHp.OnChanged += OnHpChanged;
 
-        
         private void OnHpChanged(int hp)
         {
             if (IsDead || hp > 0)
@@ -24,12 +23,6 @@ namespace Split.Game.Units
 
             IsDead = true;
             Destroy(_unit);
-            
-            
-            
-            
-            
-            
         }
     }
 }

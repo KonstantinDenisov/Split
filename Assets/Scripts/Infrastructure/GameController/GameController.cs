@@ -7,6 +7,7 @@ namespace Split.Infrastructure.GameController
     {
         private INpcService _npcService;
         private ITimerService _timerService;
+        public bool IsGameInit { get; set; }
 
         public GameController(INpcService npcService, ITimerService timerService)
         {
@@ -18,7 +19,9 @@ namespace Split.Infrastructure.GameController
         {
             await _timerService.Timer();
             _npcService.BeginMove();
+            IsGameInit = true;
         }
+        
         
         public void Dispose()
         {

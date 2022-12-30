@@ -18,7 +18,6 @@ namespace Split.Game.EnemySettings
             if (col.gameObject.CompareTag(Tags.Unit) && !_isExplode)
             {
                 ExplosionDamage();
-                //PlayAnimation();
             }
         }
 

@@ -4,14 +4,14 @@ using Zenject;
 
 namespace Split.Game.Units
 {
-    public class RegisterUnits: MonoBehaviour
+    public class RegisterUnits : MonoBehaviour
     {
         private IUnitRegisterService _unitRegisterService;
 
         [Inject]
         public void Construct(IUnitRegisterService unitRegisterService)
         {
-            _unitRegisterService =  unitRegisterService;
+            _unitRegisterService = unitRegisterService;
         }
 
         private void Start()
@@ -23,6 +23,5 @@ namespace Split.Game.Units
         {
             _unitRegisterService.Unregister(this);
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.GameOver;
+﻿using Split.Infrastructure.GameController;
+using Split.Infrastructure.GameOver;
 using Split.Infrastructure.ServicesFolder.Npc;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,19 +16,26 @@ namespace Split.Game.EnemySettings
         private INpcService _npcService;
         private EnemyDeath _enemyDeath;
         private IGameOverService _gameOverService;
-        // public float AgentSpeed => _agent.speed;
+        private IGameController _gameController;
 
         [Inject]
-        public void Construct(INpcService npcService, IGameOverService gameOverService)
+        public void Construct(INpcService npcService, IGameOverService gameOverService,IGameController gameController)
         {
             _npcService = npcService;
             _gameOverService = gameOverService;
+            _gameController = gameController;
         }
 
         private void Start()
         {
             _enemyDeath = GetComponent<EnemyDeath>();
             _enemyDeath.OnDead += Die;
+        }
+
+        private void Update()
+        {
+            if (_gameController.IsGameInit)
+                Move();
         }
 
         private void OnEnable()
@@ -42,14 +50,23 @@ namespace Split.Game.EnemySettings
             _enemyDeath.OnDead -= Die;
         }
 
-        public void StartMove()
+        public void InitMove()
+        {
+            Move();
+            StartMovementAnimation();
+        }
+
+        public void Move()
         {
             if (_gameOverService.IsGameOver)
                 return;
             ChooseTarget();
-            _animation.SetSpeedHorizontal(_agent.speed);
         }
 
+        public void StartMovementAnimation()
+        {
+            _animation.SetSpeedHorizontal(_agent.speed);
+        }
         public void ChooseTarget()
         {
             float closestTargetDistance = float.MaxValue;
