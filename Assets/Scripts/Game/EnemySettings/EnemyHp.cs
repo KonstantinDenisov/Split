@@ -20,6 +20,12 @@ namespace Split.Game.EnemySettings
             OnHpChanged?.Invoke(CurrentHp);
         }
 
+        private void Update()
+        {
+          Debug.Log($"{CurrentHp}");
+        }
+        
+
         public void AddHp(int hp)
         {
             CurrentHp = Mathf.Min(MaxHp, CurrentHp + hp);
@@ -30,6 +36,7 @@ namespace Split.Game.EnemySettings
         {
             CurrentHp = Mathf.Max(0, CurrentHp - hp);
             OnHpChanged?.Invoke(CurrentHp);
+            Debug.Log($"{CurrentHp}");
         }
     }
 }

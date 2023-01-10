@@ -10,6 +10,7 @@ TagManager:
   - EnemyThreat
   - Enemy
   - EnemyAttack
+  - UnitAttack
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Enemy
   - EnemyAttack
   - Terrain
-  - 
+  - UnitAttack
   - 
   - 
   - 

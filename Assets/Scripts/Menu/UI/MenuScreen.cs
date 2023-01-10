@@ -1,4 +1,3 @@
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
 using Split.Infrastructure.ServicesFolder.StartLevel;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,12 +22,7 @@ namespace Split.Menu.UI
         {
             _playButton.onClick.AddListener(OnPlayButtonClicked);
         }
-
-        private void Start()
-        {
-           // _startLevelService = Services.Container.Get<IStartLevelService>();
-        }
-
+        
         private void OnPlayButtonClicked()
         {
             _startLevelService.StartGame();

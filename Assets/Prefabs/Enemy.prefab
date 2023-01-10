@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc1a68ec6604d75b819edc83f5d007b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _originalHp: 1
+  _originalHp: 5
   _maxHp: 1
 --- !u!114 &5345714193617897105
 MonoBehaviour:
@@ -156,10 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particle: {fileID: 6357574571977031891, guid: 059f30d526f3f18429b13bdb72952d64, type: 3}
   _enemyHp: {fileID: 7469445040564990293}
-  _collider: {fileID: 7469445040564990317}
   _gameObject: {fileID: 7469445040564990315}
-  _model: {fileID: 137659670492254896}
-  _delay: 8
 --- !u!135 &7469445040564990317
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -357,10 +354,5 @@ Animator:
 --- !u!4 &136163777645346632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431084402279646, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
-  m_PrefabInstance: {fileID: 138624466553404310}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &137659670492254896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1528915638184230, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}
   m_PrefabInstance: {fileID: 138624466553404310}
   m_PrefabAsset: {fileID: 0}

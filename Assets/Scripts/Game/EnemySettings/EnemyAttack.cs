@@ -34,7 +34,7 @@ namespace Split.Game.EnemySettings
             }
 
             _isExplode = true;
-            _enemyHp.RemoveHp(_enemyDamage);
+            _enemyHp.RemoveHp(_enemyHp.CurrentHp);
         }
     }
 }

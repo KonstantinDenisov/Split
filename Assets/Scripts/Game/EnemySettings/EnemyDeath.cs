@@ -9,10 +9,7 @@ namespace Split.Game.EnemySettings
         [Header("Particle")]
         [SerializeField] private GameObject _particle;
         [SerializeField] private EnemyHp _enemyHp;
-        [SerializeField] private Collider _collider;
         [SerializeField] private GameObject _gameObject;
-        [SerializeField] private GameObject _model;
-        [SerializeField] private float _delay = 2000;
         public event Action OnDead;
 
         private void OnEnable()
@@ -26,7 +23,6 @@ namespace Split.Game.EnemySettings
                 return;
 
             _enemyHp.OnHpChanged -= CheckDeath;
-            //_collider.enabled = false;
 
             SpawnVfx();
 
@@ -35,13 +31,6 @@ namespace Split.Game.EnemySettings
             Destroy(_gameObject);
             OnDead?.Invoke();
         }
-
-        // private IEnumerator WaitCoroutine(float time)
-        // {
-        //     yield return new WaitForSeconds(time);
-        //     Destroy(_gameObject);
-        //     OnDead?.Invoke();
-        // }
 
         private void SpawnVfx()
         {

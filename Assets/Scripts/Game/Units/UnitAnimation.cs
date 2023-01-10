@@ -2,7 +2,8 @@
 
 namespace Split.Game.Units
 {
-    public class UnitAttack : MonoBehaviour
+    public class UnitAnimation:MonoBehaviour
     {
+        
     }
 }
