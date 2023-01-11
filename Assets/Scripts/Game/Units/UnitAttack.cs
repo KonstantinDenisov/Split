@@ -7,14 +7,19 @@ namespace Split.Game.Units
     {
         [SerializeField] private int _damageEnemy = 1;
         [SerializeField] private float _fireDelay = 0.5f;
+        [SerializeField] private float _turnSpeed = 1f;
+        [SerializeField] private Transform _unitTransform;
+        [SerializeField] private Transform _transform;
 
         private bool _isAttackActivate;
         private Transform _cachedTransform;
+        private Quaternion _rotGoal;
 
         private float _currentPlayerPosition;
         private EnemyHp _enemyHp;
 
         private float _timer;
+        
 
         private bool _isEmptyNear;
 
@@ -32,6 +37,7 @@ namespace Split.Game.Units
         private void Update()
         {
             TickTimer();
+            Rotate();
 
             if (CanAttack())
             {
@@ -52,11 +58,10 @@ namespace Split.Game.Units
 
         private void Rotate()
         {
-            Vector3 unitPosition = UnitAttack.transform.position;
-            playerPosition.z = 0f;
-        
-            Vector3 direction = playerPosition - _cachedTransform.position;
-            _cachedTransform.up = direction;
+            //Vector3 difference = (_enemyHp.transform.position - _cachedTransform.position).normalized;
+            Vector3 difference = (_transform.position- _unitTransform.position).normalized;
+            _rotGoal = Quaternion.LookRotation(difference);
+            _unitTransform.rotation = Quaternion.Slerp(_unitTransform.rotation, _rotGoal, _turnSpeed);
         }
 
         private void OnTriggerExit(Collider col)
