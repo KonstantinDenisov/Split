@@ -58,10 +58,15 @@ namespace Split.Game.Units
 
         private void Rotate()
         {
-            //Vector3 difference = (_enemyHp.transform.position - _cachedTransform.position).normalized;
-            Vector3 difference = (_transform.position- _unitTransform.position).normalized;
-            _rotGoal = Quaternion.LookRotation(difference);
-            _unitTransform.rotation = Quaternion.Slerp(_unitTransform.rotation, _rotGoal, _turnSpeed);
+            if (_enemyHp != null)
+            {
+                Vector3 difference = (_enemyHp.transform.position - _cachedTransform.position).normalized; 
+                _rotGoal = Quaternion.LookRotation(difference);
+                _unitTransform.rotation = Quaternion.Slerp(_unitTransform.rotation, _rotGoal, _turnSpeed);
+            }
+            
+            //Vector3 difference = (_transform.position- _unitTransform.position).normalized;
+            
         }
 
         private void OnTriggerExit(Collider col)
