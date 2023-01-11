@@ -27,38 +27,37 @@ namespace Split.Game.Units
                 return;
             _isEmptyNear = true;
             _enemyHp = col.gameObject.GetComponent<EnemyHp>();
-            Attack();
         }
 
         private void Update()
         {
-            if (!CanAttack())
-                return;
-            Attack();
             TickTimer();
+
+            if (CanAttack())
+            {
+                Attack();
+            }
         }
 
         private void Attack()
         {
-            if (!_isEmptyNear)
+            if (!_isEmptyNear || _enemyHp == null)
                 return;
             _enemyHp.RemoveHp(_damageEnemy);
             _timer = _fireDelay;
-            Debug.Log("Attack");
-            
         }
 
         private bool CanAttack() =>
-            _timer <= 0 && !_isEmptyNear;
+            _timer <= 0;
 
-        // private void Rotate()
-        // {
-        //     Vector3 unitPosition = UnitAttack.transform.position;
-        //     playerPosition.z = 0f;
-        //
-        //     Vector3 direction = playerPosition - _cachedTransform.position;
-        //     _cachedTransform.up = direction;
-        // }
+        private void Rotate()
+        {
+            Vector3 unitPosition = UnitAttack.transform.position;
+            playerPosition.z = 0f;
+        
+            Vector3 direction = playerPosition - _cachedTransform.position;
+            _cachedTransform.up = direction;
+        }
 
         private void OnTriggerExit(Collider col)
         {
@@ -69,6 +68,5 @@ namespace Split.Game.Units
         {
             _timer -= Time.deltaTime;
         }
-            
     }
 }
