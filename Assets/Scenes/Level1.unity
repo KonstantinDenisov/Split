@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44243902, g: 0.49150455, b: 0.57135993, a: 1}
+  m_IndirectSpecularColor: {r: 0.4424387, g: 0.491504, b: 0.5713591, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -718,6 +718,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014024180598308152, guid: 3fdd0122fb264cc4ab2c227c3e847556, type: 3}
+      propertyPath: _particle
+      value: 
+      objectReference: {fileID: 6357574571977031891, guid: 58181f569210d2145bb08cc9f0924abb, type: 3}
     - target: {fileID: 2251832409517707792, guid: 3fdd0122fb264cc4ab2c227c3e847556, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1102,7 +1106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: _targets.Array.size
@@ -1136,7 +1140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1012676631}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f4f01c51e3a4101aee2eccd425f4c2e, type: 3}
   m_Name: 
