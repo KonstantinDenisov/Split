@@ -30,6 +30,7 @@ namespace Split.Game.EnemySettings
                 if (hitCollider.gameObject.TryGetComponent(out UnitHp unit))
                 {
                     unit.ApplyDamage(_unitDamage);
+                    Debug.Log("AttackEnemy");
                 }
             }
 

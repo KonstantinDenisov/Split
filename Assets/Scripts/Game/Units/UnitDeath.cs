@@ -1,5 +1,5 @@
-﻿using Split.Infrastructure;
-using Split.Infrastructure.StateMachine;
+﻿using System.Collections;
+using Split.Infrastructure;
 using UnityEngine;
 
 namespace Split.Game.Units
@@ -8,6 +8,8 @@ namespace Split.Game.Units
     {
         [SerializeField] private UnitHp _unitHp;
         [SerializeField] private GameObject _unit;
+        [SerializeField] private UnitAnimation _unitAnimation;
+        [SerializeField] private float _lifeTime = 3f;
 
         private GameState _gameState;
 
@@ -20,6 +22,15 @@ namespace Split.Game.Units
         {
             if (IsDead || hp > 0)
                 return;
+
+            _unitAnimation.SetIsDead();
+
+            StartCoroutine(DelayDeathTime());
+        }
+
+        private IEnumerator DelayDeathTime()
+        {
+            yield return new WaitForSeconds(_lifeTime);
 
             IsDead = true;
             Destroy(_unit);

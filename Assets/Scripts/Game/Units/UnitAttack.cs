@@ -9,7 +9,7 @@ namespace Split.Game.Units
         [SerializeField] private float _fireDelay = 0.5f;
         [SerializeField] private float _turnSpeed = 1f;
         [SerializeField] private Transform _unitTransform;
-        [SerializeField] private Transform _transform;
+        [SerializeField] private UnitAnimation _unitAnimation;
 
         private bool _isAttackActivate;
         private Transform _cachedTransform;
@@ -51,6 +51,7 @@ namespace Split.Game.Units
                 return;
             _enemyHp.RemoveHp(_damageEnemy);
             _timer = _fireDelay;
+            _unitAnimation.SetIsAttack(true);
         }
 
         private bool CanAttack() =>
@@ -64,14 +65,12 @@ namespace Split.Game.Units
                 _rotGoal = Quaternion.LookRotation(difference);
                 _unitTransform.rotation = Quaternion.Slerp(_unitTransform.rotation, _rotGoal, _turnSpeed);
             }
-            
-            //Vector3 difference = (_transform.position- _unitTransform.position).normalized;
-            
         }
 
         private void OnTriggerExit(Collider col)
         {
             _enemyHp = null;
+            _unitAnimation.SetIsAttack(false);
         }
 
         private void TickTimer()

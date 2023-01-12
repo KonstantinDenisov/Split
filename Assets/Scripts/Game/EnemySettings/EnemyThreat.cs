@@ -7,11 +7,14 @@ namespace Split.Game.EnemySettings
     {
         private void OnTriggerEnter(Collider col)
         {
+            Debug.Log("EnemyThreat");
             if (col.gameObject.CompareTag(Tags.Unit))
             {
                 UnitUiActivate unitHp = col.gameObject.GetComponent<UnitUiActivate>();
                 unitHp.Activate();
+                Debug.Log("IF EnemyThreat");
             }
+            
         }
 
         private void OnTriggerExit(Collider col)
