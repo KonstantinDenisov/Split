@@ -31,16 +31,18 @@ namespace Split.Infrastructure.ServicesFolder.LevelCompletion
 
         public void MissionCompleted()
         {
+            if (_gameOverService.IsGameStop)
+                return;
+            
             LevelSettings currentLevelSetting = _levelSettingsService.GetCurrentLevelSetting();
-
+            
             if (currentLevelSetting.NextLevel == null)
             {
                 _gameWinService.ActivateGameWin(true);
                 return;
             }
 
-            if (_gameOverService.IsGameOver)
-                return;
+
             _stateMachine.Enter<LoadState, string>(currentLevelSetting.NextLevel.SceneName);
         }
 

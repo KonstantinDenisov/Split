@@ -61,8 +61,8 @@ namespace Split.Infrastructure.StateMachine
         private static TState CreateGameState<TState>() where TState : class, IExitableState
         {
             IGameStateMachine stateMachine = Services.Container.Get<IGameStateMachine>();
-            ISceneLoadService sceneLoadService = null;
-            ILoadingScreenService loadingScreenService = null;
+            //ISceneLoadService sceneLoadService = null;
+            //ILoadingScreenService loadingScreenService = null;
             INpcService npcService = null;
             IInputService inputService = null;
             //IMissionService missionService = null;

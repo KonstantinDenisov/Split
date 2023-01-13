@@ -15,6 +15,7 @@ namespace Split.Infrastructure.GameOver
         private IPauseService _pauseService;
 
         public bool IsGameOver { get; set; }
+        public bool IsGameStop { get; set; }
 
         [Inject]
         public void Construct(IStartLevelService startLevelService, IPauseService pauseService)
@@ -54,7 +55,7 @@ namespace Split.Infrastructure.GameOver
 
         private void RestartGame()
         {
-            IsGameOver = false;
+            IsGameStop = false;
             _startLevelService.RestartGame();
         }
 
@@ -62,7 +63,7 @@ namespace Split.Infrastructure.GameOver
         {
             if (_gameOverScreen == null)
                 return;
-            IsGameOver = true;
+            IsGameStop = true;
             _gameOverScreen.gameObject.SetActive(isActive);
             _pauseService.Deactivate(false);
         }
