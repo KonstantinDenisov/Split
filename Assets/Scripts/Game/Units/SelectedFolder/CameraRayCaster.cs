@@ -7,7 +7,7 @@ namespace Split.Game.Units.SelectedFolder
     public class CameraRayCaster : MonoBehaviour
     {
         #region Variables
-        
+
         private Vector2 _frameStartPosition;
         private Vector2 _frameFinishPosition;
         private Camera _mainCamera;
@@ -22,13 +22,14 @@ namespace Split.Game.Units.SelectedFolder
         #region Constructor
 
         [Inject]
-        private void Construct(SelectedService selectedService,CameraRayCasterParams cameraRayCasterParams)
+        private void Construct(SelectedService selectedService, CameraRayCasterParams cameraRayCasterParams)
         {
             _selectedService = selectedService;
             _cameraRayCasterParams = cameraRayCasterParams;
         }
 
         #endregion
+
 
         #region Unity Lifecycle
 
@@ -114,7 +115,6 @@ namespace Split.Game.Units.SelectedFolder
 
         private void IlluminationUnitTurnOn(RaycastHit hit)
         {
-            Debug.Log("курсор попал по юниту");
             var unit = hit.collider.GetComponent<UnitState>();
             unit.OnHoverEnter();
             _lastUnit = unit;
@@ -122,14 +122,12 @@ namespace Split.Game.Units.SelectedFolder
 
         private void SelectThisUnit(RaycastHit hit)
         {
-            Debug.Log("клип попал по юниту");
             _selectedService.DeselectAllUnits();
             _selectedService.SelectUnit(hit.collider.gameObject);
         }
 
         private void IlluminationUnitTurnOff()
         {
-            Debug.Log("юнит вышел из под луча");
             _lastUnit.OnHoverExit();
             _lastUnit = null;
         }
@@ -155,8 +153,6 @@ namespace Split.Game.Units.SelectedFolder
                 _cameraRayCasterParams.FrameImage.rectTransform.sizeDelta = size;
 
                 Rect rect = new Rect(min, size);
-
-                //SelectedService.Instance.DeselectAllUnits();
 
                 for (int i = 0; i < _selectedService.AllUnits.Count; i++)
                 {
@@ -193,7 +189,6 @@ namespace Split.Game.Units.SelectedFolder
 
         private void ForwardUnits(RaycastHit hit)
         {
-            
             float sumX = 0f;
             float sumY = 0f;
             float sumZ = 0f;
@@ -222,14 +217,9 @@ namespace Split.Game.Units.SelectedFolder
                     groupRadius = Vector3.Distance(centralPoint, unit.transform.position);
                 }
             }
-            
-            Debug.Log($"радиус группы - {groupRadius}, дистанция до цели - {distanceToTheTarget}," +
-                $" координаты центральной точки - {centralPoint}");
 
             if (groupRadius > distanceToTheTarget)
             {
-                Debug.Log("юниты кучкуются");
-                
                 foreach (var unit in _selectedService.SelectedUnits)
                 {
                     Vector3 difference = centralPoint - unit.transform.position;
@@ -241,8 +231,6 @@ namespace Split.Game.Units.SelectedFolder
             }
             else
             {
-                Debug.Log("много юнитов отправляются в точку");
-                
                 foreach (var unit in _selectedService.SelectedUnits)
                 {
                     Vector3 difference = centralPoint - unit.transform.position;
