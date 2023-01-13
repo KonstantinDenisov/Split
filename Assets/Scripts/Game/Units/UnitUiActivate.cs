@@ -14,7 +14,6 @@ namespace Split.Game.Units
         public void Activate()
         {
             _gameObject.SetActive(true);
-            Debug.Log("UnitUiActivate");
         }
 
         public void Diactivate()
