@@ -12,6 +12,7 @@ namespace Split.Infrastructure.Pause
         public bool IsPauseActive { get; set; } = true;
 
         private bool _isPause;
+        private bool _isGameOver;
         private PauseScreen _screen;
         private IStartLevelService _startLevelService;
         private ILevelCompletionService _levelCompletionService;
@@ -91,10 +92,15 @@ namespace Split.Infrastructure.Pause
             _startLevelService.RestartGame();
         }
 
+        // public void StopGame()
+        // {
+        //     _isGameOver = !_isGameOver;
+        //     Time.timeScale = _isGameOver ? 0 : 1;
+        // }
+
         private void ExitGame()
         {
             Exit.ExitButtonClicked();
         }
-        
     }
 }

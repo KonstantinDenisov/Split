@@ -8,15 +8,14 @@ namespace Split.Infrastructure.GameOver
     public class GameOverService : MonoBehaviour, IGameOverService
     {
         private const string GameOverScreenPath = "GameOverScreen";
-        
-        
+
         private GameOverScreen _gameOverScreen;
         private IGameOverService _gameOverServiceImplementation;
         private IStartLevelService _startLevelService;
         private IPauseService _pauseService;
 
         public bool IsGameOver { get; set; }
-        
+
         [Inject]
         public void Construct(IStartLevelService startLevelService, IPauseService pauseService)
         {
@@ -55,6 +54,7 @@ namespace Split.Infrastructure.GameOver
 
         private void RestartGame()
         {
+            IsGameOver = false;
             _startLevelService.RestartGame();
         }
 

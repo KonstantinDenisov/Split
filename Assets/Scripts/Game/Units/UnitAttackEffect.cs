@@ -10,7 +10,6 @@ namespace Split.Game.Units
         public void SpawnVfx()
         {
             Instantiate(_particle, _transform.position, Quaternion.identity);
-            Debug.Log("Particle");
         }
     }
 }
