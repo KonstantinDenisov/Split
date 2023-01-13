@@ -153,11 +153,14 @@ namespace Split.Game.Units.SelectedFolder
                 _cameraRayCasterParams.FrameImage.rectTransform.sizeDelta = size;
 
                 Rect rect = new Rect(min, size);
-
+                if(_selectedService.AllUnits.Count==0)
+                    return;
                 for (int i = 0; i < _selectedService.AllUnits.Count; i++)
                 {
                     var unitObject = _selectedService.AllUnits[i];
                     bool isUnitSelected = _selectedService.IsUnitSelected(unitObject);
+                    if(_mainCamera==null)
+                        return;
                     Vector2 screePosition =
                         _mainCamera.WorldToScreenPoint(unitObject.transform.position);
                     if (rect.Contains(screePosition))

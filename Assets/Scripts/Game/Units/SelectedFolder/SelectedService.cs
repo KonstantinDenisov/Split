@@ -44,22 +44,24 @@ namespace Split.Game.Units.SelectedFolder
             bool isRemoved = SelectedUnits.Remove(unit);
             if (!isRemoved)
                 return;
-            
+
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelectedExit();
-           // Debug.Log("unit deselected");
+            // Debug.Log("unit deselected");
         }
 
         public void DeselectAllUnits()
         {
             foreach (var unit in SelectedUnits)
             {
-                UnitState unitState = unit.transform.GetComponent<UnitState>();
-                unitState.OnSelectedExit();
+                if (unit != null)
+                {
+                    UnitState unitState = unit.transform.GetComponent<UnitState>();
+                    unitState.OnSelectedExit();
+                }
             }
-            
+
             SelectedUnits.Clear();
         }
-
     }
 }
