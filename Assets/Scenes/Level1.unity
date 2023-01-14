@@ -1032,10 +1032,6 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
-      propertyPath: _targets.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: _targets.Array.data[0]
       value: 
       objectReference: {fileID: 1998411255}
@@ -1045,10 +1041,6 @@ PrefabInstance:
       objectReference: {fileID: 1928388675}
     - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
       propertyPath: _targets.Array.data[2]
-      value: 
-      objectReference: {fileID: 821588753}
-    - target: {fileID: 7469445040564990319, guid: fa33cb653ff14864791a55ca2d82498c, type: 3}
-      propertyPath: _targets.Array.data[3]
       value: 
       objectReference: {fileID: 821588753}
     m_RemovedComponents: []

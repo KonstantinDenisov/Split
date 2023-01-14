@@ -115,7 +115,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   _agent: {fileID: 1724219040158992472}
   _animation: {fileID: 5345714193617897105}
 --- !u!114 &7469445040564990293
@@ -271,12 +270,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyHp: {fileID: 7469445040564990293}
-  _radius: 1.5
+  _radius: 1.8
   _layerMask:
     serializedVersion: 2
     m_Bits: 128
   _unitDamage: 1
-  _enemyDamage: 1
 --- !u!1001 &138624466553404310
 PrefabInstance:
   m_ObjectHideFlags: 0
