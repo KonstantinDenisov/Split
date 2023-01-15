@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Split.Game.Units.SelectedFolder;
 using Split.Infrastructure.ServicesFolder.Npc;
 
 namespace Split.Infrastructure.GameController
@@ -7,12 +8,14 @@ namespace Split.Infrastructure.GameController
     {
         private INpcService _npcService;
         private ITimerService _timerService;
+        private SelectedService _selectedService;
         public bool IsGameInit { get; set; }
 
-        public GameController(INpcService npcService, ITimerService timerService)
+        public GameController(INpcService npcService, ITimerService timerService, SelectedService selectedService)
         {
             _npcService = npcService;
             _timerService = timerService;
+            _selectedService = selectedService;
         }
 
         public async void Init()
@@ -20,6 +23,7 @@ namespace Split.Infrastructure.GameController
             await _timerService.Timer();
             _npcService.BeginMove();
             IsGameInit = true;
+            _selectedService.LossOfControl();
         }
         
         

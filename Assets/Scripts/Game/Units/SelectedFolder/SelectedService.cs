@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Split.Game.Units.SelectedFolder
 {
@@ -9,11 +10,13 @@ namespace Split.Game.Units.SelectedFolder
     {
         public List<GameObject> AllUnits;
         public List<GameObject> SelectedUnits;
-
+        public bool LossOfControlSwitcher;
+        
         private void Awake()
         {
             AllUnits = new List<GameObject>();
             SelectedUnits = new List<GameObject>();
+            LossOfControlSwitcher = true;
         }
 
         public void AddUnit(GameObject unit)
@@ -31,7 +34,6 @@ namespace Split.Game.Units.SelectedFolder
             SelectedUnits.Add(unit);
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelected();
-            //Debug.Log("unit selected");
         }
 
         public bool IsUnitSelected(GameObject unit)
@@ -47,7 +49,6 @@ namespace Split.Game.Units.SelectedFolder
 
             UnitState unitState = unit.transform.GetComponent<UnitState>();
             unitState.OnSelectedExit();
-            // Debug.Log("unit deselected");
         }
 
         public void DeselectAllUnits()
@@ -62,6 +63,15 @@ namespace Split.Game.Units.SelectedFolder
             }
 
             SelectedUnits.Clear();
+        }
+
+        public void LossOfControl()
+        {
+            Debug.Log("LossOfControl");
+            
+            DeselectAllUnits();
+
+            LossOfControlSwitcher = false;
         }
     }
 }

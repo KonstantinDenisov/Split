@@ -90,17 +90,24 @@ namespace Split.Game.Units.SelectedFolder
 
                     if (Input.GetMouseButtonDown(1))
                     {
-                        //Debug.Log("клик mouse2 по земле");
                         if (_selectedService.SelectedUnits != null)
                         {
                             if (_selectedService.SelectedUnits.Count == 1)
                             {
-                                ForwardUnit(hit);
+                                if (_selectedService.LossOfControlSwitcher == true)
+                                {
+                                    ForwardUnit(hit);  
+                                }
+                                
                             }
 
                             else
                             {
-                                ForwardUnits(hit);
+                                if (_selectedService.LossOfControlSwitcher == true)
+                                {
+                                    ForwardUnits(hit);  
+                                }
+                                
                             }
                         }
                     }
@@ -186,7 +193,10 @@ namespace Split.Game.Units.SelectedFolder
             foreach (var unit in _selectedService.SelectedUnits)
             {
                 _navMeshAgent = unit.GetComponent<NavMeshAgent>();
-                _navMeshAgent.SetDestination(hit.point);
+                if (_navMeshAgent != null)
+                {
+                    _navMeshAgent.SetDestination(hit.point);
+                }
             }
         }
 
@@ -240,7 +250,11 @@ namespace Split.Game.Units.SelectedFolder
                     Vector3 currentUnitTargetPoint = hit.point - difference;
 
                     _navMeshAgent = unit.GetComponent<NavMeshAgent>();
-                    _navMeshAgent.SetDestination(currentUnitTargetPoint);
+                    if (_navMeshAgent != null)
+                    {
+                        _navMeshAgent.SetDestination(currentUnitTargetPoint);
+                    }
+                    
                 }
             }
         }
