@@ -6,6 +6,7 @@ namespace Split.Game.EnemySettings
     public class EnemyAttack : MonoBehaviour
     {
         [SerializeField] private EnemyHp _enemyHp;
+        
         [SerializeField] private float _radius;
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private int _unitDamage = 1;
@@ -30,7 +31,7 @@ namespace Split.Game.EnemySettings
                 if (hitCollider.gameObject.TryGetComponent(out UnitHp unit))
                 {
                     unit.ApplyDamage(_unitDamage);
-                    Debug.Log("AttackEnemy");
+                   
                 }
             }
 

@@ -1,5 +1,6 @@
 ﻿using Split.Game.EnemySettings;
 using UnityEngine;
+using System;
 
 namespace Split.Game.Units
 {
@@ -10,6 +11,7 @@ namespace Split.Game.Units
         [SerializeField] private float _turnSpeed = 1f;
         [SerializeField] private Transform _unitTransform;
         [SerializeField] private UnitAnimation _unitAnimation;
+        [SerializeField] private UnitHp _unitHp;
 
         private bool _isAttackActivate;
         private Transform _cachedTransform;
@@ -17,9 +19,12 @@ namespace Split.Game.Units
 
         private float _currentPlayerPosition;
         private EnemyHp _enemyHp;
-
-        private float _timer;
         
+        private EnemyDeath _enemyDeath;
+
+        
+        
+        private float _timer;
 
         private bool _isEmptyNear;
 
@@ -30,8 +35,12 @@ namespace Split.Game.Units
         {
             if (!col.gameObject.CompareTag(Tags.Enemy) || _enemyHp != null)
                 return;
+            
             _isEmptyNear = true;
             _enemyHp = col.gameObject.GetComponent<EnemyHp>();
+            _enemyDeath = col.gameObject.GetComponent<EnemyDeath>();
+            _enemyDeath.OnDeadAnimation += OffAnimation;
+            _unitAnimation.SetIsAttack(true);
         }
 
         private void Update()
@@ -49,9 +58,9 @@ namespace Split.Game.Units
         {
             if (!_isEmptyNear || _enemyHp == null)
                 return;
+
             _enemyHp.RemoveHp(_damageEnemy);
             _timer = _fireDelay;
-            _unitAnimation.SetIsAttack(true);
         }
 
         private bool CanAttack() =>
@@ -61,7 +70,7 @@ namespace Split.Game.Units
         {
             if (_enemyHp != null)
             {
-                Vector3 difference = (_enemyHp.transform.position - _cachedTransform.position).normalized; 
+                Vector3 difference = (_enemyHp.transform.position - _cachedTransform.position).normalized;
                 _rotGoal = Quaternion.LookRotation(difference);
                 _unitTransform.rotation = Quaternion.Slerp(_unitTransform.rotation, _rotGoal, _turnSpeed);
             }
@@ -76,6 +85,15 @@ namespace Split.Game.Units
         private void TickTimer()
         {
             _timer -= Time.deltaTime;
+        }
+
+        private void OffAnimation()
+        {
+
+            if(_unitHp.CurrentHp <=0 || _enemyDeath==null)
+                return;
+            _enemyDeath.OnDeadAnimation -= OffAnimation;
+            _unitAnimation.SetIsAttack(false);
         }
     }
 }

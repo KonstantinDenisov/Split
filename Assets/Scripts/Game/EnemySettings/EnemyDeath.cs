@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Split.Game.EnemySettings
@@ -11,21 +10,23 @@ namespace Split.Game.EnemySettings
         [SerializeField] private EnemyHp _enemyHp;
         [SerializeField] private GameObject _gameObject;
         public event Action OnDead;
-
+        public event Action OnDeadAnimation;
+        public bool IsDead { get; set; }
         private void OnEnable()
         {
             _enemyHp.OnHpChanged += CheckDeath;
+            IsDead = true;
         }
 
         private void CheckDeath(int hp)
         {
             if (hp > 0)
                 return;
-
+            IsDead = false;
             _enemyHp.OnHpChanged -= CheckDeath;
-
+            OnDeadAnimation?.Invoke();
+            
             SpawnVfx();
-
             if (_gameObject == null)
                 return;
             Destroy(_gameObject);
@@ -35,6 +36,11 @@ namespace Split.Game.EnemySettings
         private void SpawnVfx()
         {
             Instantiate(_particle, transform.position, Quaternion.identity);
+        }
+
+        public bool Dead(bool isDead)
+        {
+            return isDead;
         }
     }
 }

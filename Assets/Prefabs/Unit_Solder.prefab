@@ -50,6 +50,7 @@ MonoBehaviour:
   _turnSpeed: 1
   _unitTransform: {fileID: 8642162988453740362}
   _unitAnimation: {fileID: 6472851192952504872}
+  _unitHp: {fileID: 8417771823616129703}
 --- !u!135 &5050611047064015324
 SphereCollider:
   m_ObjectHideFlags: 0
