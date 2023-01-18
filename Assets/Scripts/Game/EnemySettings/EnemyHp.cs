@@ -28,8 +28,12 @@ namespace Split.Game.EnemySettings
 
         public void RemoveHp(int hp)
         {
+            if(CurrentHp<=0)
+                return;
             CurrentHp = Mathf.Max(0, CurrentHp - hp);
             OnHpChanged?.Invoke(CurrentHp);
+            
+            
         }
     }
 }

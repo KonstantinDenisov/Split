@@ -11,7 +11,6 @@ namespace Split.Game.EnemySettings
         [SerializeField] private float _radius;
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private int _unitDamage = 1;
-        //[SerializeField] private int _enemyDamage = 1;
 
         private bool _isExplode;
 

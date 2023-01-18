@@ -13,17 +13,19 @@ namespace Split.Game.Units
 
         private GameState _gameState;
 
-        public bool IsDead { get; private set; }
+        //public bool IsDead { get; private set; }
 
         private void Start() =>
             _unitHp.OnChanged += OnHpChanged;
 
         private void OnHpChanged(int hp)
         {
-            if (IsDead || hp > 0)
+            //if (IsDead || hp > 0)
+            if (hp > 0)
                 return;
 
             _unitAnimation.SetIsDead();
+            //IsDead = true;
 
             StartCoroutine(DelayDeathTime());
         }
@@ -31,8 +33,6 @@ namespace Split.Game.Units
         private IEnumerator DelayDeathTime()
         {
             yield return new WaitForSeconds(_lifeTime);
-
-            IsDead = true;
             Destroy(_unit);
         }
     }

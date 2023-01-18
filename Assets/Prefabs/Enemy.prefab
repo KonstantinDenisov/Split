@@ -118,10 +118,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _agent: {fileID: 1724219040158992472}
   _animation: {fileID: 5345714193617897105}
 --- !u!114 &7469445040564990293
@@ -167,7 +163,7 @@ MonoBehaviour:
   _particle: {fileID: 6357574571977031891, guid: 059f30d526f3f18429b13bdb72952d64, type: 3}
   _enemyHp: {fileID: 7469445040564990293}
   _gameObject: {fileID: 7469445040564990315}
-  _cachedTriggerCollider: {fileID: 7469445040456494350}
+  _cachedTriggerCollider: {fileID: 7469445040570199143}
 --- !u!135 &7469445040564990317
 SphereCollider:
   m_ObjectHideFlags: 0
