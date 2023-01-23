@@ -17,8 +17,7 @@ namespace Split.Game.Units.SelectedFolder
         private CameraRayCasterParams _cameraRayCasterParams;
 
         #endregion
-
-
+        
         #region Constructor
 
         [Inject]
@@ -98,7 +97,6 @@ namespace Split.Game.Units.SelectedFolder
                                 {
                                     ForwardUnit(hit);  
                                 }
-                                
                             }
 
                             else
@@ -107,7 +105,6 @@ namespace Split.Game.Units.SelectedFolder
                                 {
                                     ForwardUnits(hit);  
                                 }
-                                
                             }
                         }
                     }
@@ -116,8 +113,7 @@ namespace Split.Game.Units.SelectedFolder
         }
 
         #endregion
-
-
+        
         #region Private Methods
 
         private void IlluminationUnitTurnOn(RaycastHit hit)
@@ -142,7 +138,6 @@ namespace Split.Game.Units.SelectedFolder
         private void DeselectAllUnits()
         {
             _selectedService.DeselectAllUnits();
-
             _frameStartPosition = Input.mousePosition;
         }
 
@@ -153,6 +148,7 @@ namespace Split.Game.Units.SelectedFolder
             Vector2 min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
             Vector2 max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
             Vector2 size = max - min;
+            
             if (size.magnitude > 10)
             {
                 _cameraRayCasterParams.FrameImage.enabled = true;
@@ -193,6 +189,7 @@ namespace Split.Game.Units.SelectedFolder
             foreach (var unit in _selectedService.SelectedUnits)
             {
                 _navMeshAgent = unit.GetComponent<NavMeshAgent>();
+                
                 if (_navMeshAgent != null)
                 {
                     _navMeshAgent.SetDestination(hit.point);
@@ -205,6 +202,7 @@ namespace Split.Game.Units.SelectedFolder
             float sumX = 0f;
             float sumY = 0f;
             float sumZ = 0f;
+            
             foreach (var unit in _selectedService.SelectedUnits)
             {
                 var position = unit.transform.position;
@@ -242,6 +240,7 @@ namespace Split.Game.Units.SelectedFolder
                     _navMeshAgent.SetDestination(currentUnitTargetPoint);
                 }
             }
+            
             else
             {
                 foreach (var unit in _selectedService.SelectedUnits)
@@ -254,7 +253,6 @@ namespace Split.Game.Units.SelectedFolder
                     {
                         _navMeshAgent.SetDestination(currentUnitTargetPoint);
                     }
-                    
                 }
             }
         }

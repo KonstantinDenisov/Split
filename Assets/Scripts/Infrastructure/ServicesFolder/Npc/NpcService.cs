@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Split.Game.EnemySettings;
-using Split.Infrastructure.GameOver;
 using Split.Infrastructure.ServicesFolder.LevelCompletion;
 
 namespace Split.Infrastructure.ServicesFolder.Npc
@@ -10,11 +9,10 @@ namespace Split.Infrastructure.ServicesFolder.Npc
     public class NpcService : INpcService
     {
         private ILevelCompletionService _levelCompletionService;
-       
+        
         public NpcService(ILevelCompletionService levelCompletionService )
         {
             _levelCompletionService = levelCompletionService;
-           
         }
 
         public event Action OnAllDead;

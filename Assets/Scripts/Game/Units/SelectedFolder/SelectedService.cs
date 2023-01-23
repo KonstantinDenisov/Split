@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Split.Game.Units.SelectedFolder
 {
     public class SelectedService : MonoBehaviour
-
     {
         public List<GameObject> AllUnits;
         public List<GameObject> SelectedUnits;
@@ -44,6 +41,7 @@ namespace Split.Game.Units.SelectedFolder
         public void DeselectUnit(GameObject unit)
         {
             bool isRemoved = SelectedUnits.Remove(unit);
+            
             if (!isRemoved)
                 return;
 
@@ -68,9 +66,7 @@ namespace Split.Game.Units.SelectedFolder
         public void LossOfControl()
         {
             Debug.Log("LossOfControl");
-            
             DeselectAllUnits();
-
             LossOfControlSwitcher = false;
         }
     }

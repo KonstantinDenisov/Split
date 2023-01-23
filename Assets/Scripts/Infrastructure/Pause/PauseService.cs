@@ -8,7 +8,7 @@ namespace Split.Infrastructure.Pause
     public class PauseService : MonoBehaviour, IPauseService
     {
         private const string PauseScreenPath = "PauseScreen";
-
+        
         public bool IsPauseActive { get; set; } = true;
 
         private bool _isPause;

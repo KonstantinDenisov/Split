@@ -1,6 +1,5 @@
 using Split.Infrastructure.LoadingScreen;
 using Split.Infrastructure.SceneLoader;
-using UnityEngine;
 
 namespace Split.Infrastructure.StateMachine
 {

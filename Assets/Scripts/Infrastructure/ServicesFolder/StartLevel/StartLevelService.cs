@@ -1,7 +1,6 @@
 using Split.Infrastructure.ServicesFolder.Level;
 using Split.Infrastructure.ServicesFolder.Persistant;
 using Split.Infrastructure.StateMachine;
-using UnityEngine;
 
 namespace Split.Infrastructure.ServicesFolder.StartLevel
 {

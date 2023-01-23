@@ -7,10 +7,10 @@ namespace Split.Game.EnemySettings
     {
         [SerializeField] private int _originalHp;
         [SerializeField] private int _maxHp;
-
+        
         public int CurrentHp { get; private set; }
         public int MaxHp { get; private set; }
-
+        
         public event Action<int> OnHpChanged;
 
         private void Awake()
@@ -32,8 +32,6 @@ namespace Split.Game.EnemySettings
                 return;
             CurrentHp = Mathf.Max(0, CurrentHp - hp);
             OnHpChanged?.Invoke(CurrentHp);
-            
-            
         }
     }
 }

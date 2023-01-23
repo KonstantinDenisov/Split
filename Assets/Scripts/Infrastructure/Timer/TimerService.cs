@@ -6,7 +6,6 @@ namespace Split.Infrastructure
     public class TimerService : MonoBehaviour, ITimerService
     {
         private const string GameStateScreenPath = "GameStateScreen";
-
         private int _remainingDuration = 5;
         private TimerScreen _timerScreen;
 
@@ -45,7 +44,6 @@ namespace Split.Infrastructure
         }
 
         public async UniTask Timer()
-
         {
             _timerScreen.ActivateCountdown(true);
             while (_remainingDuration >= 0)

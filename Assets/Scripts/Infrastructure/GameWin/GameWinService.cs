@@ -33,7 +33,6 @@ namespace Split.Infrastructure.GameWin
         {
             GameWinScreen prefab = Resources.Load<GameWinScreen>(GameWinScreenPath);
             _gameWinScreen = Instantiate(prefab);
-
             _gameWinScreen.gameObject.SetActive(false);
             _gameWinScreen.OnRestart += RestartGame;
             _gameWinScreen.OnExit += ExitGame;
@@ -59,6 +58,7 @@ namespace Split.Infrastructure.GameWin
         {
             if (_gameWinScreen == null)
                 return;
+            
             _gameWinScreen.gameObject.SetActive(isActive);
             _pauseService.Deactivate(false);
         }

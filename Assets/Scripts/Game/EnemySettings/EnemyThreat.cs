@@ -12,7 +12,6 @@ namespace Split.Game.EnemySettings
                 UnitUiActivate unitHp = col.gameObject.GetComponent<UnitUiActivate>();
                 unitHp.Activate();
             }
-            
         }
 
         private void OnTriggerExit(Collider col)

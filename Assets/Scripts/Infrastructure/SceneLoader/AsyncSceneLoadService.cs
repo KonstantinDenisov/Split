@@ -16,15 +16,12 @@ namespace Split.Infrastructure.SceneLoader
         }
 
          public void Load(string sceneName, Action completeCallback)
-        { 
-
+        {
             _coroutineRunner.StartCoroutine(LoadInternal(sceneName, completeCallback));
         }
-           
-
-        private IEnumerator LoadInternal(string sceneName, Action completeCallback)
+         
+         private IEnumerator LoadInternal(string sceneName, Action completeCallback)
         {
-          
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
             while (!loadSceneAsync.isDone)
                 yield return null;

@@ -1,5 +1,4 @@
 using System;
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
 
 namespace Split.Infrastructure.SceneLoader
 {

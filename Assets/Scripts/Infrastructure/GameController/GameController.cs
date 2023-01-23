@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using Split.Game.Units.SelectedFolder;
+﻿using Split.Game.Units.SelectedFolder;
 using Split.Infrastructure.ServicesFolder.Npc;
 
 namespace Split.Infrastructure.GameController
@@ -25,7 +24,6 @@ namespace Split.Infrastructure.GameController
             IsGameInit = true;
             _selectedService.LossOfControl();
         }
-        
         
         public void Dispose()
         {

@@ -26,7 +26,6 @@ namespace Split.Infrastructure.ServicesFolder.Level
                     return;
                 }
                 _settingsById.Add(setting.SceneName, setting);
-                
             }
         }
 

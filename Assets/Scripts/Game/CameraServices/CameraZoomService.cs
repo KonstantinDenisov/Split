@@ -40,6 +40,7 @@ namespace Split.Game.CameraServices
         private Vector3 PanDirection(float x, float y, float z)
         {
             Vector3 direction = Vector3.zero;
+            
             if (y >= Screen.height * _panWidthPercent && _cameraTransform.position.z <= _zMaxValue)
                 direction.z += _panDelta;
 
@@ -48,6 +49,7 @@ namespace Split.Game.CameraServices
 
             if (x >= Screen.width * _panWidthPercent && _cameraTransform.position.x <= _xMaxValue)
                 direction.x += _panDelta;
+            
             else if (x <= Screen.width * _panHeightPercent && _cameraTransform.position.x >= _xMinValue)
                 direction.x -= _panDelta;
 

@@ -1,6 +1,5 @@
 ﻿using Split.Game.EnemySettings;
 using UnityEngine;
-using System;
 
 namespace Split.Game.Units
 {
@@ -16,16 +15,10 @@ namespace Split.Game.Units
         private bool _isAttackActivate;
         private Transform _cachedTransform;
         private Quaternion _rotGoal;
-
         private float _currentPlayerPosition;
         private EnemyHp _enemyHp;
-        
         private EnemyDeath _enemyDeath;
-
-        
-        
         private float _timer;
-
         private bool _isEmptyNear;
 
         private void Awake() =>
@@ -89,7 +82,6 @@ namespace Split.Game.Units
 
         private void OffAnimation()
         {
-
             if(_unitHp.CurrentHp <=0 || _enemyDeath==null)
                 return;
             _enemyDeath.OnDeadAnimation -= OffAnimation;

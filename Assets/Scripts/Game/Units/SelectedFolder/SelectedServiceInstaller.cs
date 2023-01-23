@@ -1,5 +1,4 @@
-﻿using Split.Infrastructure.GameController;
-using Zenject;
+﻿using Zenject;
 
 namespace Split.Game.Units.SelectedFolder
 {

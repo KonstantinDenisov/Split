@@ -1,5 +1,4 @@
-﻿using Split.Infrastructure.ServicesFolder.StartLevel;
-using Zenject;
+﻿using Zenject;
 
 namespace Split.Infrastructure.Installers
 {

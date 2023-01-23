@@ -1,5 +1,4 @@
-﻿using Split.Infrastructure.GameOver;
-using Split.Infrastructure.GameWin;
+﻿using Split.Infrastructure.GameWin;
 using Zenject;
 
 namespace Split.Infrastructure

@@ -10,13 +10,17 @@ namespace Split.Game.EnemySettings
         [SerializeField] private EnemyHp _enemyHp;
         [SerializeField] private GameObject _gameObject;
         [SerializeField] private Collider _cachedTriggerCollider;
-        public event Action OnDead;
+        public event Action OnDead; 
         public event Action OnDeadAnimation;
-
-
+        
         private void OnEnable()
         {
             _enemyHp.OnHpChanged += CheckDeath;
+        }
+
+        private void OnDisable()
+        {
+            _enemyHp.OnHpChanged -= CheckDeath;
         }
 
         private void CheckDeath(int hp)
@@ -27,7 +31,6 @@ namespace Split.Game.EnemySettings
             _cachedTriggerCollider.enabled = false;
             _enemyHp.OnHpChanged -= CheckDeath;
             OnDeadAnimation?.Invoke();
-            
             SpawnVfx();
             if (_gameObject == null)
                 return;
@@ -39,6 +42,5 @@ namespace Split.Game.EnemySettings
         {
             Instantiate(_particle, transform.position, Quaternion.identity);
         }
-        
     }
 }

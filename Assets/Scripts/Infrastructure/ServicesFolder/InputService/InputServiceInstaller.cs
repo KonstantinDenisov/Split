@@ -1,6 +1,5 @@
 ﻿using Zenject;
 
-
 namespace Split.Infrastructure.ServicesFolder.InputService
 {
     public class InputServiceInstaller : Installer<InputServiceInstaller>

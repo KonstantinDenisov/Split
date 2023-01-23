@@ -9,14 +9,12 @@ namespace Split.Game.EnemySettings
 		[SerializeField] private EnemyMovement _enemyMovement;
 		
 		private static readonly int Speed = Animator.StringToHash("Speed");
-
+		
 		public void SetSpeedHorizontal(float value)
 		{
 			_animation.SetFloat(Speed,value);
 		}
-		
 	}
-
 }
         
  

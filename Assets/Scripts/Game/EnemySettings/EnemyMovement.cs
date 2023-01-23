@@ -1,4 +1,5 @@
-﻿using Split.Infrastructure.GameController;
+﻿using System;
+using Split.Infrastructure.GameController;
 using Split.Infrastructure.GameOver;
 using Split.Infrastructure.ServicesFolder.Npc;
 using UnityEngine;
@@ -41,6 +42,11 @@ namespace Split.Game.EnemySettings
         private void OnEnable()
         {
             _npcService.RegisterMovingObject(this);
+        }
+
+        private void OnDestroy()
+        {
+            _enemyDeath.OnDead -= Die;
         }
 
         private void Die()

@@ -13,7 +13,6 @@ namespace Split.Game.CameraServices
         [Header("Priorities")]
         [SerializeField] private int _minPriority;
         [SerializeField] private int _maxPriority=10;
-        
 
         private void Update()
         {

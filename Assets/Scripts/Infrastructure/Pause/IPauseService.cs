@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Split.Infrastructure.Pause
+﻿namespace Split.Infrastructure.Pause
 {
     public interface IPauseService
     {

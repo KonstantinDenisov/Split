@@ -1,5 +1,3 @@
-
-
 namespace Split.Infrastructure.StateMachine
 {
     public abstract class BaseState : BaseExitableState, IState

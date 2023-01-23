@@ -42,7 +42,6 @@ namespace Split.Infrastructure.ServicesFolder.LevelCompletion
                 return;
             }
 
-
             _stateMachine.Enter<LoadState, string>(currentLevelSetting.NextLevel.SceneName);
         }
 

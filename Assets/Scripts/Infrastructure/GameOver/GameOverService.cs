@@ -36,7 +36,6 @@ namespace Split.Infrastructure.GameOver
         {
             GameOverScreen prefab = Resources.Load<GameOverScreen>(GameOverScreenPath);
             _gameOverScreen = Instantiate(prefab);
-
             _gameOverScreen.gameObject.SetActive(false);
             _gameOverScreen.OnRestart += RestartGame;
             _gameOverScreen.OnExit += ExitGame;
@@ -63,6 +62,7 @@ namespace Split.Infrastructure.GameOver
         {
             if (_gameOverScreen == null)
                 return;
+            
             IsGameStop = true;
             _gameOverScreen.gameObject.SetActive(isActive);
             _pauseService.Deactivate(false);

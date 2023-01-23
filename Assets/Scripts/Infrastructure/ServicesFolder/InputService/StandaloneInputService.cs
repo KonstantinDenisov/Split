@@ -21,7 +21,6 @@ namespace Split.Infrastructure.ServicesFolder.InputService
             var mousePosition = Input.mousePosition;
             var worldPoint = _mainCamera.ScreenToWorldPoint(mousePosition);
             worldPoint.z = 0f;
-
             return worldPoint - _playerMovementTransform.position;
         }
     }

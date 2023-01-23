@@ -7,7 +7,7 @@ namespace Split.Game.Units
 
     {
         public event Action OnDestroyed;
-
+        
         private void OnDestroy()
         {
             OnDestroyed?.Invoke();

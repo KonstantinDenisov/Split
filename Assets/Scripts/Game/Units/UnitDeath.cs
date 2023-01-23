@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Split.Infrastructure;
 using UnityEngine;
 
 namespace Split.Game.Units
 {
     public class UnitDeath : MonoBehaviour
-    {
+    { 
+        public bool IsDead { get; private set; }
+        
         [SerializeField] private UnitHp _unitHp;
         [SerializeField] private GameObject _unit;
         [SerializeField] private UnitAnimation _unitAnimation;
@@ -13,10 +16,13 @@ namespace Split.Game.Units
 
         private GameState _gameState;
 
-        public bool IsDead { get; private set; }
-
         private void Start() =>
             _unitHp.OnChanged += OnHpChanged;
+
+        private void OnDestroy()
+        {
+            _unitHp.OnChanged -= OnHpChanged;
+        }
 
         private void OnHpChanged(int hp)
         {
@@ -25,7 +31,6 @@ namespace Split.Game.Units
 
             _unitAnimation.SetIsDead();
             IsDead = true;
-
             StartCoroutine(DelayDeathTime());
         }
 

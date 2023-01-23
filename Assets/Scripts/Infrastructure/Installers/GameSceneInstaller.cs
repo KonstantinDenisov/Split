@@ -7,7 +7,6 @@ using Split.Infrastructure.ServicesFolder.Npc;
 using Split.Infrastructure.UnitRegisterService;
 using Zenject;
 
-
 namespace Split.Infrastructure.Installers
 {
     public class GameSceneInstaller : MonoInstaller
@@ -25,7 +24,6 @@ namespace Split.Infrastructure.Installers
             WinServiceInstaller.Install(Container);
             SelectedServiceInstaller.Install(Container);
             //CameraRayCasterInstaller.Install(Container);
-
         }
     }
 }

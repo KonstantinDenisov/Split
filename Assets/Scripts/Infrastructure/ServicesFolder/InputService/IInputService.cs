@@ -1,4 +1,3 @@
-using Split.Infrastructure.ServicesFolder.ServicesContainer;
 using UnityEngine;
 
 namespace Split.Infrastructure.ServicesFolder.InputService

@@ -19,7 +19,6 @@ namespace Split.Infrastructure.StateMachine
         {
             _levelSettingsService.Bootstrap();
             _persistantService.Bootstrap();
-            
             StateMachine.Enter<MenuState>();
         }
 
