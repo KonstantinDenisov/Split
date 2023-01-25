@@ -40,12 +40,12 @@ namespace Split.Game.Units.SelectedFolder
 
         private void Update()
         {
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100, _cameraRayCasterParams.InteractiveObjects))
             {
-                InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
+                var interactiveObject = hit.collider.GetComponent<InteractiveObject>();
 
                 if (interactiveObject == null)
                 {
@@ -145,9 +145,9 @@ namespace Split.Game.Units.SelectedFolder
         {
             _frameFinishPosition = Input.mousePosition;
 
-            Vector2 min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
-            Vector2 max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
-            Vector2 size = max - min;
+            var min = Vector2.Min(_frameStartPosition, _frameFinishPosition);
+            var max = Vector2.Max(_frameStartPosition, _frameFinishPosition);
+            var size = max - min;
             
             if (size.magnitude > 10)
             {
@@ -155,13 +155,13 @@ namespace Split.Game.Units.SelectedFolder
                 _cameraRayCasterParams.FrameImage.rectTransform.anchoredPosition = min;
                 _cameraRayCasterParams.FrameImage.rectTransform.sizeDelta = size;
 
-                Rect rect = new Rect(min, size);
+                var rect = new Rect(min, size);
                 if(_selectedService.AllUnits.Count==0)
                     return;
-                for (int i = 0; i < _selectedService.AllUnits.Count; i++)
+                for (var i = 0; i < _selectedService.AllUnits.Count; i++)
                 {
                     var unitObject = _selectedService.AllUnits[i];
-                    bool isUnitSelected = _selectedService.IsUnitSelected(unitObject);
+                    var isUnitSelected = _selectedService.IsUnitSelected(unitObject);
                     if(_mainCamera==null)
                         return;
                     Vector2 screePosition =
@@ -199,9 +199,9 @@ namespace Split.Game.Units.SelectedFolder
 
         private void ForwardUnits(RaycastHit hit)
         {
-            float sumX = 0f;
-            float sumY = 0f;
-            float sumZ = 0f;
+            var sumX = 0f;
+            var sumY = 0f;
+            var sumZ = 0f;
             
             foreach (var unit in _selectedService.SelectedUnits)
             {
@@ -211,13 +211,13 @@ namespace Split.Game.Units.SelectedFolder
                 sumZ += position.z;
             }
 
-            float centrX = sumX / _selectedService.SelectedUnits.Count;
-            float centrY = sumY / _selectedService.SelectedUnits.Count;
-            float centrZ = sumZ / _selectedService.SelectedUnits.Count;
+            var centrX = sumX / _selectedService.SelectedUnits.Count;
+            var centrY = sumY / _selectedService.SelectedUnits.Count;
+            var centrZ = sumZ / _selectedService.SelectedUnits.Count;
 
-            Vector3 centralPoint = new Vector3(centrX, centrY, centrZ);
+            var centralPoint = new Vector3(centrX, centrY, centrZ);
 
-            float distanceToTheTarget = Vector3.Distance(centralPoint, hit.point);
+            var distanceToTheTarget = Vector3.Distance(centralPoint, hit.point);
 
             float groupRadius = 0;
 
@@ -233,8 +233,8 @@ namespace Split.Game.Units.SelectedFolder
             {
                 foreach (var unit in _selectedService.SelectedUnits)
                 {
-                    Vector3 difference = centralPoint - unit.transform.position;
-                    Vector3 currentUnitTargetPoint = hit.point - difference / 2;
+                    var difference = centralPoint - unit.transform.position;
+                    var currentUnitTargetPoint = hit.point - difference / 2;
 
                     _navMeshAgent = unit.GetComponent<NavMeshAgent>();
                     _navMeshAgent.SetDestination(currentUnitTargetPoint);
@@ -245,8 +245,8 @@ namespace Split.Game.Units.SelectedFolder
             {
                 foreach (var unit in _selectedService.SelectedUnits)
                 {
-                    Vector3 difference = centralPoint - unit.transform.position;
-                    Vector3 currentUnitTargetPoint = hit.point - difference;
+                    var difference = centralPoint - unit.transform.position;
+                    var currentUnitTargetPoint = hit.point - difference;
 
                     _navMeshAgent = unit.GetComponent<NavMeshAgent>();
                     if (_navMeshAgent != null)

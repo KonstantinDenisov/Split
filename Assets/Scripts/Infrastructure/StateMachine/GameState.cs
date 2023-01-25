@@ -71,7 +71,7 @@ namespace Split.Infrastructure
 
         private void SaveCurrentScene(string sceneName)
         {
-            PersistantData data = _persistantService.Data;
+            var data = _persistantService.Data;
             data.LevelData.CurrentSceneId = sceneName;
             _persistantService.Save();
         }

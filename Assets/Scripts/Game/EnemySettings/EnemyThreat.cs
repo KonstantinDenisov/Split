@@ -9,7 +9,7 @@ namespace Split.Game.EnemySettings
         {
             if (col.gameObject.CompareTag(Tags.Unit))
             {
-                UnitUiActivate unitHp = col.gameObject.GetComponent<UnitUiActivate>();
+                var unitHp = col.gameObject.GetComponent<UnitUiActivate>();
                 unitHp.Activate();
             }
         }
@@ -18,7 +18,7 @@ namespace Split.Game.EnemySettings
         {
             if (col.gameObject.CompareTag(Tags.Unit))
             {
-                UnitUiActivate unitHp = col.gameObject.GetComponent<UnitUiActivate>();
+                var unitHp = col.gameObject.GetComponent<UnitUiActivate>();
                 unitHp.Diactivate();
             }
         }

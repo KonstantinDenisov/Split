@@ -10,7 +10,7 @@ namespace Split.Infrastructure.ServicesFolder.Persistant
         
         public void Bootstrap()
         {
-            string json = PlayerPrefs.GetString(Key);
+            var json = PlayerPrefs.GetString(Key);
 
             if (string.IsNullOrEmpty(json))
             {
@@ -31,7 +31,7 @@ namespace Split.Infrastructure.ServicesFolder.Persistant
 
         public void Save()
         {
-            string json = JsonUtility.ToJson(Data);
+            var json = JsonUtility.ToJson(Data);
             PlayerPrefs.SetString(Key, json);
         }
     }

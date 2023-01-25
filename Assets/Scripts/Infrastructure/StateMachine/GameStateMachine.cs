@@ -15,7 +15,7 @@ namespace Split.Infrastructure
         public void Enter<TState>() where TState : class, IState
         {
             ExitCurrent();
-            TState newState = _stateFactory.Create<TState>();
+            var newState = _stateFactory.Create<TState>();
             newState.Enter();
             _currentState = newState;
         }
@@ -23,7 +23,7 @@ namespace Split.Infrastructure
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
         {
             ExitCurrent();
-            TState newState = _stateFactory.Create<TState>();
+            var newState = _stateFactory.Create<TState>();
             newState.Enter(payload);
             _currentState = newState;
         }

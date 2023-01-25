@@ -14,7 +14,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
     {
         public static void RegisterFor<TState>() where TState : class, IExitableState
         {
-            Type type = typeof(TState);
+            var type = typeof(TState);
 
             if (type == typeof(BootstrapState))
             {
@@ -56,9 +56,9 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
         {
             //ILevelSettingsService levelSettingsService =
               //  Services.Container.Get<ILevelSettingsService>();
-            IGameStateMachine gameStateMachine =
+            var gameStateMachine =
                 Services.Container.Get<IGameStateMachine>();
-            IPersistantService persistantService =
+            var persistantService =
                 Services.Container.Get<IPersistantService>();
 
             //Services.Container.Register<IStartLevelService>(new StartLevelService(

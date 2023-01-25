@@ -42,7 +42,7 @@ namespace Split.Infrastructure.Pause
 
         private void CreatePauseScreen()
         {
-            PauseScreen prefab = Resources.Load<PauseScreen>(PauseScreenPath);
+            var prefab = Resources.Load<PauseScreen>(PauseScreenPath);
             _screen = Instantiate(prefab);
             _screen.gameObject.SetActive(false);
             _screen.OnContinue += TogglePause;

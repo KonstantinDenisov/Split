@@ -33,7 +33,7 @@ namespace Split.Infrastructure.StateMachine
         {
             var stateMachine = Services.Container.Get<IGameStateMachine>();
             ILevelSettingsService levelSettingsService = null;
-            IPersistantService persistantService =
+            var persistantService =
                 Services.Container.Get<IPersistantService>();
 
             return new BootstrapState(stateMachine, levelSettingsService, persistantService) as TState;
@@ -50,7 +50,7 @@ namespace Split.Infrastructure.StateMachine
 
         private static TState CreateLoadState<TState>() where TState : class, IExitableState
         {
-            IGameStateMachine stateMachine = Services.Container.Get<IGameStateMachine>();
+            var stateMachine = Services.Container.Get<IGameStateMachine>();
             ISceneLoadService sceneLoadService = null;
             ILoadingScreenService loadingScreenService = null;
             ILevelSettingsService levelSettingsService = null;
@@ -60,7 +60,7 @@ namespace Split.Infrastructure.StateMachine
 
         private static TState CreateGameState<TState>() where TState : class, IExitableState
         {
-            IGameStateMachine stateMachine = Services.Container.Get<IGameStateMachine>();
+            var stateMachine = Services.Container.Get<IGameStateMachine>();
             //ISceneLoadService sceneLoadService = null;
             //ILoadingScreenService loadingScreenService = null;
             INpcService npcService = null;

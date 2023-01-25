@@ -18,10 +18,15 @@ namespace Split.Infrastructure.Pause
 
         private void Start()
         {
-            _continueButton.onClick.AddListener(delegate { OnContinue?.Invoke(); });
-            _restartButton.onClick.AddListener(delegate { OnRestart?.Invoke(); });
-            _restartLevelButton.onClick.AddListener(delegate { OnRestartLevel?.Invoke(); });
-            _exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
+            //_continueButton.onClick.AddListener(delegate { OnContinue?.Invoke(); });
+            //_restartButton.onClick.AddListener(delegate { OnRestart?.Invoke(); });
+            //_restartLevelButton.onClick.AddListener(delegate { OnRestartLevel?.Invoke(); });
+            //_exitButton.onClick.AddListener(delegate { OnExit?.Invoke(); });
+            
+            _continueButton.onClick.AddListener(() => OnContinue?.Invoke());
+            _restartButton.onClick.AddListener(()=>OnRestart?.Invoke());
+            _restartLevelButton.onClick.AddListener(()=>OnRestartLevel?.Invoke());
+            _exitButton.onClick.AddListener(()=>OnExit?.Invoke());
         }
     }
 }

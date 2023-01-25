@@ -17,7 +17,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
         
         public TService Register<TService>(TService implementation) where TService : class, IService
         {
-            Type key = typeof(TService);
+            var key = typeof(TService);
 
             if (_services.ContainsKey(key))
             {
@@ -30,7 +30,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
         public TService RegisterMono<TService>(Type serviceType) where TService : class, IService
         {
-            Component service = new GameObject(serviceType.Name).AddComponent(serviceType);
+            var service = new GameObject(serviceType.Name).AddComponent(serviceType);
             Object.DontDestroyOnLoad(service);
             _components.Add(typeof(TService), service);
             return Register<TService>(service as TService);
@@ -38,7 +38,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
         public TService Get<TService>() where TService : class
         {
-            Type key = typeof(TService);
+            var key = typeof(TService);
 
             if (_services.ContainsKey(key))
             {
@@ -53,7 +53,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
         public void UnRegister<TService>() where TService : IService
         {
-            Type key = typeof(TService);
+            var key = typeof(TService);
             if (!_services.ContainsKey(key))
             {
                 return;
@@ -63,7 +63,7 @@ namespace Split.Infrastructure.ServicesFolder.ServicesContainer
 
             if (_components.ContainsKey(key))
             {
-                Component serviceComponent = _components[key];
+                var serviceComponent = _components[key];
                 Object.Destroy(serviceComponent.gameObject);
                 _components.Remove(key);
             }

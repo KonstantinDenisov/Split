@@ -23,7 +23,7 @@ namespace Split.Infrastructure.LoadingScreen
 
         private void LoadScreen()
         {
-            GameObject prefab = Resources.Load<GameObject>(LoadingScreenPath);
+            var prefab = Resources.Load<GameObject>(LoadingScreenPath);
             _loadingScreen = Object.Instantiate(prefab);
             Object.DontDestroyOnLoad(_loadingScreen);
         }

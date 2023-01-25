@@ -19,7 +19,7 @@ namespace Split.Infrastructure
             if (_timerScreen != null)
                 return;
 
-            TimerScreen prefab = Resources.Load<TimerScreen>(GameStateScreenPath);
+            var prefab = Resources.Load<TimerScreen>(GameStateScreenPath);
             _timerScreen = Instantiate(prefab);
             _timerScreen.gameObject.SetActive(true);
         }
