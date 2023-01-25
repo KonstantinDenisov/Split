@@ -92,12 +92,6 @@ namespace Split.Infrastructure.Pause
             _startLevelService.RestartGame();
         }
 
-        // public void StopGame()
-        // {
-        //     _isGameOver = !_isGameOver;
-        //     Time.timeScale = _isGameOver ? 0 : 1;
-        // }
-
         private void ExitGame()
         {
             Exit.ExitButtonClicked();

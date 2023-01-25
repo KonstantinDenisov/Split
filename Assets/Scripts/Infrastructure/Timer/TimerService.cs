@@ -48,7 +48,7 @@ namespace Split.Infrastructure
             _timerScreen.ActivateCountdown(true);
             while (_remainingDuration >= 0)
             {
-                await UniTask.Delay(500);
+                await UniTask.Delay(1000);
                 UpdateUI(_remainingDuration);
                 _remainingDuration--;
             }
